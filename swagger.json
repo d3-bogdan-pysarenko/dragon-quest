@@ -1,0 +1,735 @@
+{
+  "swaggerDoc": {
+    "openapi": "3.0.1",
+    "info": {
+      "version": "1.0.1",
+      "title": "API Your Energy",
+      "description": "The API for the Your Energy project"
+    },
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "servers": [
+      {
+        "url": "https://your-energy.b.goit.study/api"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Exercises",
+        "description": "Exercises endpoints"
+      },
+      {
+        "name": "Filters",
+        "description": "Filters endpoints"
+      },
+      {
+        "name": "Quotes",
+        "description": "Quotes endpoints"
+      },
+      {
+        "name": "Subscriptions",
+        "description": "Subscriptions endpoints"
+      }
+    ],
+    "paths": {
+      "/exercises": {
+        "get": {
+          "tags": ["Exercises"],
+          "summary": "Get Exercises By Filters",
+          "parameters": [
+            {
+              "name": "bodypart",
+              "in": "query",
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "back",
+                  "cardio",
+                  "chest",
+                  "lower arms",
+                  "lower legs",
+                  "neck",
+                  "shoulders",
+                  "upper arms",
+                  "upper legs",
+                  "waist"
+                ]
+              },
+              "description": "Select body part for search exercises by body part"
+            },
+            {
+              "name": "muscles",
+              "in": "query",
+              "description": "Select muscle for search exercises by muscle",
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "abductors",
+                  "abs",
+                  "adductors",
+                  "biceps",
+                  "calves",
+                  "cardiovascular system",
+                  "delts",
+                  "forearms",
+                  "glutes",
+                  "hamstrings",
+                  "lats",
+                  "levator scapulae",
+                  "pectorals",
+                  "quads",
+                  "serratus anterior",
+                  "spine",
+                  "traps",
+                  "triceps",
+                  "upper back"
+                ]
+              }
+            },
+            {
+              "name": "equipment",
+              "in": "query",
+              "description": "Select equipment for search exercises by equipment",
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "assisted",
+                  "band",
+                  "barbell",
+                  "body weight",
+                  "bosu ball",
+                  "cable",
+                  "dumbbell",
+                  "elliptical machine",
+                  "ez barbell",
+                  "hammer",
+                  "kettlebell",
+                  "leverage machine",
+                  "medicine ball",
+                  "olympic barbell",
+                  "resistance band",
+                  "roller",
+                  "rope",
+                  "skierg machine",
+                  "sled machine",
+                  "smith machine",
+                  "stability ball",
+                  "stationary bike",
+                  "stepmill machine",
+                  "tire",
+                  "trap bar",
+                  "upper body ergometer",
+                  "weighted",
+                  "wheel roller"
+                ]
+              }
+            },
+            {
+              "in": "query",
+              "name": "keyword",
+              "description": "Input keyword for search by exercise name",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "in": "query",
+              "name": "page",
+              "description": "Input number page of the exercises",
+              "schema": {
+                "type": "number",
+                "default": 1
+              }
+            },
+            {
+              "in": "query",
+              "name": "limit",
+              "description": "Input limit for the exercises",
+              "schema": {
+                "type": "number",
+                "default": 10
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ExercisesResponse"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not found",
+              "content": {}
+            },
+            "409": {
+              "description": "Filter is required",
+              "content": {}
+            },
+            "500": {
+              "description": "Server error",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/exercises/{id}/rating": {
+        "patch": {
+          "tags": ["Exercises"],
+          "summary": "Add Exercise's Rating",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "schema": {
+                "type": "string"
+              },
+              "required": true
+            }
+          ],
+          "requestBody": {
+            "description": "Rating's object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ExerciseResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (invalid request body)",
+              "content": {}
+            },
+            "404": {
+              "description": "Such exercise not found",
+              "content": {}
+            },
+            "409": {
+              "description": "Such email already exists",
+              "content": {}
+            },
+            "500": {
+              "description": "Server error",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/exercises/{id}": {
+        "get": {
+          "tags": ["Exercises"],
+          "summary": "Get Exercise By Id",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "schema": {
+                "type": "string"
+              },
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ExerciseResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (invalid request body)",
+              "content": {}
+            },
+            "404": {
+              "description": "Not found",
+              "content": {}
+            },
+            "500": {
+              "description": "Server error",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/filters": {
+        "get": {
+          "tags": ["Filters"],
+          "summary": "Get Filters Of Exercises",
+          "parameters": [
+            {
+              "name": "filter",
+              "in": "query",
+              "schema": {
+                "type": "string",
+                "enum": ["Body parts", "Muscles", "Equipment"]
+              },
+              "description": "Select filter for search exercises"
+            },
+            {
+              "in": "query",
+              "name": "page",
+              "description": "Input number page of the exercises",
+              "schema": {
+                "type": "number",
+                "default": 1
+              }
+            },
+            {
+              "in": "query",
+              "name": "limit",
+              "description": "Input limit for the exercises",
+              "schema": {
+                "type": "number",
+                "default": 12
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/FiltersResponse"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not found",
+              "content": {}
+            },
+            "500": {
+              "description": "Server error",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/quote": {
+        "get": {
+          "tags": ["Quotes"],
+          "summary": "Get Quote of the day",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/QuoteResponse"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not found",
+              "content": {}
+            },
+            "500": {
+              "description": "Server error",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/subscription": {
+        "post": {
+          "tags": ["Subscriptions"],
+          "summary": "Order subscription to new exercises",
+          "requestBody": {
+            "description": "Subscription's object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SubscriptionResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (invalid request body)",
+              "content": {}
+            },
+            "404": {
+              "description": "Not found",
+              "content": {}
+            },
+            "409": {
+              "description": "Subscription already exists",
+              "content": {}
+            },
+            "500": {
+              "description": "Server error",
+              "content": {}
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "ExercisesResponse": {
+          "type": "object",
+          "properties": {
+            "page": {
+              "type": "number",
+              "description": "Page number",
+              "format": 1
+            },
+            "perPage": {
+              "type": "number",
+              "description": "Number of items per page",
+              "format": 6
+            },
+            "totalPages": {
+              "type": "number",
+              "description": "Total number of pages",
+              "format": 48
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "Exercise's id",
+                    "format": "64f389465ae26083f39b17a6"
+                  },
+                  "bodyPart": {
+                    "type": "string",
+                    "description": "Body part is involved in the exercise",
+                    "example": "back"
+                  },
+                  "equipment": {
+                    "type": "string",
+                    "description": "Equipment is involved in the exercise",
+                    "example": "cable"
+                  },
+                  "gifUrl": {
+                    "type": "string",
+                    "description": "Exercise's gif URL",
+                    "example": "https://ftp.goit.study/img/power-pulse/gifs/0007.gif"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Exercise's name",
+                    "example": "alternate lateral pulldown"
+                  },
+                  "target": {
+                    "type": "string",
+                    "description": "Exercise's target (muscle)",
+                    "example": "lats"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Exercise's description",
+                    "example": "These large back muscles are responsible for shoulder adduction and horizontal extension. Pull-ups and lat pulldowns are common exercises targeting the lats."
+                  },
+                  "rating": {
+                    "type": "number",
+                    "description": "Exercise's rating",
+                    "example": 3
+                  },
+                  "burnedCalories": {
+                    "type": "number",
+                    "description": "The number of calories burned in a given time",
+                    "example": 70
+                  },
+                  "time": {
+                    "type": "number",
+                    "description": "Exercise time for burning certain calories",
+                    "example": 3
+                  },
+                  "popularity": {
+                    "type": "number",
+                    "description": "Exercise's popularity",
+                    "example": 100
+                  }
+                }
+              }
+            }
+          },
+          "example": {
+            "page": 1,
+            "perPage": 6,
+            "totalPages": 1,
+            "results": [
+              {
+                "_id": "64f389465ae26083f39b17a4",
+                "bodyPart": "waist",
+                "equipment": "body weight",
+                "gifUrl": "https://ftp.goit.study/img/power-pulse/gifs/0003.gif",
+                "name": "air bike",
+                "target": "abs",
+                "description": "This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.",
+                "rating": 3,
+                "burnedCalories": 312,
+                "time": 3,
+                "popularity": 1
+              },
+              {
+                "_id": "64f389465ae26083f39b17a5",
+                "bodyPart": "waist",
+                "equipment": "body weight",
+                "gifUrl": "https://ftp.goit.study/img/power-pulse/gifs/0006.gif",
+                "name": "alternate heel touchers",
+                "target": "abs",
+                "description": "This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.",
+                "rating": 3,
+                "burnedCalories": 116,
+                "time": 3,
+                "popularity": 1
+              },
+              {
+                "_id": "64f389465ae26083f39b17a6",
+                "bodyPart": "back",
+                "equipment": "cable",
+                "gifUrl": "https://ftp.goit.study/img/power-pulse/gifs/0007.gif",
+                "name": "alternate lateral pulldown",
+                "target": "lats",
+                "description": "These large back muscles are responsible for shoulder adduction and horizontal extension. Pull-ups and lat pulldowns are common exercises targeting the lats.",
+                "rating": 3,
+                "burnedCalories": 70,
+                "time": 3,
+                "popularity": 1
+              }
+            ]
+          }
+        },
+        "RatingRequest": {
+          "type": "object",
+          "required": ["rate", "email"],
+          "properties": {
+            "rate": {
+              "type": "number",
+              "description": "Exercise's rating",
+              "example": 5
+            },
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "example": "test@gmail.com"
+            },
+            "review": {
+              "type": "string",
+              "description": "User's review",
+              "example": "My best exercise"
+            }
+          }
+        },
+        "ExerciseResponse": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Exercise's id",
+              "format": "64f389465ae26083f39b17a6"
+            },
+            "bodyPart": {
+              "type": "string",
+              "description": "Body part is involved in the exercise",
+              "example": "back"
+            },
+            "equipment": {
+              "type": "string",
+              "description": "Equipment is involved in the exercise",
+              "example": "cable"
+            },
+            "gifUrl": {
+              "type": "string",
+              "description": "Exercise's gif URL",
+              "example": "https://ftp.goit.study/img/power-pulse/gifs/0007.gif"
+            },
+            "name": {
+              "type": "string",
+              "description": "Exercise's name",
+              "example": "alternate lateral pulldown"
+            },
+            "target": {
+              "type": "string",
+              "description": "Exercise's target (muscle)",
+              "example": "lats"
+            },
+            "description": {
+              "type": "string",
+              "description": "Exercise's description",
+              "example": "These large back muscles are responsible for shoulder adduction and horizontal extension. Pull-ups and lat pulldowns are common exercises targeting the lats."
+            },
+            "rating": {
+              "type": "number",
+              "description": "Exercise's rating",
+              "example": 3
+            },
+            "burnedCalories": {
+              "type": "number",
+              "description": "The number of calories burned in a given time",
+              "example": 70
+            },
+            "time": {
+              "type": "number",
+              "description": "Exercise time for burning certain calories",
+              "example": 3
+            },
+            "popularity": {
+              "type": "number",
+              "description": "Exercise's popularity",
+              "example": 100
+            }
+          },
+          "example": {
+            "_id": "64f389465ae26083f39b17a4",
+            "bodyPart": "waist",
+            "equipment": "body weight",
+            "gifUrl": "https://ftp.goit.study/img/power-pulse/gifs/0003.gif",
+            "name": "air bike",
+            "target": "abs",
+            "description": "This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.",
+            "rating": 4.33,
+            "burnedCalories": 312,
+            "time": 3,
+            "popularity": 4
+          }
+        },
+        "FiltersResponse": {
+          "type": "object",
+          "properties": {
+            "page": {
+              "type": "number",
+              "description": "Page number",
+              "format": 1
+            },
+            "perPage": {
+              "type": "number",
+              "description": "Number of items per page",
+              "format": 6
+            },
+            "totalPages": {
+              "type": "number",
+              "description": "Total number of pages",
+              "format": 48
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "Exercise's filter",
+                    "example": "Body parts"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Filter's item",
+                    "example": "back"
+                  },
+                  "imgUrl": {
+                    "type": "string",
+                    "description": "Filter's img URL",
+                    "example": "string"
+                  }
+                }
+              }
+            }
+          },
+          "example": {
+            "page": 1,
+            "perPage": 12,
+            "totalPages": 5,
+            "results": [
+              {
+                "filter": "Body parts",
+                "name": "back",
+                "imgURL": "string"
+              },
+              {
+                "filter": "Body parts",
+                "name": "cardio",
+                "imgURL": "string"
+              },
+              {
+                "filter": "Body parts",
+                "name": "chest",
+                "imgURL": "string"
+              }
+            ]
+          }
+        },
+        "QuoteResponse": {
+          "type": "object",
+          "properties": {
+            "author": {
+              "type": "string",
+              "description": "Author of the quote",
+              "example": "Muhammad Ali"
+            },
+            "quote": {
+              "type": "string",
+              "description": "Quote of the day",
+              "example": "I hated every minute of training, but I said, 'Don't quit. Suffer now and live the rest of your life as a champion."
+            }
+          },
+          "example": {
+            "author": "Muhammad Ali",
+            "quote": "I hated every minute of training, but I said, 'Don't quit. Suffer now and live the rest of your life as a champion.'"
+          }
+        },
+        "SubscriptionRequest": {
+          "type": "object",
+          "required": ["email"],
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "example": "test@gmail.com"
+            }
+          }
+        },
+        "SubscriptionResponse": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "We're excited to have you on board! 🎉 Thank you for subscribing to new exercises on Your Energy. You've just taken a significant step towards improving your fitness and well-being."
+            }
+          }
+        }
+      }
+    }
+  },
+  "customOptions": {}
+}
