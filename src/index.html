@@ -23,9 +23,28 @@
     <script type="module" src="./main.ts"></script>
   </head>
   <body>
-    <load src="./partials/header.html" icon-path="img/sprite.svg#icon-logo-text" />
+    <load
+      src="./partials/header.html"
+      icon-path="img/sprite.svg#icon-logo-text"
+    />
 
-    <main></main>
+    <main>
+      <section class="ye-dashboard container" data-ye-root>
+        <load src="./partials/your-energy-header.html" />
+
+        <load src="./partials/your-energy-actions.html" />
+
+        <div class="ye-grid">
+          <load src="./partials/your-energy-quote.html" />
+          <load src="./partials/your-energy-filters.html" />
+        </div>
+
+        <div class="ye-grid">
+          <load src="./partials/your-energy-exercises.html" />
+          <load src="./partials/your-energy-details.html" />
+        </div>
+      </section>
+    </main>
 
     <load src="./partials/footer.html" />
   </body>

@@ -1,0 +1,10 @@
+.ye-quote-card__text {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.ye-quote-card__author {
+  margin-top: 16px;
+  font-weight: 700;
+  color: rgba(36, 36, 36, 0.7);
+}

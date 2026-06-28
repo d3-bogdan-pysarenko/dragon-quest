@@ -70,3 +70,12 @@ export const subscribeToNewsletter = async (
 
   return response.data;
 };
+
+export const yourEnergyClient = {
+  getFilters,
+  getExercises,
+  getExerciseById,
+  addExerciseRating,
+  getQuoteOfTheDay,
+  subscribeToNewsletter,
+};
