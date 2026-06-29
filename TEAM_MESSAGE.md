@@ -51,4 +51,3 @@ npm run build
 ```
 
 Якщо потрібен приклад реалізації, дивіться `src/mvc-example.ts` і `src/mvc`.
-
