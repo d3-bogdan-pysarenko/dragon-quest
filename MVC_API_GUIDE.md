@@ -271,7 +271,7 @@ const result = await subscribeToNewsletter({
 <!-- src/partials/quote.html -->
 <section class="quote">
   <div class="container">
-    <p class="quote__text">Train your body. Focus your mind.</p>
+    <p class="quote-text">Train your body. Focus your mind.</p>
   </div>
 </section>
 ```
@@ -339,7 +339,7 @@ const result = await subscribeToNewsletter({
   padding-bottom: 40px;
 }
 
-.quote__text {
+.quote-text {
   font-size: 18px;
 }
 ```
@@ -358,30 +358,41 @@ const result = await subscribeToNewsletter({
 @import url('./components/button.css');
 ```
 
-Правило іменування: використовуй зрозумілий клас компонента і вкладені елементи
-через `__`.
+Правило іменування: використовуй зрозумілі назви класів через дефіс. Не
+використовуй подвійне підкреслення у назвах класів.
 
 ```css
 .search-form {}
-.search-form__input {}
-.search-form__button {}
+.search-form-input {}
+.search-form-button {}
 ```
 
 ## Інтерактивний компонент без API
 
 Якщо компоненту потрібна тільки поведінка в браузері, але не потрібні API-запити,
-можна додати код у `src/main.ts` або окремий файл і імпортувати його в
+створюй для нього окремий TS-файл. Не пиши логіку компонента прямо в
 `src/main.ts`.
 
-Приклад:
+Приклад окремого файлу:
 
 ```ts
-const button = document.querySelector<HTMLButtonElement>('[data-menu-open]');
-const menu = document.querySelector<HTMLElement>('[data-menu]');
+// src/components/menu.ts
+export const initMenu = (): void => {
+  const button = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
 
-button?.addEventListener('click', () => {
-  menu?.classList.toggle('is-open');
-});
+  button?.addEventListener('click', () => {
+    menu?.classList.toggle('is-open');
+  });
+};
+```
+
+Підключення в `src/main.ts`:
+
+```ts
+import { initMenu } from './components/menu';
+
+initMenu();
 ```
 
 Для пошуку елементів краще використовувати `data-*` атрибути, а не CSS-класи.
@@ -472,7 +483,8 @@ HTML-контейнер:
 - Якщо потрібна тільки розмітка - створи partial у `src/partials`.
 - Якщо компонент повторюється - створи partial у `src/partials/components`.
 - Якщо потрібні тільки стилі - створи CSS-файл і імпортуй його в `styles.css`.
-- Якщо потрібен клік, toggle або проста DOM-логіка - додай TS-код без MVC.
+- Якщо потрібен клік, toggle або проста DOM-логіка - створи окремий TS-файл без
+  MVC і підключи його в entrypoint.
 - Якщо потрібні API-запити, стан, loading/error або кілька дій - створи MVC.
 
 ## Як додавати зміни в MVC
