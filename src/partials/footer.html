@@ -1,3 +1,51 @@
-<footer class="footer">
-  <div class="container"></div>
+<!-- #region Footer -->
+<footer class="site-footer">
+  <div class="container site-footer-container">
+    <div class="site-footer-brand">
+      <a
+        class="site-footer-logo"
+        href="./index.html"
+        aria-label="Your Energy home"
+      >
+        <svg class="site-footer-logo-icon" width="132" height="24">
+          <use href="img/sprite.svg#icon-logo-text"></use>
+        </svg>
+      </a>
+
+      <load src="/partials/components/socials.html" addition-classes="dark site-footer-socials" />
+    </div>
+
+    <p class="site-footer-slogan">
+      Transforming your <em>body</em> shape with us
+    </p>
+
+    <form class="subscribe-form" action="#" method="post">
+      <label class="subscribe-form-label" for="subscribe-email">
+        Subscribe and learn about new exercises!
+      </label>
+      <input
+        class="input width-100-percent"
+        id="subscribe-email"
+        name="email"
+        type="email"
+        placeholder="Email"
+      />
+      <button class="btn light width-100-percent" type="submit">Send</button>
+    </form>
+
+    <div class="site-footer-legal">
+      <p class="site-footer-copyright">Your Energy. All rights reserved.</p>
+      <ul class="site-footer-policy-list">
+        <li class="site-footer-policy-item">
+          <a class="site-footer-policy-link" href="#">Privacy Policy</a>
+        </li>
+        <li class="site-footer-policy-item" aria-hidden="true">/</li>
+        <li class="site-footer-policy-item">
+          <a class="site-footer-policy-link" href="#">Terms of Service</a>
+        </li>
+      </ul>
+      <p class="site-footer-year">&copy;2023</p>
+    </div>
+  </div>
 </footer>
+<!-- #endregion Footer -->

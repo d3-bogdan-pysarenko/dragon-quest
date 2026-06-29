@@ -1,0 +1,30 @@
+<form class="search-form" role="search" action="#" method="GET">
+  <!-- Підпис обов'язковий для скрінрідерів -->
+  <label for="site-search" class="visually-hidden">Search</label>
+
+  <div class="search-wrapper">
+    <!-- 1. Поле вводу -->
+    <input
+      type="search"
+      id="site-search"
+      class="search-input"
+      name="search"
+      placeholder="Search"
+      required
+    />
+
+    <!-- 2. Кнопка очищення (показується тільки коли є текст) -->
+    <button type="reset" class="input-btn-icon input-btn-clear" aria-label="Clear input">
+      <svg class="input-icon-x" width="18" height="18">
+        <use href="img/sprite.svg#icon-x"></use>
+      </svg>
+    </button>
+
+    <!-- 3. Кнопка пошуку (завжди видима справа) -->
+    <button type="submit" class="input-btn-icon input-btn-search" aria-label="Start search">
+      <svg class="input-icon-x" width="18" height="18">
+        <use href="img/sprite.svg#icon-search"></use>
+      </svg>
+    </button>
+  </div>
+</form>

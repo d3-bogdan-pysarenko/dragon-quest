@@ -1,0 +1,105 @@
+.search-form {
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Обгортка-пігулка */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-light);
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  padding: 0px 14px;
+  transition: border-color var(--transition-base);
+}
+
+.search-wrapper:focus-within {
+  border-color: #0056b3;
+  outline: 3px solid #0056b3;
+  outline-offset: 2px;
+}
+
+/* Поле вводу */
+.search-input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0 8px 0 0;
+  color: #333;
+  width: 100%;
+}
+
+.search-input::-webkit-search-decoration,
+.search-input::-webkit-search-cancel-button {
+  display: none; /* Ховаємо стандартний хрестик браузера */
+}
+
+/* Спільні стилі для кнопок-іконок */
+.input-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 46px; /* Достатня зона натискання згідно з WCAG */
+  height: 46px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  color: #555;
+  cursor: pointer;
+}
+
+.input-btn-icon:hover {
+  color: #0056b3;
+  background-color: #f0f4f8;
+}
+
+.input-btn-clear:hover {
+  color: #d32f2f;
+  background-color: #ffebee;
+}
+
+.input-btn-icon:focus-visible {
+  outline: 2px solid #0056b3;
+  outline-offset: -2px;
+}
+
+/* 
+ * ЛОГІКА ВИДИМОСТІ КНОПКИ ОЧИЩЕННЯ
+ */
+.input-btn-clear {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+  min-width: 46px; /* Утримуємо ширину у видимому стані */
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+/* 
+ * Коли показується placeholder (тобто текст не введено), 
+ * ми повністю схлопуємо ширину сусідньої (+) кнопки очищення. 
+ */
+.search-input:placeholder-shown + .input-btn-clear {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.5);
+  width: 0;
+  min-width: 0; /* Дозволяє кнопці зникнути, не залишаючи дірки */
+  padding: 0;
+  margin: 0;
+}
+
+/* Підтримка High Contrast Mode (режиму високого контрасту) */
+@media (forced-colors: active) {
+  .search-wrapper {
+    border-color: CanvasText;
+  }
+  .input-btn-icon:focus-visible {
+    outline-color: CanvasText;
+  }
+}

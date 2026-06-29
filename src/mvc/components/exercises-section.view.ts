@@ -24,21 +24,21 @@ export class ExercisesSectionView {
   render(exercises: ExerciseResponse[]): void {
     if (exercises.length === 0) {
       this.root.innerHTML =
-        '<li class="ye-exercises__empty">No exercises found.</li>';
+        '<li class="exercises__empty">No exercises found.</li>';
       return;
     }
 
     this.root.innerHTML = exercises
       .map(exercise =>
         html`
-          <li class="ye-exercises__item" data-exercise-id="${exercise._id}">
-            <button type="button" class="ye-exercises__button">
-              <strong class="ye-exercises__name">${exercise.name}</strong>
-              <span class="ye-exercises__meta">
+          <li class="exercises__item" data-exercise-id="${exercise._id}">
+            <button type="button" class="exercises__button">
+              <strong class="exercises__name">${exercise.name}</strong>
+              <span class="exercises__meta">
                 ${exercise.bodyPart} • ${exercise.equipment}
               </span>
-              <span class="ye-exercises__meta">Target: ${exercise.target}</span>
-              <span class="ye-exercises__meta">Rating: ${exercise.rating}</span>
+              <span class="exercises__meta">Target: ${exercise.target}</span>
+              <span class="exercises__meta">Rating: ${exercise.rating}</span>
             </button>
           </li>
         `

@@ -1,0 +1,80 @@
+.input {
+  padding: 12px 14px;
+  border-radius: var(--radius-pill);
+  color: var(--color-light);
+  background-color: transparent;
+  border: 1px solid var(--color-light);
+  width: 100%;
+}
+
+.light .input {
+  color: var(--color-ink);
+  background-color: transparent;
+  border: 1px solid var(--color-ink);
+}
+
+.input::placeholder {
+  color: var(--color-light-muted);
+}
+
+.light .input::placeholder {
+  color: var(--color-ink);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input-wrap {
+  position: relative;
+}
+.input-wrap .input {
+  padding-right: 58px;
+}
+
+.input-btn-x,
+.input-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  right: 35px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  transition:
+    background-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.input-btn-x:hover,
+.input-btn:hover {
+  background-color: var(--border-dark-soft);
+  box-shadow: 0 0 0 4px var(--border-dark-soft);
+}
+
+.input-btn-x {
+  display: none;
+}
+
+.input:not(:placeholder-shown) + .input-btn-x {
+  display: flex;
+}
+
+.input-btn {
+  right: 11px;
+}
+
+.input-icon,
+.input-icon-x {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+}

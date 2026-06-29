@@ -1,0 +1,53 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 8px;
+ 
+  border: 1px solid var(--color-light);
+  border-radius: var(--radius-pill);
+  padding: 11px 23px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-ink);
+
+  outline: none;
+
+  transition:
+    color var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.light.btn {
+  background-color: var(--color-light);
+  color: var(--color-ink);
+}
+
+.light.btn:hover,
+.light.btn:focus-visible {
+  color: var(--color-light);
+  background-color: transparent;
+}
+
+
+.dark.btn {
+  color: var(--color-light);
+  background-color: transparent;
+}
+
+.dark.btn:hover,
+.dark.btn:focus-visible {
+  background-color: var(--color-light);
+  color: var(--color-ink);
+}
+
+
+.btn-icon {
+  stroke: currentColor;
+  fill: none;
+  transition:
+    opacity var(--transition-base);
+}

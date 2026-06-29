@@ -1,7 +1,13 @@
-a {
-  text-decoration: none;
-  font-size: inherit;
-  color: var(--color);
+/* #region Reset */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
 }
 
 ul,
@@ -14,33 +20,35 @@ ol {
   padding-left: 0;
 }
 
-button {
+a {
+  color: currentColor;
+  text-decoration: none;
   font-size: inherit;
-  font-family: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
   cursor: pointer;
-  font-weight: var(--font-weight);
-  letter-spacing: var(--letter-spacing);
+}
+
+img,
+svg {
+  display: block;
 }
 
 address {
   font-style: normal;
 }
-
 img {
-  display: block;
   max-width: 100%;
   object-fit: cover;
   height: auto;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0;
 }
 
 input,
@@ -49,3 +57,4 @@ button {
   font-family: inherit;
   line-height: inherit;
 }
+/* #endregion Reset */

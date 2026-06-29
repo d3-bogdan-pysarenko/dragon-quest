@@ -11,8 +11,8 @@ export class QuoteSectionView {
     }
 
     this.root.innerHTML = html`
-      <blockquote class="ye-quote-card__text">"${quote.quote}"</blockquote>
-      <p class="ye-quote-card__author">${quote.author}</p>
+      <blockquote class="quote-card__text">"${quote.quote}"</blockquote>
+      <p class="quote-card__author">${quote.author}</p>
     `;
   }
 }

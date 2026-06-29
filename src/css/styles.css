@@ -1,13 +1,16 @@
-@import url('./common.css');
-@import url('./base.css');
 @import url('./reset.css');
+@import url('./base.css');
+@import url('./common.css');
+@import url('./components/socials.css');
+@import url('./components/button.css');
+@import url('./components/input.css');
+@import url('./components/search-form.css');
 
-@import url('./socials.css');
-@import url('./your-energy-dashboard.css');
-@import url('./your-energy-header.css');
-@import url('./your-energy-actions.css');
-@import url('./your-energy-quote.css');
-@import url('./your-energy-filters.css');
-@import url('./your-energy-exercises.css');
-@import url('./your-energy-details.css');
-
+@import url('./header.css');
+@import url('./hero.css');
+@import url('./exercises.css');
+@import url('./filters.css');
+@import url('./footer.css');
+@import url('./burger-menu.css');
+@import url('./quote.css');
+@import url('./pagination.css');

@@ -6,16 +6,16 @@ export class FiltersSectionView {
 
   render(filters: FilterItem[]): void {
     if (filters.length === 0) {
-      this.root.innerHTML = '<li class="ye-filters__empty">No filters found.</li>';
+      this.root.innerHTML = '<li class="filters__empty">No filters found.</li>';
       return;
     }
 
     this.root.innerHTML = filters
       .map(filter =>
         html`
-          <li class="ye-filters__item">
-            <span class="ye-filters__name">${filter.name}</span>
-            <small class="ye-filters__meta">${filter.filter}</small>
+          <li class="filters__item">
+            <span class="filters__name">${filter.name}</span>
+            <small class="filters__meta">${filter.filter}</small>
           </li>
         `
       )

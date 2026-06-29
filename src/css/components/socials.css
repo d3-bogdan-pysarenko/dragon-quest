@@ -1,0 +1,70 @@
+/* #region Socials */
+.social-list {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  color: var(--color-ink);
+  outline: none;
+  transition:
+    color var(--transition-base),
+    background-color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.light .social-link {
+  border-color: var(--border-dark-soft);
+}
+
+.light .social-link:hover,
+.light .social-link:focus-visible {
+  color: var(--color-light);
+  background-color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.dark .social-link {
+  color: var(--color-light);
+  border-color: var(--border-light-soft);
+}
+
+.dark .social-link:hover,
+.dark .social-link:focus-visible {
+  color: var(--color-ink);
+  background-color: var(--color-light);
+  border-color: var(--color-light);
+}
+
+.social-icon {
+  fill: currentColor;
+  transition:
+    opacity var(--transition-base);
+}
+
+.light .social-icon {
+  opacity: 0.8;
+}
+
+.light .social-link:hover .social-icon {
+  opacity: 1;
+}
+
+.dark .social-icon {
+  opacity: 1;
+}
+
+.dark .social-link:hover .social-icon {
+  opacity: 0.8;
+}
+/* #endregion Socials */

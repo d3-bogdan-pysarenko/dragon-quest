@@ -1,19 +1,35 @@
-<header class="header">
-  <div class="container">
-    <nav class="nav">
-      <a class="nav-logo" href="./index.html" aria-label="Site logo">
-        <svg class="nav-logo-icon" width="176" height="32">
-          <use href="{=$icon-path}"></use>
-        </svg>
-      </a>
-      <ul class="nav-list">
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-act}" href="./page-2.html">Page 2</a>
+<!-- #region Header -->
+<header class="site-header">
+  <div class="container site-header-container">
+    <a
+      class="site-header-logo"
+      href="./index.html"
+      aria-label="Your Energy home"
+    >
+      <svg class="site-header-logo-icon" width="132" height="24">
+        <use href="img/sprite.svg#icon-logo-text"></use>
+      </svg>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <ul class="site-nav-list">
+        <li class="site-nav-item">
+          <a class="site-nav-link site-nav-link-active" href="./index.html">
+            Home
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-curr}" href="./page-3.html">Page 3</a>
+        <li class="site-nav-item">
+          <a class="site-nav-link" href="#favorites">Favorites</a>
         </li>
       </ul>
     </nav>
+
+    <load src="/partials/components/socials.html" addition-classes="light" />
+    <button class="site-menu-button" type="button" aria-label="Open menu">
+      <span class="site-menu-button-line"></span>
+      <span class="site-menu-button-line"></span>
+      <span class="site-menu-button-line"></span>
+    </button>
   </div>
 </header>
+<!-- #endregion Header -->

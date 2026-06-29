@@ -1,0 +1,22 @@
+<div class="input-field {=$class}">
+  <label class="input-label visually-hidden" for="{=$name}">{=$label}</label>
+  <div class="input-wrap">
+    <input
+      class="input"
+      type="{=$type}"
+      id="{=$name}"
+      name="{=$name}"
+      placeholder="{=$label}"
+    />
+    <button class="input-btn-x" type="button" aria-label="Clear input">
+      <svg class="input-icon-x" width="18" height="18">
+        <use href="img/sprite.svg#icon-x"></use>
+      </svg>
+    </button>
+    <button class="input-btn" type="button" aria-label="{=$label}">
+      <svg class="input-icon" width="18" height="18">
+        <use href="img/sprite.svg#{=$icon-id}"></use>
+      </svg>
+    </button>
+  </div>
+</div>

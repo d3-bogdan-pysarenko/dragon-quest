@@ -11,10 +11,10 @@ export class DetailsSectionView {
     }
 
     this.root.innerHTML = html`
-      <article class="ye-details-card">
-        <h3 class="ye-details-card__title">${exercise.name}</h3>
-        <p class="ye-details-card__description">${exercise.description}</p>
-        <ul class="ye-details-card__list">
+      <article class="details-card">
+        <h3 class="details-card__title">${exercise.name}</h3>
+        <p class="details-card__description">${exercise.description}</p>
+        <ul class="details-card__list">
           <li>Body part: ${exercise.bodyPart}</li>
           <li>Equipment: ${exercise.equipment}</li>
           <li>Target: ${exercise.target}</li>
