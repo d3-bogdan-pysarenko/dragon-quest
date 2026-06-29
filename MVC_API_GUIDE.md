@@ -39,8 +39,8 @@ controller.init();
 <script type="module" src="./mvc-example.ts"></script>
 ```
 
-`src/index.html` підключає основний entrypoint `src/main.ts`. MVC-приклад у
-нього не імпортується.
+`src/index.html` і `src/favorites.html` підключають основний entrypoint
+`src/main.ts`. MVC-приклад у нього не імпортується.
 
 ## Як працює Model
 
@@ -395,6 +395,39 @@ import { initMenu } from './components/menu';
 initMenu();
 ```
 
+Якщо `src/main.ts` підключений на кількох сторінках, логіка компонента має сама
+перевіряти, чи є на поточній сторінці потрібна розмітка. Якщо елемента немає,
+функція просто завершується.
+
+```ts
+// src/components/favorites-list.ts
+export const initFavoritesList = (): void => {
+  const root = document.querySelector<HTMLElement>('[data-favorites-list]');
+
+  if (!root) {
+    return;
+  }
+
+  root.textContent = 'Favorites page logic is active';
+};
+```
+
+Підключення в `src/main.ts`:
+
+```ts
+import { initFavoritesList } from './components/favorites-list';
+import { initMenu } from './components/menu';
+
+initMenu();
+initFavoritesList();
+```
+
+Так `initFavoritesList()` відпрацює тільки на сторінці, де є:
+
+```html
+<section data-favorites-list></section>
+```
+
 Для пошуку елементів краще використовувати `data-*` атрибути, а не CSS-класи.
 CSS-класи відповідають за стилі, `data-*` атрибути - за JavaScript.
 
@@ -484,7 +517,8 @@ HTML-контейнер:
 - Якщо компонент повторюється - створи partial у `src/partials/components`.
 - Якщо потрібні тільки стилі - створи CSS-файл і імпортуй його в `styles.css`.
 - Якщо потрібен клік, toggle або проста DOM-логіка - створи окремий TS-файл без
-  MVC і підключи його в entrypoint.
+  MVC, підключи його в entrypoint і перевіряй у ньому наявність свого
+  `data-*` контейнера.
 - Якщо потрібні API-запити, стан, loading/error або кілька дій - створи MVC.
 
 ## Як додавати зміни в MVC
