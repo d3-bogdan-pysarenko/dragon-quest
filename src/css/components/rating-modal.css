@@ -1,0 +1,95 @@
+/* #region Rating modal */
+.rating-modal {
+  position: relative;
+  width: 100%;
+  max-width: 335px;
+  padding: 40px 20px;
+  background-color: var(--color-ink);
+  color: var(--color-light);
+  border-radius: var(--radius-card);
+}
+
+.rating-form {
+  display: grid;
+}
+
+.rating-form-title {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-light-soft);
+  margin-bottom: 8px;
+}
+
+.rating-stars-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.rating-value {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-light);
+}
+
+.rating-stars {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 2px;
+}
+
+.rating-star-label {
+  display: flex;
+  cursor: pointer;
+}
+
+.rating-star-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--color-light-soft);
+  transition: fill var(--transition-base);
+}
+
+.rating-star-input:checked ~ .rating-star-label .rating-star-icon,
+.rating-star-label:hover ~ .rating-star-label .rating-star-icon,
+.rating-star-label:hover .rating-star-icon {
+  fill: #ffc531;
+}
+
+.rating-star-input:focus-visible + .rating-star-label .rating-star-icon {
+  outline: 2px solid var(--color-light);
+  outline-offset: 2px;
+}
+
+.rating-form .input {
+  margin-bottom: 10px;
+}
+
+.rating-form .textarea {
+  min-height: 93px;
+  resize: vertical;
+  margin-bottom: 20px;
+}
+@media screen and (min-width: 768px) {
+  .rating-modal {
+    max-width: 430px;
+    padding: 40px;
+  }
+
+  .rating-stars-row {
+    margin-bottom: 32px;
+  }
+
+  .rating-form .input {
+    margin-bottom: 16px;
+  }
+
+  .rating-form .textarea {
+    min-height: 93px;
+    margin-bottom: 32px;
+  }
+}
+/* #endregion Rating modal */
