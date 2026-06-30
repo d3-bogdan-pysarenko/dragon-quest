@@ -373,6 +373,42 @@ const result = await subscribeToNewsletter({
 створюй для нього окремий TS-файл. Не пиши логіку компонента прямо в
 `src/main.ts`.
 
+## Куди класти TS-скрипти
+
+Для невеликих інтерактивних компонентів використовуй папку:
+
+```text
+src/components
+```
+
+Приклади:
+
+```text
+src/components/burger-menu.ts
+src/components/modal.ts
+src/components/tabs.ts
+src/components/search-form.ts
+```
+
+Для логіки, яка належить цілій сторінці, використовуй папку:
+
+```text
+src/pages
+```
+
+Приклади:
+
+```text
+src/pages/home.ts
+src/pages/favorites.ts
+```
+
+Різниця:
+
+- `src/components` - маленька незалежна поведінка: меню, модалка, tabs, форма.
+- `src/pages` - логіка всієї сторінки: favorites page, home page, ініціалізація
+  кількох блоків сторінки.
+
 Приклад окремого файлу:
 
 ```ts
@@ -393,6 +429,31 @@ export const initMenu = (): void => {
 import { initMenu } from './components/menu';
 
 initMenu();
+```
+
+Приклад сторінкового файлу:
+
+```ts
+// src/pages/favorites.ts
+export const initFavoritesPage = (): void => {
+  const page = document.querySelector<HTMLElement>('[data-page="favorites"]');
+
+  if (!page) {
+    return;
+  }
+
+  page.dataset.ready = 'true';
+};
+```
+
+Підключення в `src/main.ts`:
+
+```ts
+import { initMenu } from './components/menu';
+import { initFavoritesPage } from './pages/favorites';
+
+initMenu();
+initFavoritesPage();
 ```
 
 Якщо `src/main.ts` підключений на кількох сторінках, логіка компонента має сама
