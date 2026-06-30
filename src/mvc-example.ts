@@ -1,3 +1,4 @@
+import { initRatingModal } from './components/rating-modal';
 import { ExampleController } from './mvc/example.controller';
 import { ExampleModel } from './mvc/example.model';
 import { ExampleView } from './mvc/example.view';
@@ -13,3 +14,4 @@ const view = new ExampleView(mvcElement);
 const controller = new ExampleController(model, view);
 
 controller.init();
+initRatingModal();
