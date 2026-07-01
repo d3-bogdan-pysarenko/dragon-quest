@@ -5,6 +5,7 @@
 @import url('./components/button.css');
 @import url('./components/input.css');
 @import url('./components/search-form.css');
+@import url('./components/workout-card.css');
 @import url('./components/modal.css');
 @import url('./components/rating-modal.css');
 
@@ -16,3 +17,4 @@
 @import url('./burger-menu.css');
 @import url('./quote.css');
 @import url('./pagination.css');
+@import url(./loader.css);
