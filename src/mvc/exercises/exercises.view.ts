@@ -77,8 +77,7 @@ export class ExercisesView {
     );
   }
 
-  private handleCardClick(filter: ExerciseFilter) {
-  }
+  private handleCardClick(filter: ExerciseFilter) { }
 
   setDefaultCategory(categoryName: ExerciseFilter) {
     const button = Array.from(this.categoriesContainer.querySelectorAll('.btnFilters'))
