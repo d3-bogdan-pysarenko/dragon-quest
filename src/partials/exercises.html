@@ -1,11 +1,11 @@
-<section class="section exercises">
+<section class="section exercises" data-exercises-section>
   <div class="container exercises__header">
-    <h2 class="exercises__header-title">Exercises
-      <span class="exercises__span-slash hidden">/</span>
+    <h2 class="exercises__header-title" data-exercises-title-text>Exercises
+      <span class="exercises__span-slash hidden" data-exercises-slash>/</span>
       <a class="exercises__text-link hidden"></a>
     </h2>
     <div class="exercises__header-search-filters">
-      <div class="search-input hidden">
+      <div class="search-input hidden" data-exercises-search>
         <!-- Load the input-btn template with parameters -->
         <load
           src="partials/components/input-btn.html"
@@ -16,7 +16,8 @@
           icon-id="icon-search"
         />
       </div>
-      <ul class="exercises__header-categories" id="exerciseCategories">
+      <ul class="exercises__header-categories" data-exercises-categories>
+
       </ul>
 
     </div>
@@ -24,6 +25,6 @@
 
   <div class="container exercises__quote-filters">
     <div class="aside__container"></div>
-    <div class="list-filters__container"></div>
+    <div class="list-filters__container" data-exercises-list></div>
   </div>
 </section>
