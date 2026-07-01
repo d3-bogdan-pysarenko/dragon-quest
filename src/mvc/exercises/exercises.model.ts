@@ -2,7 +2,7 @@ import {
   getFilters as getFiltersApi,
   ExerciseFilter,
   FiltersResponse,
-} from '../api';
+} from '../../api';
 
 export class ExercisesModel {
   async getFilters(filter: ExerciseFilter): Promise<FiltersResponse> {
