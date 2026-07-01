@@ -242,3 +242,23 @@
       gap: 32px 16px;
     }
   }
+  .favor-exercises-list p {
+    text-align: center;
+  }
+  .favor-exercises-noitems {
+    padding: 40px 8px 0 9px;
+  }
+  @media screen and (min-width: 768px) {
+    .favor-exercises-noitems {
+      padding: 132px 75px 0;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .favor-exercises-noitems {
+      padding: 102px 148px 0;
+    }
+  }
+  .favor-exercises-text {
+    font-size: 18px;
+    line-height: 1.33;
+  }
