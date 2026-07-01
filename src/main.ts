@@ -1,3 +1,4 @@
+import { initScrollUp } from './components/scroll-up';
 import { initRatingModal } from './components/rating-modal';
 import { showLoader, hideLoader } from './components/loader';
 import { ExercisesModel } from './mvc/exercises/exercises.model';
@@ -21,5 +22,5 @@ showLoader();
 hideLoader();
 
 initRatingModal();
-
+initScrollUp();
 export {};
