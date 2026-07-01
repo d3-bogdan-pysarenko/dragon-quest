@@ -1,11 +1,7 @@
-root {
-    --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
   body {
     background-color: var(--color-light);
   }
-  
+
   .favor-container {
     padding-top: 80px;
     padding-bottom: 80px;
@@ -93,135 +89,10 @@ root {
   .favor-exercises {
     padding-top: 40px;
   }
-  .favor-exercises-noitems {
-    padding: 40px 8px 0 9px;
-  }
   .favor-exercises-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
-  }
-  .favor-exercises-list p {
-    text-align: center;
-  }
-  /**                          exercises-card */
-  .favor-exercises-card {
-    width: 335px;
-    height: 141px;
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 16px;
-  }
-  .favor-exercises-head {
-    display: flex;
-    gap: 8px;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .favor-exercises-head svg {
-    fill: var(--color-ink);
-    transition: transform var(--transition);
-  }
-  .favor-exercises-wrap {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  .favor-exercises button {
-    display: flex;
-    align-items: center;
-    line-height: 1.29;
-    color: var(--color-ink);
-    background-color: transparent;
-    border: none;
-  }
-  .favor-exercises-startbtn {
-    gap: 8px;
-    height: 18px;
-  }
-  .favor-exercises-startbtn svg {
-    transform: rotate(90deg);
-  }
-  .favor-exercises-name {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    padding-top: 27px;
-    padding-bottom: 8px;
-  }
-  .favor-exercises-icon {
-    position: relative;
-    background-color: var(--color-ink);
-    min-width: 32px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-  }
-  .favor-exercises-icon svg {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    fill: var(--color-light);
-  }
-  .favor-exercises-name h3 {
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 1.33;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .favor-exercises-name h3::first-letter {
-    text-transform: capitalize;
-  }
-  .favor-exercises-info {
-    display: flex;
-    gap: 10px;
-  }
-  .favor-exercises-item {
-    font-size: 12px;
-    line-height: 1.5;
-    letter-spacing: -0.03em;
-    color: rgba(36, 36, 36, 0.4);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .favor-exercises-item::first-letter {
-    text-transform: capitalize;
-  }
-  .favor-exercises-item span {
-    color: var(--color-ink);
-    padding-left: 2px;
-  }
-  .favor-exercises-span {
-    text-transform: capitalize;
-  }
-  .favor-exercises-calories {
-    max-width: 144px;
-  }
-  .favor-exercises-body {
-    max-width: 83px;
-  }
-  .favor-exercises-target {
-    width: 56px;
-    flex-grow: 1;
-  }
-  .favor-workout {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 75px;
-    height: 24px;
-    border-radius: 15px;
-    border: 1px solid var(--color-ink);
-  }
-  .favor-workout p {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: normal;
-    text-transform: uppercase;
   }
   /**                          @media */
   @media screen and (min-width: 768px) {
@@ -288,30 +159,10 @@ root {
     .favor-exercises {
       padding-top: 64px;
     }
-    .favor-exercises-noitems {
-      padding: 132px 75px 0;
-    }
     .favor-exercises-list {
       flex-direction: row;
       flex-wrap: wrap;
       gap: 32px 16px;
-    }
-    .favor-exercises-text {
-      font-size: 18px;
-      line-height: 1.33;
-    }
-    .favor-exercises-card {
-      width: 344px;
-    }
-    .favor-exercises button {
-      font-size: 16px;
-      line-height: 1.5;
-    }
-    .favor-exercises-startbtn {
-      height: 24px;
-    }
-    .favor-exercises-body {
-      max-width: 88px;
     }
   }
   @media screen and (min-width: 1440px) {
@@ -354,17 +205,5 @@ root {
       border-radius: 12px;
       border: none;
     }
-    .favor-exercises-noitems {
-      padding: 102px 148px 0;
-    }
-    .favor-exercises-card {
-      width: 405px;
-    }
-    .favor-exercises-info {
-      gap: 16px;
-    }
-    .favor-exercises-body {
-      max-width: 123px;
-    }
   }
-  
+
