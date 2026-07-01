@@ -73,6 +73,12 @@
   resize: none;
   margin-bottom: 20px;
 }
+.rating-form-error {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ff6b6b;
+}
+
 @media screen and (min-width: 768px) {
   .rating-modal {
     max-width: 430px;

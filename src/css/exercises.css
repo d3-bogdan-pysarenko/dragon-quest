@@ -39,7 +39,7 @@
         gap: 20px;
         align-items: center;
         & .exercises-category {
-          & .categorie-btn {
+          & .category-btn {
             padding: 0 0 4px;
             border: none;
             line-height: 1.43em;
