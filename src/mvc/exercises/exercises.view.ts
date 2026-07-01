@@ -78,6 +78,6 @@ export class ExercisesView {
   }
 
   private handleCardClick(filter: ExerciseFilter) {
-    
+
   }
 }
