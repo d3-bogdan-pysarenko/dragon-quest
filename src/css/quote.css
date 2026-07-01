@@ -1,1 +1,275 @@
-/* Quote Styles */
+.sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .sidebar-quote {
+    border-radius: 20px;
+    padding: 20px;
+    overflow: hidden;
+    width: 335px;
+    height: 188px;
+    background-color: var(--color-ink);
+  }
+  #sidebar-error {
+    width: 335px;
+    height: 188px;
+  }
+  .sidebar-quotewrap {
+    display: flex;
+  }
+  .sidebar-quote::before {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--color-light);
+    opacity: 0.2;
+  }
+  .sidebar-quoteitem {
+    margin-left: 26px;
+    margin-right: -20px;
+  }
+  .sidebar-quote h2 {
+    display: block;
+    color: var(--color-light);
+    font-family: var(--font-primary);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .sidebar-quote p {
+    display: block;
+    height: 88px;
+    width: 243px;
+    margin: 6px 0 16px 0;
+    color: rgba(244, 244, 244, 0.6);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.286;
+    overflow: hidden;
+  }
+  .sidebar-quote h3 {
+    display: block;
+    color: var(--color-light);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.286;
+  }
+  .sidebar-quotesvg1 {
+    position: relative;
+    top: 6px;
+    left: 6px;
+    width: 20px;
+    height: 20px;
+    fill: var(--color-light);
+  }
+  .sidebar-quotesvg2 {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-light);
+  }
+  .sidebar-photo {
+    border-radius: 20px;
+    overflow: hidden;
+    width: 335px;
+    height: 242px;
+  }
+  .sidebar-info {
+    position: relative;
+    width: 335px;
+    height: 203px;
+    padding: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #fff;
+  }
+  .sidebar-info h2 {
+    display: block;
+    color: var(--color-ink);
+    font-family: var(--font-primary);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .sidebar-info h3 {
+    display: block;
+    margin: 4px 0 16px 0;
+    color: rgba(36, 36, 36, 0.6);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.286;
+  }
+  .sidebar-info p {
+    display: block;
+    width: 245px;
+    height: 105px;
+    padding: 10px 0;
+    color: var(--color-ink);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.286;
+    letter-spacing: 0.0001em;
+    overflow: hidden;
+  }
+  .sidebar-info::before {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--color-ink);
+  }
+  .sidebar-info .sidebar-infosvg {
+    transition: transform 1s ease 0.25s;
+    transform: scale(1);
+  }
+  .sidebar-info:hover .sidebar-infosvg {
+    transform: scale(1.7);
+  }
+  .sidebar-infosvg {
+    position: relative;
+    top: 6px;
+    left: 6px;
+    fill: var(--color-light);
+  }
+  .sidebar-infowrap {
+    display: flex;
+    gap: 24px;
+  }
+  .sidebar-timerstart::before {
+    content: 'Want to start training?';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--color-ink);
+    font-size: 14px;
+    color: #fff;
+    padding-left: 10px;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 1s ease 0.25s;
+  }
+  .sidebar-timerstart[data-active='true']::before {
+    content: 'The training has begun!';
+    font-size: 14px;
+  }
+  .sidebar-timerstart:hover::before,
+  .sidebar-timerstart:focus::before {
+    opacity: 1;
+  }
+  @media screen and (max-width: 374.98px) {
+    .sidebar-photo,
+    .sidebar-quote,
+    #sidebar-error,
+    .sidebar-info {
+      max-width: 220px;
+      height: auto;
+      margin: 0 auto;
+    }
+    .sidebar-quoteitem {
+      margin-right: -40px;
+    }
+    .sidebar-quote h2 {
+      font-size: 14px;
+    }
+    .sidebar-quote p {
+      width: 150px;
+    }
+    .sidebar-info p {
+      width: 150px;
+      padding: 5px 0;
+      font-size: 13px;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .sidebar-list {
+      flex-wrap: wrap;
+      flex-direction: row;
+      row-gap: 32px;
+      column-gap: 16px;
+    }
+    .sidebar-quoteitem {
+      margin-left: 24px;
+      margin-right: -24px;
+    }
+    .sidebar-quote h2 {
+      font-size: 24px;
+      line-height: 1.33;
+    }
+    .sidebar-quote p {
+      height: 89px;
+      width: 270px;
+      margin: 6px 0 18px 0;
+    }
+    .sidebar-quote h3 {
+      font-size: 16px;
+    }
+    .sidebar-quotesvg2 {
+      width: 24px;
+      height: 24px;
+    }
+    .sidebar-photo {
+      width: 288px;
+      height: 249px;
+    }
+    .sidebar-quote,
+    #sidebar-error,
+    .sidebar-info {
+      padding: 40px;
+      width: 400px;
+      height: 249px;
+    }
+    .sidebar-info h2 {
+      font-size: 24px;
+      line-height: 1.33;
+    }
+    .sidebar-info h3 {
+      margin: 6px 0 16px 0;
+    }
+    .sidebar-info p {
+      width: 270px;
+      height: 97px;
+      font-size: 13.9px;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .sidebar-list {
+      flex-direction: column;
+      gap: 32px;
+    }
+    .sidebar-quote,
+    #sidebar-error {
+      width: 444px;
+      height: 230px;
+    }
+    .sidebar-quote p {
+      width: 314px;
+      height: 70px;
+    }
+    .sidebar-photo {
+      width: 444px;
+      height: 242px;
+    }
+    .sidebar-info {
+      width: 444px;
+      height: 315px;
+    }
+    .sidebar-info p {
+      width: 314px;
+      height: 163px;
+      font-size: 14px;
+      padding: 0;
+    }
+    .image-error404 {
+      width: 444px;
+    }
+  }
+  
