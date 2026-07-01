@@ -6,6 +6,8 @@
 @import url('./components/input.css');
 @import url('./components/search-form.css');
 @import url('./components/workout-card.css');
+@import url('./components/modal.css');
+@import url('./components/rating-modal.css');
 
 @import url('./header.css');
 @import url('./hero.css');
