@@ -1,4 +1,4 @@
-import { initRatingModal } from './mvc/rating.controller';
+import { initRatingModal } from './mvc/rating/rating.controller';
 import { ExampleController } from './mvc/example.controller';
 import { ExampleModel } from './mvc/example.model';
 import { ExampleView } from './mvc/example.view';
