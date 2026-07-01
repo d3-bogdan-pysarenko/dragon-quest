@@ -7,7 +7,7 @@
     border-radius: var(--radius-card);
     border: 1px solid var(--border-dark-soft);
     box-sizing: border-box;
-    /* Гарантирует, что паддинги не раздувают карточку */
+   
 }
 
 .workout-header {
@@ -76,17 +76,13 @@
     margin: 0;
 }
 
-/* Список характеристик в межах картки */
 .workout-info-list {
     display: flex;
     flex-wrap: wrap;
-    /* Дозволяє параметрам переноситися, якщо картка завузька */
     gap: 8px 16px;
-    /* Вертикальний відступ 8px, горизонтальний 16px */
     width: 100%;
 }
 
-/* Елементи списку */
 .workout-info-item {
     font-size: 12px;
     line-height: 1.5;
@@ -101,7 +97,7 @@
     color: var(--color-ink);
     font-weight: 500;
 }
-/* Позиционирование кнопки Start */
+
 .workout-btn-start {
     position: absolute;
     top: 24px;
