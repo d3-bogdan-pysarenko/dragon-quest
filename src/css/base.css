@@ -4,6 +4,7 @@
   --color-page: #f4f4f4;
   --color-surface: #ffffff;
   --color-ink: #242424;
+  --color-ink-dark: rgba(36, 36, 36, 0.8);
   --color-ink-muted: rgba(36, 36, 36, 0.6);
   --color-ink-soft: rgba(36, 36, 36, 0.4);
   --color-light: #f4f4f4;
