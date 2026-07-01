@@ -1,4 +1,5 @@
-import { initRatingModal } from './components/rating-modal';
+
+import { initRatingModal } from './mvc/rating/rating.controller';
 import { showLoader, hideLoader } from './components/loader';
 import { ExercisesModel } from './mvc/exercises/exercises.model';
 import { ExercisesView } from './mvc/exercises/exercises.view';
