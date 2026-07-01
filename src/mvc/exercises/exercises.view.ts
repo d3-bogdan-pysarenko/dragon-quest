@@ -1,19 +1,20 @@
-import { ExerciseFilter } from '../../api';
+import { ExerciseFilter, FilterItem } from '../../api';
 
 export class ExercisesView {
   private readonly searchInput: HTMLInputElement;
   private readonly exercisesTitleText: HTMLElement;
   private readonly exercisesSlash: HTMLSpanElement;
-  private readonly listItems: HTMLElement;
+  private readonly listContainer: HTMLElement;
   private categoriesContainer: HTMLUListElement;
 
   constructor(private readonly root: HTMLElement) {
     this.searchInput = this.getElement('[data-exercises-search]');
     this.exercisesTitleText = this.getElement('[data-exercises-title-text]');
     this.exercisesSlash = this.getElement('[data-exercises-slash]');
-    this.listItems = this.getElement('[data-exercises-list]');
+    this.listContainer = this.getElement('[data-exercises-list]');
     this.categoriesContainer = this.getElement('[data-exercises-categories]');
   }
+
   renderExerciseCategories(): void {
     this.categoriesContainer.innerHTML = Object.values(ExerciseFilter)
       .map(categoryName => `
@@ -53,6 +54,30 @@ export class ExercisesView {
     }
     return element;
   }
+
+  renderCategoryCard(filters: FilterItem[]) {
+    const template = document.getElementById('filter-card-template') as HTMLTemplateElement;
+
+    if (!template) return;
+    this.listContainer.innerHTML = '';
+
+    filters.forEach(filter => {
+        const clone = template.content.cloneNode(true) as DocumentFragment;
+        const card = clone.querySelector('.filter-item') as HTMLElement;
+
+        (card.querySelector('[data-filter-img]') as HTMLImageElement).src = filter.imgUrl;
+        (card.querySelector('[data-filter-img]') as HTMLImageElement).alt = filter.name;
+        (card.querySelector('[data-filter-title]') as HTMLElement).textContent = filter.filter;
+        (card.querySelector('[data-filter-desc]') as HTMLElement).textContent = filter.name;
+
+        card.addEventListener('click', () => this.handleCardClick(filter.filter));
+
+        this.listContainer.appendChild(clone);
+      },
+    );
+  }
+
+  private handleCardClick(filter: ExerciseFilter) {
 
 
   setDefaultCategory(categoryName: ExerciseFilter) {
