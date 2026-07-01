@@ -18,7 +18,7 @@ export class ExercisesView {
     this.categoriesContainer.innerHTML = Object.values(ExerciseFilter)
       .map(categoryName => `
         <li class="exercises-category">
-          <button class="categorie-btn btnFilters" type="button" data-filter="${categoryName}">
+          <button class="category-btn btnFilters" type="button" data-filter="${categoryName}">
             ${categoryName}
           </button>
         </li>
@@ -52,5 +52,17 @@ export class ExercisesView {
       throw new Error(`Element not found: ${selector}`);
     }
     return element;
+  }
+
+
+  setDefaultCategory(categoryName: ExerciseFilter) {
+    const button = Array.from(this.categoriesContainer.querySelectorAll('.btnFilters'))
+      .find(btn => btn.textContent?.trim() === categoryName);
+
+    if (button) {
+      this.categoriesContainer.querySelectorAll('.btnFilters')
+        .forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+    }
   }
 }
