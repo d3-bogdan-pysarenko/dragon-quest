@@ -1,4 +1,4 @@
-import { ExerciseFilter } from '../api';
+import { ExerciseFilter } from '../../api';
 
 export class ExercisesView {
   private readonly searchInput: HTMLInputElement;

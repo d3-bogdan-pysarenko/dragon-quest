@@ -1,4 +1,4 @@
-import { ExerciseFilter } from '../api';
+import { ExerciseFilter } from '../../api';
 import { ExercisesModel } from './exercises.model';
 import { ExercisesView } from './exercises.view';
 
