@@ -8,9 +8,11 @@ export class ExercisesController {
     private view: ExercisesView
   ) {}
 
-  init(): void {
+  async init(): Promise<void> {
     this.view.renderExerciseCategories();
     this.view.onCategoryClick(filter => this.handleFilterSelection(filter));
+
+    await this.loadDefaultCategory();
   }
 
   private async handleFilterSelection(filter: ExerciseFilter): Promise<void> {
@@ -19,6 +21,15 @@ export class ExercisesController {
       console.log(data.results);
     } catch (error) {
       console.error('Error loading filters:', error);
+    }
+  }
+
+  private async loadDefaultCategory() {
+    try {
+      const data = await this.model.getFilters(ExerciseFilter.MUSCLES);
+      this.view.renderCategoryCard(data.results);
+    } catch (e) {
+      console.error('Failed to load filters:', e);
     }
   }
 }
