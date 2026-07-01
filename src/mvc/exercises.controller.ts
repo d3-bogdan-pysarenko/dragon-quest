@@ -11,6 +11,7 @@ export class ExercisesController {
   init(): void {
     this.view.renderExerciseCategories();
     this.view.onCategoryClick(filter => this.handleFilterSelection(filter));
+    this.view.setDefaultCategory(ExerciseFilter.MUSCLES);
   }
 
   private async handleFilterSelection(filter: ExerciseFilter): Promise<void> {

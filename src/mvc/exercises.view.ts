@@ -53,4 +53,16 @@ export class ExercisesView {
     }
     return element;
   }
+
+
+  setDefaultCategory(categoryName: ExerciseFilter) {
+    const button = Array.from(this.categoriesContainer.querySelectorAll('.btnFilters'))
+      .find(btn => btn.textContent?.trim() === categoryName);
+
+    if (button) {
+      this.categoriesContainer.querySelectorAll('.btnFilters')
+        .forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+    }
+  }
 }
