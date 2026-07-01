@@ -6,6 +6,18 @@
     padding-top: 80px;
     padding-bottom: 80px;
   }
+  @media screen and (min-width: 768px) {
+    .favor-container {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .favor-container {
+      padding-top: 90px;
+      padding-bottom: 50px;
+    }
+  }
   /**                          title */
   .favor-title {
     font-size: 28px;
@@ -14,7 +26,25 @@
     letter-spacing: -0.02em;
     margin-bottom: 20px;
   }
+  @media screen and (min-width: 768px) {
+    .favor-title {
+      font-size: 44px;
+      line-height: 1.09;
+      margin-bottom: 32px;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .favor-title {
+      margin-bottom: 44px;
+    }
+  }
   /**                          quote */
+  @media screen and (min-width: 1440px) {
+    .favor-quote {
+      display: flex;
+      gap: 32px;
+    }
+  }
   .favor-quote-container {
     display: flex;
     gap: 18px;
@@ -24,6 +54,21 @@
     background-color: var(--color-ink);
     padding: 20px;
     margin-bottom: 20px;
+  }
+  @media screen and (min-width: 768px) {
+    .favor-quote-container {
+      min-height: 220px;
+      gap: 16px;
+      padding: 40px;
+      margin-bottom: 16px;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .favor-quote-container {
+      gap: 16px;
+      width: 494px;
+      min-height: 230px;
+    }
   }
   .favor-quote-icon {
     position: relative;
@@ -44,13 +89,35 @@
     position: relative;
     min-width: 200px;
   }
+  @media screen and (min-width: 768px) {
+    .favor-quote-wrap {
+      max-width: 574px;
+      min-width: 560px;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .favor-quote-wrap {
+      min-width: 360px;
+    }
+  }
   .favor-quote-wrap h3 {
     color: var(--color-light);
     font-weight: 500;
     margin-bottom: 6px;
   }
+  @media screen and (min-width: 768px) {
+    .favor-quote-wrap h3 {
+      font-size: 24px;
+      line-height: 1.33;
+    }
+  }
   .favor-quote-wrap p {
     color: rgba(244, 244, 244, 0.6);
+  }
+  @media screen and (min-width: 768px) {
+    .favor-quote-wrap p {
+      margin-bottom: 18px;
+    }
   }
   .favor-quote-wrap h4 {
     font-size: 16px;
@@ -60,6 +127,16 @@
     color: var(--color-light);
     margin-top: 16px;
   }
+  @media screen and (min-width: 768px) {
+    .favor-quote-wrap h4 {
+      display: block;
+      color: #f4f4f4;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+  }
   .favor-quote-wrap svg {
     position: absolute;
     top: 0;
@@ -67,12 +144,33 @@
     fill: var(--color-light);
   }
   /**                          dailynorm */
+  @media screen and (min-width: 768px) {
+    .favor-info {
+      display: flex;
+      gap: 16px;
+      height: 141px;
+      margin-bottom: 0;
+    }
+  }
   .favor-dailynorm {
     position: relative;
     border-radius: 20px;
     background-color: #fff;
     padding: 20px;
     margin-bottom: 20px;
+  }
+  @media screen and (min-width: 768px) {
+    .favor-dailynorm {
+      width: 344px;
+      height: 141px;
+      margin-bottom: 0;
+      border-radius: 15px;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .favor-dailynorm {
+      width: 239px;
+    }
   }
   .favor-dailynorm svg {
     fill: var(--color-ink);
@@ -82,6 +180,12 @@
     font-weight: 500;
     margin-bottom: 6px;
   }
+  @media screen and (min-width: 768px) {
+    .favor-dailynorm h3 {
+      font-size: 24px;
+      line-height: 1.33;
+    }
+  }
   .favor-dailynorm p {
     color: rgba(36, 36, 36, 0.6);
   }
@@ -90,113 +194,27 @@
     border-radius: 20px;
     overflow: hidden;
   }
+  @media screen and (min-width: 768px) {
+    .favor-img-wrap {
+      width: 344px;
+      height: 141px;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .favor-img-wrap {
+      width: 239px;
+    }
+  }
   /**                          exercises */
   .favor-exercises {
     padding-top: 40px;
   }
-  .favor-exercises-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  /**                          @media */
   @media screen and (min-width: 768px) {
-    .favor-container {
-      padding-top: 100px;
-      padding-bottom: 100px;
-    }
-    /**                          title */
-    .favor-title {
-      font-size: 44px;
-      line-height: 1.09;
-      margin-bottom: 32px;
-    }
-    /**                          quote */
-    .favor-quote-container {
-      min-height: 220px;
-      gap: 16px;
-      padding: 40px;
-      margin-bottom: 16px;
-    }
-    .favor-quote-wrap {
-      max-width: 574px;
-      min-width: 560px;
-    }
-    .favor-quote-wrap h3 {
-      font-size: 24px;
-      line-height: 1.33;
-    }
-    .favor-quote-wrap p {
-      margin-bottom: 18px;
-    }
-    .favor-quote-wrap h4 {
-      display: block;
-      color: #f4f4f4;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.5;
-      margin-top: 18px;
-    }
-    /**                          dailynorm */
-    .favor-info {
-      display: flex;
-      gap: 16px;
-      height: 141px;
-    }
-    .favor-dailynorm {
-      width: 344px;
-      height: 141px;
-      margin-bottom: 0;
-      border-radius: 15px;
-    }
-    .favor-dailynorm h3 {
-      font-size: 24px;
-      line-height: 1.33;
-    }
-    /**                          dailynorm */
-    .favor-info {
-      margin-bottom: 0;
-    }
-    .favor-img-wrap {
-      width: 344px;
-      height: 141px;
-    }
-    /**                          exercises */
     .favor-exercises {
       padding-top: 64px;
     }
-    .favor-exercises-list {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 32px 16px;
-    }
   }
   @media screen and (min-width: 1440px) {
-    .favor-container {
-      padding-top: 90px;
-      padding-bottom: 50px;
-    }
-    .favor-title {
-      margin-bottom: 44px;
-    }
-    .favor-quote {
-      display: flex;
-      gap: 32px;
-    }
-    .favor-quote-container {
-      gap: 16px;
-      width: 494px;
-      min-height: 230px;
-    }
-    .favor-quote-wrap {
-      min-width: 360px;
-      }
-    .favor-dailynorm {
-      width: 239px;
-    }
-    .favor-img-wrap {
-      width: 239px;
-    }
     .favor-exercises {
       min-width: 850px;
       height: 487px;
@@ -212,4 +230,15 @@
       border: none;
     }
   }
-
+  .favor-exercises-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  @media screen and (min-width: 768px) {
+    .favor-exercises-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 32px 16px;
+    }
+  }
