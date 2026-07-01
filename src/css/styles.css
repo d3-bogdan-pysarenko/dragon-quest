@@ -8,6 +8,7 @@
 @import url('./components/workout-card.css');
 @import url('./components/modal.css');
 @import url('./components/rating-modal.css');
+@import url('./components/quote.css');
 
 @import url('./header.css');
 @import url('./hero.css');
@@ -15,6 +16,5 @@
 @import url('./filters.css');
 @import url('./footer.css');
 @import url('./burger-menu.css');
-@import url('./quote.css');
 @import url('./pagination.css');
 @import url('./favorites-main.css');
