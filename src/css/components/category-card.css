@@ -1,7 +1,7 @@
 .exercises-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 15px;
+  gap: 20px;
   width: 100%;
   list-style: none;
   padding: 0;
@@ -58,12 +58,13 @@
 
 @media screen and (min-width: 768px) {
   .exercises-list {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    row-gap: 32px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .exercises-list {
-    }
+  }
 }
