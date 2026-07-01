@@ -1,5 +1,11 @@
 /* #region Header */
 .site-header {
+  /* visible on top */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-page);
+  /* end visible on top */
   padding-top: 20px;
 }
 
@@ -22,7 +28,7 @@
 }
 
 .site-nav,
-.site-header-socials {
+.site-header .social-list {
   display: none;
 }
 
@@ -58,9 +64,13 @@
     min-height: 52px;
   }
 
+  .site-header .social-list {
+    display: flex;
+  }
+
   .site-nav {
     display: block;
-    padding: 8px;
+    padding: 8px 34px;
     color: var(--color-light);
     background-color: var(--color-ink);
     border-radius: 60px;
@@ -92,6 +102,17 @@
 
   .site-menu-button {
     display: none;
+  }
+
+  .site-header .social-link:hover {
+    background-color: var(--color-ink-dark);
+    border-color: var(--border-dark-soft);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .site-nav {
+    padding: 8px 50px;
   }
 }
 
