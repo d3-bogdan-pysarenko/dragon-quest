@@ -7,6 +7,15 @@ import { QuoteController } from './mvc/quote/quote.controller';
 
 initRatingModal();
 
+const favoritesRoot = document.querySelector<HTMLElement>('[data-favorites]');
+if (favoritesRoot) {
+  const favoritesController = new FavoritesController(
+    new FavoritesModel(),
+    new FavoritesView(favoritesRoot)
+  );
+  favoritesController.init();
+}
+
 const quoteRoot = document.querySelector<HTMLElement>('[data-quote]');
 if (quoteRoot) {
   const quoteController = new QuoteController(
@@ -17,6 +26,9 @@ if (quoteRoot) {
 }
 import { showLoader, hideLoader } from './components/loader';
 import { initBurgerMenu } from './components/burger-menu';
+import { FavoritesModel } from './mvc/favorites/favorites.model';
+import { FavoritesView } from './mvc/favorites/favorites.view';
+import { FavoritesController } from './mvc/favorites/favorites.controller';
 import { ExercisesModel } from './mvc/exercises/exercises.model';
 import { ExercisesView } from './mvc/exercises/exercises.view';
 import { ExercisesController } from './mvc/exercises/exercises.controller';
