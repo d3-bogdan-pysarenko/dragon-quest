@@ -12,6 +12,7 @@ export class ExercisesController {
     this.view.renderExerciseCategories();
     this.view.onCategoryClick(filter => this.handleFilterSelection(filter));
 
+    this.view.setDefaultCategory(ExerciseFilter.MUSCLES);
     await this.loadDefaultCategory();
   }
 
