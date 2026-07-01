@@ -1,3 +1,3 @@
-import { initRatingModal } from './components/rating-modal';
+import { initRatingModal } from './mvc/rating.controller';
 
 initRatingModal();
