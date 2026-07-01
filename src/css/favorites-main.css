@@ -53,7 +53,12 @@
     color: rgba(244, 244, 244, 0.6);
   }
   .favor-quote-wrap h4 {
-    display: none;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 18px;
+    color: var(--color-light);
+    margin-top: 16px;
   }
   .favor-quote-wrap svg {
     position: absolute;
@@ -130,6 +135,7 @@
       font-size: 16px;
       font-weight: 400;
       line-height: 1.5;
+      margin-top: 18px;
     }
     /**                          dailynorm */
     .favor-info {
