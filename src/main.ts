@@ -1,5 +1,20 @@
 import { initRatingModal } from './components/rating-modal';
 import { showLoader, hideLoader } from './components/loader';
+import { ExercisesModel } from './mvc/exercises.model';
+import { ExercisesView } from './mvc/exercises.view';
+import { ExercisesController } from './mvc/exercises.controller';
+
+
+
+const exercisesSection = document.querySelector<HTMLElement>('[data-exercises-section]');
+if (!exercisesSection) throw new Error('Exercises section not found');
+const exercisesModel = new ExercisesModel();
+const exercisesView = new ExercisesView(exercisesSection);
+exercisesView.renderExerciseCategories();
+const exercisesController = new ExercisesController(exercisesModel, exercisesView);
+exercisesController.init();
+
+
 
 showLoader();
 hideLoader();
@@ -7,3 +22,4 @@ hideLoader();
 initRatingModal();
 
 export {};
+
