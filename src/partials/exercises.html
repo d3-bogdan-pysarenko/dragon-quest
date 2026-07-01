@@ -1,1 +1,30 @@
-<!-- Exercises -->
+<section class="container section exercises" data-exercises-section>
+  <div class="exercises-header">
+    <h2 class="exercises-title" data-exercises-title-text>Exercises
+      <span class="exercises-slash hidden" data-exercises-slash>/</span>
+      <a class="exercises-link hidden"></a>
+    </h2>
+    <div class="exercises-filters">
+      <div class="search-input hidden" data-exercises-search>
+        <!-- Load the input-btn template with parameters -->
+        <load
+          src="partials/components/input-btn.html"
+          class="exercises-input"
+          name="exercises-search"
+          label="Search exercises"
+          type="text"
+          icon-id="icon-search"
+        />
+      </div>
+      <ul class="exercises-categories" data-exercises-categories>
+
+      </ul>
+
+    </div>
+  </div>
+
+  <div class="container exercises-content">
+    <div class="exercises-sidebar"></div>
+    <div class="exercises-list" data-exercises-list></div>
+  </div>
+</section>
