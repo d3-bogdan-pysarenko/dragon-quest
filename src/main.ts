@@ -1,3 +1,4 @@
+import { initScrollUp } from './components/scroll-up';
 
 import { initRatingModal } from './mvc/rating/rating.controller';
 import { QuoteModel } from './mvc/quote/quote.model';
@@ -37,6 +38,7 @@ showLoader();
 hideLoader();
 
 initRatingModal();
+initScrollUp();
 initBurgerMenu();
 
 export {};
