@@ -17,8 +17,8 @@ export class ExercisesView {
   renderExerciseCategories(): void {
     this.categoriesContainer.innerHTML = Object.values(ExerciseFilter)
       .map(categoryName => `
-        <li class="exercises__header-category">
-          <button class="exercises__categorie-btn btnFilters" type="button" data-filter="${categoryName}">
+        <li class="exercises-category">
+          <button class="categorie-btn btnFilters" type="button" data-filter="${categoryName}">
             ${categoryName}
           </button>
         </li>
