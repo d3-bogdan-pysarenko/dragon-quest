@@ -1,6 +1,22 @@
 import { initScrollUp } from './components/scroll-up';
-import { initRatingModal } from './components/rating-modal';
+
+import { initRatingModal } from './mvc/rating/rating.controller';
+import { QuoteModel } from './mvc/quote/quote.model';
+import { QuoteView } from './mvc/quote/quote.view';
+import { QuoteController } from './mvc/quote/quote.controller';
+
+initRatingModal();
+
+const quoteRoot = document.querySelector<HTMLElement>('[data-quote]');
+if (quoteRoot) {
+  const quoteController = new QuoteController(
+    new QuoteModel(),
+    new QuoteView(quoteRoot)
+  );
+  quoteController.init();
+}
 import { showLoader, hideLoader } from './components/loader';
+import { initBurgerMenu } from './components/burger-menu';
 import { ExercisesModel } from './mvc/exercises/exercises.model';
 import { ExercisesView } from './mvc/exercises/exercises.view';
 import { ExercisesController } from './mvc/exercises/exercises.controller';
@@ -23,4 +39,6 @@ hideLoader();
 
 initRatingModal();
 initScrollUp();
+initBurgerMenu();
+
 export {};
