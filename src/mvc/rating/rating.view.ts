@@ -1,4 +1,4 @@
-import type { ExerciseRatingPayload } from '../api';
+import type { ExerciseRatingPayload } from '../../api';
 import type { RatingState } from './rating.model';
 
 export class RatingView {

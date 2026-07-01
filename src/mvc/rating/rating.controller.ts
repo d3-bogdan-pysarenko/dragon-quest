@@ -1,4 +1,4 @@
-import { createModal } from '../components/modal';
+import { createModal } from '../../components/modal';
 import { RatingModel } from './rating.model';
 import { RatingView } from './rating.view';
 

@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { addExerciseRating } from '../api';
-import type { ExerciseRatingPayload } from '../api';
+import { addExerciseRating, ExerciseRatingPayload } from '../../api';
 
 export interface RatingState {
   status: 'idle' | 'submitting' | 'error';
