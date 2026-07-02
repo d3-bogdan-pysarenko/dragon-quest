@@ -1,10 +1,10 @@
 /* #region Header */
 .site-header {
   /* visible on top */
-  position: sticky;
+  /* position: sticky;
   top: 0;
   z-index: 100;
-  background-color: var(--color-page);
+  background-color: var(--color-page); */
   /* end visible on top */
   padding-top: 20px;
 }
