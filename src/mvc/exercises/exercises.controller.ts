@@ -4,33 +4,71 @@ import { ExercisesView } from './exercises.view';
 
 export class ExercisesController {
   constructor(
-    private model: ExercisesModel,
-    private view: ExercisesView
+    private readonly model: ExercisesModel,
+    private readonly view: ExercisesView
   ) {}
 
   async init(): Promise<void> {
     this.view.renderExerciseCategories();
-    this.view.onCategoryClick(filter => this.handleFilterSelection(filter));
+    this.bindEvents();
 
-    this.view.setDefaultCategory(ExerciseFilter.MUSCLES);
-    await this.loadDefaultCategory();
+    this.view.setActiveFilter(ExerciseFilter.MUSCLES);
+    await this.loadCategories(ExerciseFilter.MUSCLES);
   }
 
-  private async handleFilterSelection(filter: ExerciseFilter): Promise<void> {
+  private bindEvents(): void {
+    this.view.onFilterClick(filter => {
+      void this.loadCategories(filter);
+    });
+
+    this.view.onCategoryCardClick(category => {
+      void this.selectCategory(category);
+    });
+
+    this.view.onSearchSubmit(keyword => {
+      void this.searchExercises(keyword);
+    });
+
+    this.view.onSearchClear(() => {
+      void this.searchExercises('');
+    });
+  }
+
+  private async loadCategories(filter: ExerciseFilter): Promise<void> {
+    await this.runRequest(() => this.model.loadCategories(filter));
+  }
+
+  private async selectCategory(category: string): Promise<void> {
+    await this.runRequest(() => this.model.selectCategory(category));
+  }
+
+  private async searchExercises(keyword: string): Promise<void> {
+    await this.runRequest(() => this.model.searchExercises(keyword));
+  }
+
+  private async runRequest(request: () => Promise<unknown>): Promise<void> {
+    this.view.setLoading(true);
+
     try {
-      const data = await this.model.getFilters(filter);
-      console.log(data.results);
+      await request();
+      this.render();
     } catch (error) {
-      console.error('Error loading filters:', error);
+      this.view.renderError(error);
+    } finally {
+      this.view.setLoading(false);
     }
   }
 
-  private async loadDefaultCategory() {
-    try {
-      const data = await this.model.getFilters(ExerciseFilter.MUSCLES);
-      this.view.renderCategoryCard(data.results);
-    } catch (e) {
-      console.error('Failed to load filters:', e);
+  private render(): void {
+    const state = this.model.getState();
+
+    this.view.setActiveFilter(state.selectedFilter);
+
+    if (state.selectedCategory) {
+      this.view.renderExercises(state);
+      return;
     }
+
+    this.view.renderCategoryCards(state.categories);
   }
 }

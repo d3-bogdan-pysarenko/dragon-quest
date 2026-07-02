@@ -89,7 +89,8 @@ export interface ExercisesListParams extends PaginationParams {
 export interface FilterItem {
   filter: ExerciseFilter;
   name: string;
-  imgUrl: string;
+  imgUrl?: string;
+  imgURL?: string;
 }
 
 export interface FiltersResponse {
