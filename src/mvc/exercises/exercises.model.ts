@@ -19,6 +19,8 @@ export interface ExercisesState {
   keyword: string;
   categories: FilterItem[];
   exercises: ExerciseResponse[];
+  page: number;
+  totalPages: number;
 }
 
 export class ExercisesModel {
@@ -28,6 +30,8 @@ export class ExercisesModel {
     keyword: '',
     categories: [],
     exercises: [],
+    page: 1,
+    totalPages: 0,
   };
 
   getState(): ExercisesState {
@@ -35,9 +39,14 @@ export class ExercisesModel {
   }
 
   async loadCategories(filter: ExerciseFilter): Promise<ExercisesState> {
+    const isSameFilterPaging =
+      filter === this.state.selectedFilter &&
+      this.state.selectedCategory === null;
+    const page = isSameFilterPaging ? this.state.page : 1;
+
     const response = await getFiltersApi({
       filter,
-      page: 1,
+      page,
       limit: CATEGORIES_PER_PAGE,
     });
 
@@ -48,6 +57,8 @@ export class ExercisesModel {
       keyword: '',
       categories: response.results,
       exercises: [],
+      page: response.page,
+      totalPages: response.totalPages,
     };
 
     return this.state;
@@ -58,6 +69,7 @@ export class ExercisesModel {
       ...this.state,
       selectedCategory: category,
       keyword: '',
+      page: 1,
     };
 
     return this.loadExercises();
@@ -67,9 +79,20 @@ export class ExercisesModel {
     this.state = {
       ...this.state,
       keyword: keyword.trim(),
+      page: 1,
     };
 
     return this.loadExercises();
+  }
+
+  async setPage(page: number): Promise<ExercisesState> {
+    this.state = { ...this.state, page };
+
+    if (this.state.selectedCategory) {
+      return this.loadExercises();
+    }
+
+    return this.loadCategories(this.state.selectedFilter);
   }
 
   async loadExercises(): Promise<ExercisesState> {
@@ -82,6 +105,8 @@ export class ExercisesModel {
     this.state = {
       ...this.state,
       exercises: response.results,
+      page: response.page,
+      totalPages: response.totalPages,
     };
 
     return this.state;
@@ -90,7 +115,7 @@ export class ExercisesModel {
   private buildExercisesParams(): ExercisesListParams {
     const params: ExercisesListParams = {
       keyword: this.state.keyword,
-      page: 1,
+      page: this.state.page,
       limit: EXERCISES_PER_PAGE,
     };
 

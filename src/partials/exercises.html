@@ -1,17 +1,18 @@
 <section class="container section exercises" data-exercises-section>
   <div class="exercises-header">
-    <h2 class="exercises-title" data-exercises-title-text>Exercises
+    <h2 class="exercises-title" data-exercises-title-text>
+      Exercises
       <span class="exercises-slash hidden" data-exercises-slash>/</span>
-      <span class="exercises-link hidden" data-exercises-selected-category></span>
+      <span
+        class="exercises-link hidden"
+        data-exercises-selected-category
+      ></span>
     </h2>
     <div class="exercises-filters">
       <div class="exercises-search-form hidden" data-exercises-search>
         <load src="/partials/components/search-form.html" />
       </div>
-      <ul class="exercises-categories" data-exercises-categories>
-
-      </ul>
-
+      <ul class="exercises-categories" data-exercises-categories></ul>
     </div>
   </div>
 
@@ -29,6 +30,11 @@
     </aside>
     <div class="exercises-main">
       <ul class="exercises-list" data-exercises-list></ul>
+      <nav
+        class="pagination hidden"
+        data-exercises-pagination
+        aria-label="Exercises pagination"
+      ></nav>
     </div>
   </div>
 </section>
