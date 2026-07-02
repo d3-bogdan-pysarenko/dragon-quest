@@ -11,47 +11,7 @@
             </div>
             <load src="/partials/components/quote.html" />
           </div>
-          <div class="favor-info">
-            <div class="favor-dailynorm" id="startTimerListItem">
-              <div class="favor-dailynorm-icon">
-                <svg width="20" height="20">
-                  <use href="./img/sprite.svg#icon-dumbbell"></use>
-                </svg>
-              </div>
-              <h3 id="timerValue">110 min</h3>
-              <p>Daily norm of sports</p>
-            </div>
-            <div class="favor-img-wrap">
-              <picture>
-                <source
-                  media="(min-width: 1440px)"
-                  srcset="
-                    ./img/favorites/women-outdoors.jpg    1x,
-                    ./img/favorites/women-outdoors@2x.jpg 2x
-                  "
-                />
-                <source
-                  media="(min-width: 768px)"
-                  srcset="
-                    ./img/favorites/women-outdoors-tab.jpg    1x,
-                    ./img/favorites/women-outdoors-tab@2x.jpg 2x
-                  "
-                />
-                <source
-                  srcset="
-                    ./img/favorites/women-outdoors-mob.jpg    1x,
-                    ./img/favorites/women-outdoors-mob@2x.jpg 2x
-                  "
-                />
-                <img
-                  src="./img/favorites/women-outdoors-mob.jpg "
-                  alt="Women sportswear working-out outdoor"
-                  width="344"
-                  height="141"
-                />
-              </picture>
-            </div>
-          </div>
+          <load src="/partials/components/favor-info.html" />
         </div>
         <div class="favor-exercises" data-favorites>
           <ul class="favor-exercises-list"></ul>
@@ -60,4 +20,3 @@
       </div>
     </div>
   </section>
-  

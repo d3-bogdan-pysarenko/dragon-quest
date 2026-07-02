@@ -84,15 +84,48 @@
 }
 
 .exercises-sidebar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
   min-width: 0;
+  order: 2;
 }
 
 .exercises-sidebar .favor-quote-container {
+  order: 1;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.exercises-sidebar .favor-quote-wrap {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+.exercises-sidebar .favor-info {
+  display: contents;
+}
+
+.exercises-sidebar .favor-img-wrap {
+  order: 2;
+  width: 100%;
+}
+
+.exercises-sidebar .favor-img-wrap img {
+  width: 100%;
+  height: 100%;
+}
+
+.exercises-sidebar .favor-dailynorm {
+  order: 3;
+  width: 100%;
   margin-bottom: 0;
 }
 
 .exercises-main {
   min-width: 0;
+  order: 1;
 }
 
 .exercises-content .exercises-list {
@@ -194,6 +227,30 @@
   .exercises-list.exercises-list--workouts {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .exercises-sidebar {
+    grid-template-columns: 400px 288px;
+    gap: 16px;
+  }
+
+  .exercises-sidebar .favor-quote-container {
+    grid-column: 1;
+    grid-row: 1;
+    width: 400px;
+  }
+
+  .exercises-sidebar .favor-img-wrap {
+    grid-column: 2;
+    grid-row: 1;
+    width: 288px;
+    height: 220px;
+  }
+
+  .exercises-sidebar .favor-dailynorm {
+    grid-column: 1;
+    grid-row: 2;
+    width: 400px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -216,6 +273,35 @@
     grid-template-columns: 494px minmax(0, 850px);
     align-items: start;
     gap: 32px;
+  }
+
+  .exercises-sidebar {
+    grid-template-columns: 494px;
+    order: 1;
+  }
+
+  .exercises-main {
+    order: 2;
+  }
+
+  .exercises-sidebar .favor-quote-container,
+  .exercises-sidebar .favor-img-wrap,
+  .exercises-sidebar .favor-dailynorm {
+    grid-column: 1;
+    width: 494px;
+  }
+
+  .exercises-sidebar .favor-quote-container {
+    grid-row: 1;
+  }
+
+  .exercises-sidebar .favor-img-wrap {
+    grid-row: 2;
+    height: 242px;
+  }
+
+  .exercises-sidebar .favor-dailynorm {
+    grid-row: 3;
   }
 
   .exercises-list.exercises-list--workouts {
