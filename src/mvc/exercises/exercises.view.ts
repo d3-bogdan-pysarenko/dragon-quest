@@ -149,11 +149,9 @@ export class ExercisesView {
   setLoading(isLoading: boolean): void {
     this.root.setAttribute('aria-busy', String(isLoading));
 
-    this.root
-      .querySelectorAll<HTMLButtonElement>('button')
-      .forEach(button => {
-        button.disabled = isLoading;
-      });
+    this.root.querySelectorAll<HTMLButtonElement>('button').forEach(button => {
+      button.disabled = isLoading;
+    });
 
     this.searchInput.disabled = isLoading;
   }
@@ -214,6 +212,7 @@ export class ExercisesView {
               type="button"
               aria-label="Start ${this.escapeHtml(exercise.name)}"
               data-action="start"
+              data-exercise-open
               data-exercise-id="${this.escapeHtml(exercise._id)}"
             >
               Start

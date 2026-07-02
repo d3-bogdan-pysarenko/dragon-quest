@@ -2,6 +2,7 @@ import { initScrollUp } from './components/scroll-up';
 import { showLoader, hideLoader } from './components/loader';
 import { initBurgerMenu } from './components/burger-menu';
 import { initRatingModal } from './mvc/rating/rating.controller';
+import { initExerciseModal } from './mvc/exercise-modal/exercise-modal.controller';
 import { QuoteModel } from './mvc/quote/quote.model';
 import { QuoteView } from './mvc/quote/quote.view';
 import { QuoteController } from './mvc/quote/quote.controller';
@@ -12,10 +13,13 @@ import { ExercisesModel } from './mvc/exercises/exercises.model';
 import { ExercisesView } from './mvc/exercises/exercises.view';
 import { ExercisesController } from './mvc/exercises/exercises.controller';
 import {
-  SubscriptionController, SubscriptionModel, SubscriptionView
+  SubscriptionController,
+  SubscriptionModel,
+  SubscriptionView,
 } from './mvc/subscribe';
 
 initRatingModal();
+initExerciseModal();
 initScrollUp();
 initBurgerMenu();
 
@@ -63,4 +67,4 @@ if (subscriptionForm) {
 showLoader();
 hideLoader();
 
-export { };
+export {};
