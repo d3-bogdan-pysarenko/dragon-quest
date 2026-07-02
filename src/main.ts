@@ -11,6 +11,9 @@ import { FavoritesController } from './mvc/favorites/favorites.controller';
 import { ExercisesModel } from './mvc/exercises/exercises.model';
 import { ExercisesView } from './mvc/exercises/exercises.view';
 import { ExercisesController } from './mvc/exercises/exercises.controller';
+import {
+  SubscriptionController, SubscriptionModel, SubscriptionView
+} from './mvc/subscribe';
 
 initRatingModal();
 initScrollUp();
@@ -46,7 +49,18 @@ if (exercisesSection) {
   void exercisesController.init();
 }
 
+const subscriptionForm = document.querySelector<HTMLFormElement>(
+  '[data-subscribe-form]'
+);
+if (subscriptionForm) {
+  const subscriptionController = new SubscriptionController(
+    new SubscriptionModel(),
+    new SubscriptionView(subscriptionForm)
+  );
+  subscriptionController.init();
+}
+
 showLoader();
 hideLoader();
 
-export {};
+export { };

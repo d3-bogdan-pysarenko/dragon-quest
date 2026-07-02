@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { API_BASE_URL } from '../constants';
 
 export const yourEnergyApi = axios.create({
-  baseURL: 'https://your-energy.b.goit.study/api',
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },

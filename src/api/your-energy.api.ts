@@ -11,11 +11,12 @@ import type {
   SubscriptionPayload,
   SubscriptionResponse,
 } from './your-energy.types';
+import { Endpoint } from '../constants';
 
 export const getFilters = async (
   params: FilterListParams = {}
 ): Promise<FiltersResponse> => {
-  const response = await yourEnergyApi.get<FiltersResponse>('/filters', {
+  const response = await yourEnergyApi.get<FiltersResponse>(Endpoint.Filters, {
     params: buildParams(params),
   });
 
@@ -25,7 +26,7 @@ export const getFilters = async (
 export const getExercises = async (
   params: ExercisesListParams = {}
 ): Promise<ExercisesResponse> => {
-  const response = await yourEnergyApi.get<ExercisesResponse>('/exercises', {
+  const response = await yourEnergyApi.get<ExercisesResponse>(Endpoint.Exercises, {
     params: buildParams(params),
   });
 
@@ -36,7 +37,7 @@ export const getExerciseById = async (
   exerciseId: string
 ): Promise<ExerciseDetails> => {
   const response = await yourEnergyApi.get<ExerciseDetails>(
-    `/exercises/${exerciseId}`
+    `${Endpoint.Exercises}/${exerciseId}`
   );
 
   return response.data;
@@ -47,7 +48,7 @@ export const addExerciseRating = async (
   payload: ExerciseRatingPayload
 ): Promise<ExerciseRatingResponse> => {
   const response = await yourEnergyApi.patch<ExerciseRatingResponse>(
-    `/exercises/${exerciseId}/rating`,
+    `${Endpoint.Exercises}/${exerciseId}/${Endpoint.Rating}`,
     payload
   );
 
@@ -55,7 +56,7 @@ export const addExerciseRating = async (
 };
 
 export const getQuoteOfTheDay = async (): Promise<QuoteOfTheDay> => {
-  const response = await yourEnergyApi.get<QuoteOfTheDay>('/quote');
+  const response = await yourEnergyApi.get<QuoteOfTheDay>(Endpoint.Quote);
 
   return response.data;
 };
@@ -64,7 +65,7 @@ export const subscribeToNewsletter = async (
   payload: SubscriptionPayload
 ): Promise<SubscriptionResponse> => {
   const response = await yourEnergyApi.post<SubscriptionResponse>(
-    '/subscription',
+    Endpoint.Subscription,
     payload
   );
 
