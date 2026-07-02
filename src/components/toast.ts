@@ -8,8 +8,13 @@ const notyf = new Notyf({
   dismissible: true,
 });
 
-export const showToast = (message: string, type: 'success' | 'error'): void => {
-  if (type === 'success') {
+export enum ToastType {
+  Success = 'success',
+  Error = 'error',
+}
+
+export const showToast = (message: string, type: ToastType): void => {
+  if (type === ToastType.Success) {
     notyf.success(message);
   } else {
     notyf.error(message);

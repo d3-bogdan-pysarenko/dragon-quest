@@ -1,6 +1,6 @@
 import { SubscriptionModel, SubscriptionView } from "./";
 import { showLoader, hideLoader } from '../../components/loader';
-import { showToast } from '../../components/toast';
+import { showToast, ToastType } from '../../components/toast';
 import { validateEmail, getErrorMessage } from '../../utils';
 import { SubscriptionRequest, SubscriptionResponse } from "../../api";
 
@@ -23,14 +23,14 @@ export class SubscriptionController {
 
   private async handleSubscription(email: string): Promise<void> {
     if (!email) {
-      showToast('Email is required', 'error');
+      showToast('Email is required', ToastType.Error);
       return;
     }
 
     const isValidEmail = validateEmail(email);
 
     if (!isValidEmail) {
-      showToast('Please enter a valid email address.', 'error');
+      showToast('Please enter a valid email address.', ToastType.Error);
       return;
     }
 
@@ -44,11 +44,11 @@ export class SubscriptionController {
 
     try {
       const result = await request();
-      showToast(result.message, 'success');
+      showToast(result.message, ToastType.Success);
       this.view.resetForm();
     } catch (error) {
       const errorMessage = getErrorMessage(error);
-      showToast(errorMessage, 'error');
+      showToast(errorMessage, ToastType.Error);
     } finally {
       this.view.setLoading(false);
       hideLoader();
