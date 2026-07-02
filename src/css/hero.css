@@ -33,25 +33,10 @@
   width: 1em;
   height: 1em;
   vertical-align: -0.12em;
-  transition: all 0.3s ease;
-  animation: sunPulse 4s infinite ease-in-out;
+  color: var(--color-ink);
+  fill: currentColor;
 }
 
-.hero-title-icon:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 6px yellow);
-}
-
-@keyframes sunPulse {
-  0%, 100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05) rotate(5deg);
-    opacity: 0.9;
-  }
-}
 .hero-subtitle {
   margin-bottom: 20px;
   font-weight: 400;
@@ -201,4 +186,13 @@
   }
 }
 
-
+/*@keyframes sunPulse {*/
+/*  0%, 100% {*/
+/*    transform: scale(1) rotate(0deg);*/
+/*    opacity: 1;*/
+/*  }*/
+/*  50% {*/
+/*    transform: scale(1.05) rotate(5deg);*/
+/*    opacity: 0.9;*/
+/*  }*/
+/*}*/

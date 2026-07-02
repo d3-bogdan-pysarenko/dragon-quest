@@ -4,6 +4,7 @@ import { initRatingModal } from './mvc/rating/rating.controller';
 import { QuoteModel } from './mvc/quote/quote.model';
 import { QuoteView } from './mvc/quote/quote.view';
 import { QuoteController } from './mvc/quote/quote.controller';
+import './components/svg-icon-sun'
 
 initRatingModal();
 
