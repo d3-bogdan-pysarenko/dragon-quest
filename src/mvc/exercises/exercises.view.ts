@@ -12,6 +12,7 @@ export class ExercisesView {
   private readonly exercisesSlash: HTMLSpanElement;
   private readonly selectedCategoryText: HTMLElement;
   private readonly listContainer: HTMLElement;
+  private readonly listItemTemplate: HTMLTemplateElement;
   private readonly categoriesContainer: HTMLUListElement;
   private readonly paginationContainer: HTMLElement;
 
@@ -24,6 +25,9 @@ export class ExercisesView {
       '[data-exercises-selected-category]'
     );
     this.listContainer = this.getElement('[data-exercises-list]');
+    this.listItemTemplate = this.getElement(
+      '[data-exercises-workout-item-template]'
+    );
     this.categoriesContainer = this.getElement('[data-exercises-categories]');
     this.paginationContainer = this.getElement('[data-exercises-pagination]');
   }
@@ -151,9 +155,11 @@ export class ExercisesView {
       return;
     }
 
-    this.listContainer.innerHTML = state.exercises
-      .map(exercise => this.createWorkoutCard(exercise))
-      .join('');
+    const fragment = state.exercises.reduce((frag, exercise) => {
+      frag.appendChild(this.createWorkoutCard(exercise));
+      return frag;
+    }, document.createDocumentFragment());
+    this.listContainer.appendChild(fragment);
   }
 
   renderPagination(state: ExercisesState): void {
@@ -271,66 +277,49 @@ export class ExercisesView {
     `;
   }
 
-  private createWorkoutCard(exercise: ExerciseResponse): string {
+  private createWorkoutCard(exercise: ExerciseResponse): HTMLElement {
     const rating = Number.isFinite(exercise.rating)
       ? exercise.rating.toFixed(1)
       : '0.0';
 
-    return `
-      <li class="exercises-workout-item">
-        <div class="workout-card" data-workout-id="${this.escapeHtml(exercise._id)}">
-          <div class="workout-header">
-            <div class="workout-badge-wrap">
-              <div class="workout-badge">Workout</div>
-              <div class="workout-rating" aria-label="Rating ${rating}">
-                <span>${rating}</span>
-                <svg class="workout-rating-icon" width="18" height="18">
-                  <use href="img/sprite.svg#icon-star"></use>
-                </svg>
-              </div>
-            </div>
-
-            <button
-              class="workout-btn-start"
-              type="button"
-              aria-label="Start ${this.escapeHtml(exercise.name)}"
-              data-action="start"
-              data-exercise-open
-              data-exercise-id="${this.escapeHtml(exercise._id)}"
-            >
-              Start
-              <svg class="btn-icon" width="20" height="20">
-                <use href="img/sprite.svg#icon-arrow-right"></use>
-              </svg>
-            </button>
-          </div>
-
-          <div class="workout-title-container">
-            <div class="workout-icon-wrap">
-              <svg class="workout-icon" width="16" height="16">
-                <use href="img/sprite.svg#icon-running-stick-figure"></use>
-              </svg>
-            </div>
-            <h3 class="workout-title">${this.escapeHtml(this.formatDisplayName(exercise.name))}</h3>
-          </div>
-
-          <ul class="workout-info-list">
-            <li class="workout-info-item">
-              <span class="info-label">Burned calories:</span>
-              <span class="info-value">${exercise.burnedCalories} / 3 min</span>
-            </li>
-            <li class="workout-info-item">
-              <span class="info-label">Body part:</span>
-              <span class="info-value">${this.escapeHtml(this.formatDisplayName(exercise.bodyPart))}</span>
-            </li>
-            <li class="workout-info-item">
-              <span class="info-label">Target:</span>
-              <span class="info-value">${this.escapeHtml(this.formatDisplayName(exercise.target))}</span>
-            </li>
-          </ul>
-        </div>
-      </li>
-    `;
+    const clone: HTMLElement = this.listItemTemplate.content.cloneNode(
+      true
+    ) as HTMLElement;
+    const listItem: HTMLLIElement = clone.querySelector('li') as HTMLLIElement;
+    
+    listItem
+      .querySelector('.workout-card')
+      ?.setAttribute('data-workout-id', this.escapeHtml(exercise._id));
+    
+    listItem
+      .querySelector('.workout-rating')
+      ?.setAttribute('aria-label', `Rating ${rating}`);
+    
+    listItem.querySelector('.workout-rating span')!.textContent = rating;
+    
+    listItem
+      .querySelector('.workout-btn-start')
+      ?.setAttribute('aria-label', `Start ${this.escapeHtml(exercise.name)}`);
+    
+    listItem
+      .querySelector('.workout-btn-start')
+      ?.setAttribute('data-exercise-id', this.escapeHtml(exercise._id));
+    
+    listItem.querySelector('.workout-title')!.textContent = this.escapeHtml(
+      this.formatDisplayName(exercise.name)
+    );
+    
+    listItem.querySelector('[data-exercise-burned-calories]')!.textContent =
+      `${exercise.burnedCalories} / 3 min`;
+    
+    listItem.querySelector('[data-exercise-body-part]')!.textContent =
+      this.escapeHtml(this.formatDisplayName(exercise.bodyPart));
+    
+    listItem.querySelector(
+      '[data-exercise-target]'
+    )!.textContent = this.escapeHtml(this.formatDisplayName(exercise.target));
+    
+    return listItem;
   }
 
   private createCategoryCard(filter: FilterItem): string {
