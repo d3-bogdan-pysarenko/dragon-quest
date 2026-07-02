@@ -28,9 +28,9 @@
 
 .site-footer-slogan {
   max-width: 595px;
-  font-size: 32px;
-  line-height: 1;
-  letter-spacing: -0.64px;
+  font-size: 38px;
+  line-height: 1.1579; /* 44/38 */
+  letter-spacing: -0.76px;
 }
 
 .subscribe-form {
@@ -45,11 +45,17 @@
 
 .site-footer-legal {
   display: grid;
+  grid-template-columns: 1fr auto;
   gap: 10px;
+  align-items: center;
   font-size: 14px;
   line-height: 1.2857;
   letter-spacing: -0.28px;
   color: var(--color-footer-text);
+}
+
+.site-footer-copyright {
+  grid-column: 1 / -1;
 }
 
 .site-footer-policy-list {
@@ -72,14 +78,14 @@
 @media screen and (min-width: 768px) {
   .site-footer-container {
     grid-template-columns: 156px minmax(0, 1fr);
-    gap: 64px 80px;
+    gap: 64px 114px; /* content column starts at x=302 as in Figma */
     padding-top: 64px;
     padding-bottom: 32px;
   }
 
   .site-footer-slogan {
     font-size: 56px;
-    line-height: 1.0714;
+    line-height: 1.0714; /* 60/56 */
     letter-spacing: -1.12px;
   }
 
@@ -92,6 +98,10 @@
     grid-column: 1 / -1;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
+  }
+
+  .site-footer-copyright {
+    grid-column: auto;
   }
 
   .site-footer-year {
@@ -111,6 +121,11 @@
 
   .site-footer-legal {
     grid-template-columns: 234px 1fr 352px;
+    gap: 10px 80px; /* aligns Privacy/Terms with the slogan column (x=346) */
+  }
+
+  .site-footer-year {
+    justify-self: start; /* desktop: ©2023 aligns to subscribe column start */
   }
 }
 /* #endregion Responsive */
