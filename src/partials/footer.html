@@ -12,14 +12,22 @@
         </svg>
       </a>
 
-      <load src="/partials/components/socials.html" addition-classes="dark site-footer-socials" />
+      <load
+        src="/partials/components/socials.html"
+        addition-classes="dark site-footer-socials"
+      />
     </div>
 
     <p class="site-footer-slogan">
       Transforming your <em>body</em> shape with us
     </p>
 
-    <form class="subscribe-form" action="#" method="post">
+    <form
+      id="subscribe-form"
+      class="subscribe-form"
+      data-subscribe-form
+      novalidate
+    >
       <label class="subscribe-form-label" for="subscribe-email">
         Subscribe and learn about new exercises!
       </label>
@@ -29,8 +37,13 @@
         name="email"
         type="email"
         placeholder="Email"
+        pattern="^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+        autocomplete="email"
+        required
       />
-      <button class="btn light width-100-percent" type="submit">Send</button>
+      <button class="btn light width-100-percent" type="submit" disabled>
+        Send
+      </button>
     </form>
 
     <div class="site-footer-legal">

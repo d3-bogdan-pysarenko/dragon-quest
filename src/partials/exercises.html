@@ -2,19 +2,11 @@
   <div class="exercises-header">
     <h2 class="exercises-title" data-exercises-title-text>Exercises
       <span class="exercises-slash hidden" data-exercises-slash>/</span>
-      <a class="exercises-link hidden"></a>
+      <span class="exercises-link hidden" data-exercises-selected-category></span>
     </h2>
     <div class="exercises-filters">
-      <div class="search-input hidden" data-exercises-search>
-        <!-- Load the input-btn template with parameters -->
-        <load
-          src="partials/components/input-btn.html"
-          class="exercises-input"
-          name="exercises-search"
-          label="Search exercises"
-          type="text"
-          icon-id="icon-search"
-        />
+      <div class="exercises-search-form hidden" data-exercises-search>
+        <load src="/partials/components/search-form.html" />
       </div>
       <ul class="exercises-categories" data-exercises-categories>
 
@@ -23,8 +15,20 @@
     </div>
   </div>
 
-  <div class="container exercises-content">
-    <div class="exercises-sidebar"></div>
-    <ul class="exercises-list" data-exercises-list></ul>
+  <div class="exercises-content">
+    <aside class="exercises-sidebar" aria-label="Quote of the day">
+      <div class="favor-quote-container">
+        <div class="favor-quote-icon">
+          <svg width="18" height="20">
+            <use href="./img/sprite.svg#icon-running-stick"></use>
+          </svg>
+        </div>
+        <load src="/partials/components/quote.html" />
+      </div>
+      <load src="/partials/components/favor-info.html" />
+    </aside>
+    <div class="exercises-main">
+      <ul class="exercises-list" data-exercises-list></ul>
+    </div>
   </div>
 </section>

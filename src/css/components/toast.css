@@ -1,0 +1,56 @@
+/* #region Toast (Notyf overrides) */
+.notyf {
+  padding: 20px;
+}
+
+.notyf__toast {
+  border-radius: var(--radius-small) !important;
+  padding: 16px 20px !important;
+  min-width: 280px;
+  max-width: 320px;
+  box-shadow: 0 4px 16px rgba(4, 4, 4, 0.2) !important;
+}
+
+.notyf__toast--success {
+  background-color: var(--color-ink) !important;
+}
+
+.notyf__toast--error {
+  background-color: #e63946 !important;
+}
+
+.notyf__wrapper {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 0 !important;
+}
+
+.notyf__message {
+  margin: 0 !important;
+}
+
+.notyf__icon {
+  margin-right: 12px !important;
+}
+
+.notyf__dismiss {
+  margin-left: 12px !important;
+}
+
+.notyf__dismiss-btn {
+  background-color: transparent !important;
+  opacity: 0.6;
+  transition: opacity var(--transition-base) !important;
+}
+
+.notyf__dismiss-btn::after,
+.notyf__dismiss-btn::before {
+  background-color: var(--color-light) !important;
+}
+
+.notyf__dismiss-btn:hover {
+  opacity: 1;
+}
+/* #endregion Toast */
