@@ -6,7 +6,7 @@ import { initExerciseModal } from './mvc/exercise-modal/exercise-modal.controlle
 import { QuoteModel } from './mvc/quote/quote.model';
 import { QuoteView } from './mvc/quote/quote.view';
 import { QuoteController } from './mvc/quote/quote.controller';
-import './components/svg-icon-sun'
+import { initSunIcon } from './components/svg-icon-sun';
 import { FavoritesModel } from './mvc/favorites/favorites.model';
 import { FavoritesView } from './mvc/favorites/favorites.view';
 import { FavoritesController } from './mvc/favorites/favorites.controller';
@@ -23,6 +23,7 @@ initRatingModal();
 initExerciseModal();
 initScrollUp();
 initBurgerMenu();
+initSunIcon();
 
 const favoritesRoot = document.querySelector<HTMLElement>('[data-favorites]');
 if (favoritesRoot) {
