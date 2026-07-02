@@ -8,9 +8,20 @@ export class FavoritesController {
   ) {}
 
   init(): void {
-    const favorites = this.model.getFavorites();
+    this.render();
+
+    this.view.onDeleteClick(id => {
+      const remaining = this.model.removeFavorite(id);
+      this.render(remaining);
+    });
+  }
+
+  private render(favorites = this.model.getFavorites()): void {
     if (!favorites || favorites.length === 0) {
       this.view.renderEmptyState();
+      return;
     }
+
+    this.view.renderFavorites(favorites);
   }
 }
