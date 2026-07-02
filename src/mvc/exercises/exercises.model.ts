@@ -57,8 +57,8 @@ export class ExercisesModel {
       keyword: '',
       categories: response.results,
       exercises: [],
-      page: response.page,
-      totalPages: response.totalPages,
+      page: Number(response.page),
+      totalPages: Number(response.totalPages),
     };
 
     return this.state;
@@ -105,8 +105,8 @@ export class ExercisesModel {
     this.state = {
       ...this.state,
       exercises: response.results,
-      page: response.page,
-      totalPages: response.totalPages,
+      page: Number(response.page),
+      totalPages: Number(response.totalPages),
     };
 
     return this.state;

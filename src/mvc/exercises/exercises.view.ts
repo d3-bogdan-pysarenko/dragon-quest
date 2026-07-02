@@ -195,7 +195,7 @@ export class ExercisesView {
         type="button"
         data-page="${target}"
         aria-label="${label}"
-        ${disabled ? 'disabled' : ''}
+        ${disabled ? 'disabled data-static-disabled' : ''}
       >${symbol}</button>
     `;
 
@@ -226,11 +226,17 @@ export class ExercisesView {
   setLoading(isLoading: boolean): void {
     this.root.setAttribute('aria-busy', String(isLoading));
 
-    this.root.querySelectorAll<HTMLButtonElement>('button').forEach(button => {
-      button.disabled = isLoading;
-    });
+    this.root
+      .querySelectorAll<HTMLButtonElement>('button:not([data-static-disabled])')
+      .forEach(button => {
+        button.disabled = isLoading;
+      });
 
     this.searchInput.disabled = isLoading;
+  }
+
+  scrollToSectionTop(): void {
+    this.root.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   renderError(error: unknown): void {
