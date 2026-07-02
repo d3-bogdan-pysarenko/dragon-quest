@@ -33,6 +33,8 @@
   width: 1em;
   height: 1em;
   vertical-align: -0.12em;
+  color: var(--color-ink);
+  fill: currentColor;
 }
 
 .hero-subtitle {
@@ -183,3 +185,14 @@
     overflow: hidden;
   }
 }
+
+/*@keyframes sunPulse {*/
+/*  0%, 100% {*/
+/*    transform: scale(1) rotate(0deg);*/
+/*    opacity: 1;*/
+/*  }*/
+/*  50% {*/
+/*    transform: scale(1.05) rotate(5deg);*/
+/*    opacity: 0.9;*/
+/*  }*/
+/*}*/

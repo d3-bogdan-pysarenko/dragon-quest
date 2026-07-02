@@ -5,6 +5,7 @@ import { initRatingModal } from './mvc/rating/rating.controller';
 import { QuoteModel } from './mvc/quote/quote.model';
 import { QuoteView } from './mvc/quote/quote.view';
 import { QuoteController } from './mvc/quote/quote.controller';
+import './components/svg-icon-sun'
 import { FavoritesModel } from './mvc/favorites/favorites.model';
 import { FavoritesView } from './mvc/favorites/favorites.view';
 import { FavoritesController } from './mvc/favorites/favorites.controller';
