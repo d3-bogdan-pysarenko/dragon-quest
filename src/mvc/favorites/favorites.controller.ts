@@ -1,3 +1,4 @@
+import { FAVORITES_CHANGED_EVENT } from '../../constants';
 import { FavoritesModel } from './favorites.model';
 import { FavoritesView } from './favorites.view';
 
@@ -14,6 +15,8 @@ export class FavoritesController {
       const remaining = this.model.removeFavorite(id);
       this.render(remaining);
     });
+
+    document.addEventListener(FAVORITES_CHANGED_EVENT, () => this.render());
   }
 
   private render(favorites = this.model.getFavorites()): void {

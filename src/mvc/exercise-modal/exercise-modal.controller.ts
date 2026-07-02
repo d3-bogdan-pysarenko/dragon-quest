@@ -1,4 +1,5 @@
 import { createModal } from '../../components/modal';
+import { FAVORITES_CHANGED_EVENT } from '../../constants';
 import { ExerciseModalModel } from './exercise-modal.model';
 import { ExerciseModalView } from './exercise-modal.view';
 
@@ -19,6 +20,7 @@ export const initExerciseModal = (): void => {
   view.onFavoriteClick(() => {
     const state = model.toggleFavorite();
     view.updateFavoriteButton(state.isFavorite);
+    document.dispatchEvent(new CustomEvent(FAVORITES_CHANGED_EVENT));
   });
 
   document.addEventListener('click', event => {
