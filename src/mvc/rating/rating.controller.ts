@@ -1,4 +1,5 @@
 import { createModal } from '../../components/modal';
+import { showToast } from '../../components/toast';
 import { RatingModel } from './rating.model';
 import { RatingView } from './rating.view';
 
@@ -30,6 +31,9 @@ export const openRatingModal = (options: OpenRatingModalOptions): void => {
 
       if (state.status === 'idle') {
         modal.close();
+        showToast('Your rating has been submitted. Thank you!', 'success');
+      } else if (state.status === 'error') {
+        showToast('Something went wrong. Please try again.', 'error');
       }
     })();
   });
@@ -62,6 +66,9 @@ export const initRatingModal = (): void => {
 
       if (state.status === 'idle') {
         modal.close();
+        showToast('Your rating has been submitted. Thank you!', 'success');
+      } else if (state.status === 'error') {
+        showToast('Something went wrong. Please try again.', 'error');
       }
     })();
   });
