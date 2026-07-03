@@ -13,8 +13,16 @@
           </div>
           <load src="/partials/components/favor-info.html" />
         </div>
-        <div class="favor-exercises" data-favorites>
-          <ul class="favor-exercises-list"></ul>
+        <div class="favor-exercises-wrap" data-favorites>
+          <div class="favor-exercises">
+            <ul class="favor-exercises-list"></ul>
+          </div>
+
+          <nav
+            class="pagination hidden"
+            data-favorites-pagination
+            aria-label="Favorites pagination"
+          ></nav>
 
           <template data-favorites-card-template>
             <li class="favor-exercises-item">
@@ -76,7 +84,6 @@
             </li>
           </template>
         </div>
-        <ul class="pag-list"></ul>
       </div>
     </div>
   </section>

@@ -1,3 +1,4 @@
+import { getPageFromEvent, renderPagination } from '../../components/pagination';
 import type { FavoriteExercise } from './favorites.model';
 
 const EMPTY_TEXT =
@@ -6,16 +7,20 @@ const EMPTY_TEXT =
   'easier access in the future.';
 
 export class FavoritesView {
+  private readonly exercisesBox: HTMLElement;
   private readonly list: HTMLUListElement;
   private readonly cardTemplate: HTMLTemplateElement;
+  private readonly paginationContainer: HTMLElement;
 
   constructor(private readonly root: HTMLElement) {
+    this.exercisesBox = this.getElement('.favor-exercises');
     this.list = this.getElement('.favor-exercises-list');
     this.cardTemplate = this.getElement('[data-favorites-card-template]');
+    this.paginationContainer = this.getElement('[data-favorites-pagination]');
   }
 
   renderFavorites(favorites: FavoriteExercise[]): void {
-    this.root.classList.remove('favor-exercises-noitems');
+    this.exercisesBox.classList.remove('favor-exercises-noitems');
     this.list.innerHTML = '';
 
     const fragment = favorites.reduce((frag, favorite) => {
@@ -28,12 +33,16 @@ export class FavoritesView {
 
   renderEmptyState(): void {
     this.list.innerHTML = '';
-    this.root.classList.add('favor-exercises-noitems');
+    this.exercisesBox.classList.add('favor-exercises-noitems');
 
     const text = document.createElement('p');
     text.className = 'favor-exercises-text';
     text.textContent = EMPTY_TEXT;
     this.list.append(text);
+  }
+
+  renderPagination(page: number, totalPages: number): void {
+    renderPagination(this.paginationContainer, { page, totalPages });
   }
 
   onDeleteClick(callback: (id: string) => void): void {
@@ -55,6 +64,21 @@ export class FavoritesView {
         callback(id);
       }
     });
+  }
+
+  onPageClick(callback: (page: number) => void): void {
+    this.paginationContainer.addEventListener('click', event => {
+      const page = getPageFromEvent(event.target);
+
+      if (page !== null) {
+        callback(page);
+      }
+    });
+  }
+
+  scrollToTop(): void {
+    this.exercisesBox.scrollTop = 0;
+    this.exercisesBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   private createCard(favorite: FavoriteExercise): HTMLElement {

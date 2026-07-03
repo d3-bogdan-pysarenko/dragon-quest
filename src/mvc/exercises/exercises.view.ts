@@ -3,6 +3,7 @@ import {
   type ExerciseResponse,
   type FilterItem,
 } from '../../api';
+import { getPageFromEvent, renderPagination } from '../../components/pagination';
 import type { ExercisesState } from './exercises.model';
 
 export class ExercisesView {
@@ -121,18 +122,9 @@ export class ExercisesView {
 
   onPageClick(callback: (page: number) => void): void {
     this.paginationContainer.addEventListener('click', event => {
-      const button = this.getClosestElement<HTMLButtonElement>(
-        event.target,
-        '[data-page]'
-      );
+      const page = getPageFromEvent(event.target);
 
-      if (!button || button.disabled) {
-        return;
-      }
-
-      const page = Number(button.dataset.page);
-
-      if (Number.isFinite(page)) {
+      if (page !== null) {
         callback(page);
       }
     });
@@ -169,59 +161,10 @@ export class ExercisesView {
   }
 
   renderPagination(state: ExercisesState): void {
-    const { page, totalPages } = state;
-
-    if (totalPages <= 1) {
-      this.paginationContainer.classList.add('hidden');
-      this.paginationContainer.innerHTML = '';
-      return;
-    }
-
-    this.paginationContainer.classList.remove('hidden');
-
-    const windowSize = 3;
-    const start = Math.max(1, Math.min(page - 1, totalPages - windowSize + 1));
-    const end = Math.min(totalPages, start + windowSize - 1);
-
-    const numbers: string[] = [];
-    for (let p = start; p <= end; p += 1) {
-      const isActive = p === page;
-      numbers.push(`
-        <button
-          class="pagination-btn${isActive ? ' active' : ''}"
-          type="button"
-          data-page="${p}"
-          ${isActive ? 'aria-current="page"' : ''}
-        >${p}</button>
-      `);
-    }
-
-    const arrow = (
-      symbol: string,
-      target: number,
-      disabled: boolean,
-      label: string
-    ): string => `
-      <button
-        class="pagination-btn pagination-arrow"
-        type="button"
-        data-page="${target}"
-        aria-label="${label}"
-        ${disabled ? 'disabled data-static-disabled' : ''}
-      >${symbol}</button>
-    `;
-
-    this.paginationContainer.innerHTML = `
-      <div class="pagination-group">
-        ${arrow('&laquo;', 1, page === 1, 'First page')}
-        ${arrow('&lsaquo;', page - 1, page === 1, 'Previous page')}
-      </div>
-      <div class="pagination-group">${numbers.join('')}</div>
-      <div class="pagination-group">
-        ${arrow('&rsaquo;', page + 1, page === totalPages, 'Next page')}
-        ${arrow('&raquo;', totalPages, page === totalPages, 'Last page')}
-      </div>
-    `;
+    renderPagination(this.paginationContainer, {
+      page: state.page,
+      totalPages: state.totalPages,
+    });
   }
 
   setActiveFilter(filter: ExerciseFilter): void {
