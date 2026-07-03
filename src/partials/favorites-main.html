@@ -1,82 +1,36 @@
 <section>
-  <div class="container favor-container">
-    <h2 class="favor-title">Favorites</h2>
-    <div class="favor-quote">
-      <div>
-        <div class="favor-quote-container">
-          <div class="favor-quote-icon">
-            <svg width="18" height="20">
-              <use href="./img/sprite.svg#icon-running-stick"></use>
-            </svg>
-          </div>
-          <load src="/partials/components/quote.html" />
-        </div>
-        <load src="/partials/components/favor-info.html" />
-      </div>
-      <div class="favor-exercises" data-favorites>
-        <ul class="favor-exercises-list"></ul>
-
-        <template data-favorites-card-template>
-          <li class="favor-exercises-item">
-            <div class="workout-card" data-workout-id>
-              <div class="workout-header">
-                <div class="workout-badge-wrap">
-                  <div class="workout-badge">Workout</div>
-                  <button
-                    class="workout-btn-delete"
-                    type="button"
-                    aria-label="Delete workout"
-                    data-action="delete"
-                  >
-                    <svg class="delete-icon" width="16" height="16">
-                      <use href="img/sprite.svg#icon-trash"></use>
-                    </svg>
-                  </button>
-                </div>
-
-                <button
-                  class="workout-btn-start"
-                  type="button"
-                  aria-label="Start "
-                  data-action="start"
-                  data-exercise-open
-                  data-exercise-id
-                >
-                  Start
-                  <svg class="btn-icon" width="20" height="20">
-                    <use href="img/sprite.svg#icon-arrow-right"></use>
-                  </svg>
-                </button>
-              </div>
-
-              <div class="workout-title-container">
-                <div class="workout-icon-wrap">
-                  <svg class="workout-icon" width="16" height="16">
-                    <use href="img/sprite.svg#icon-running-stick-figure"></use>
-                  </svg>
-                </div>
-                <h3 class="workout-title"></h3>
-              </div>
-
-              <ul class="workout-info-list">
-                <li class="workout-info-item">
-                  <span class="info-label">Burned calories:</span>
-                  <span class="info-value" data-exercise-burned-calories></span>
-                </li>
-                <li class="workout-info-item">
-                  <span class="info-label">Body part:</span>
-                  <span class="info-value" data-exercise-body-part></span>
-                </li>
-                <li class="workout-info-item">
-                  <span class="info-label">Target:</span>
-                  <span class="info-value" data-exercise-target></span>
-                </li>
-              </ul>
+    <div class="container favor-container">
+      <h2 class="favor-title">Favorites</h2>
+      <div class="favor-quote">
+        <div>
+          <div class="favor-quote-container">
+            <div class="favor-quote-icon">
+              <svg width="18" height="20">
+                <use href="./img/sprite.svg#icon-running-stick"></use>
+              </svg>
             </div>
-          </li>
-        </template>
+            <load src="/partials/components/quote.html" />
+          </div>
+          <load src="/partials/components/favor-info.html" />
+        </div>
+        <div class="favor-exercises-wrap" data-favorites>
+          <div class="favor-exercises">
+            <ul class="favor-exercises-list"></ul>
+          </div>
+
+          <nav
+            class="pagination hidden"
+            data-favorites-pagination
+            aria-label="Favorites pagination"
+          ></nav>
+
+          <load
+            src="/partials/components/exercises-workout-item-template.html"
+            template-attr="data-favorites-card-template"
+            item-class="favor-exercises-item"
+            badge-action="/partials/components/workout-btn-delete.html"
+          />
+        </div>
       </div>
-      <ul class="pag-list"></ul>
     </div>
-  </div>
-</section>
+  </section>

@@ -1,19 +1,34 @@
 import { ExerciseFilter } from '../../api';
-import { ExercisesModel } from './exercises.model';
+import {
+  EXERCISES_PER_PAGE,
+  EXERCISES_PER_PAGE_MOBILE,
+  ExercisesModel,
+} from './exercises.model';
 import { ExercisesView } from './exercises.view';
 
+const DESKTOP_QUERY = '(min-width: 768px)';
+
 export class ExercisesController {
+  private readonly desktopQuery = window.matchMedia(DESKTOP_QUERY);
+
   constructor(
     private readonly model: ExercisesModel,
     private readonly view: ExercisesView
   ) {}
 
   async init(): Promise<void> {
+    this.applyExercisesPerPage();
     this.view.renderExerciseCategories();
     this.bindEvents();
 
     this.view.setActiveFilter(ExerciseFilter.MUSCLES);
     await this.loadCategories(ExerciseFilter.MUSCLES);
+  }
+
+  private applyExercisesPerPage(): void {
+    this.model.setExercisesPerPage(
+      this.desktopQuery.matches ? EXERCISES_PER_PAGE : EXERCISES_PER_PAGE_MOBILE
+    );
   }
 
   private bindEvents(): void {
@@ -35,6 +50,14 @@ export class ExercisesController {
 
     this.view.onPageClick(page => {
       void this.setPage(page);
+    });
+
+    this.desktopQuery.addEventListener('change', () => {
+      this.applyExercisesPerPage();
+
+      if (this.model.getState().selectedCategory) {
+        void this.setPage(1);
+      }
     });
   }
 
