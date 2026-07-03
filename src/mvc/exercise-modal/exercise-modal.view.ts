@@ -77,6 +77,10 @@ export class ExerciseModalView {
     this.favoriteButton.addEventListener('click', handler);
   }
 
+  onRatingClick(handler: () => void): void {
+    this.ratingButton.addEventListener('click', handler);
+  }
+
   updateFavoriteButton(isFavorite: boolean): void {
     this.favoriteBtnText.textContent = isFavorite
       ? 'Remove from favorites'
