@@ -18,7 +18,7 @@
   border-radius: 50%;
   cursor: pointer;
   z-index: 999;
-  background-color:var(--color-ink);
+  background-color: var(--color-ink);
 
   /* Світіння навколо кнопки, щоб не зливалась з чорним футером */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -57,7 +57,6 @@
     bottom: 32px;
     right: 32px;
     padding: 32px;
-
   }
 
   .scroll-up-btn:hover {

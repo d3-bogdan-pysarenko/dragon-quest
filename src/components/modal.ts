@@ -8,7 +8,10 @@ export interface CreateModalOptions {
   onClose?: () => void;
 }
 
-export const createModal = (root: HTMLElement, options: CreateModalOptions = {}): ModalInstance => {
+export const createModal = (
+  root: HTMLElement,
+  options: CreateModalOptions = {}
+): ModalInstance => {
   const closeButton = root.querySelector<HTMLElement>('[data-modal-close]');
 
   let isOpen = false;

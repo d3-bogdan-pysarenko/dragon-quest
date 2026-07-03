@@ -16,7 +16,7 @@ import { Endpoint } from '../constants';
 export const getFilters = async (
   params: FilterListParams = {}
 ): Promise<FiltersResponse> => {
-  const response = await yourEnergyApi.get<FiltersResponse>(Endpoint.Filters, {
+  const response = await yourEnergyApi.get<FiltersResponse>(`/${Endpoint.Filters}`, {
     params: buildParams(params),
   });
 
@@ -26,9 +26,12 @@ export const getFilters = async (
 export const getExercises = async (
   params: ExercisesListParams = {}
 ): Promise<ExercisesResponse> => {
-  const response = await yourEnergyApi.get<ExercisesResponse>(Endpoint.Exercises, {
-    params: buildParams(params),
-  });
+  const response = await yourEnergyApi.get<ExercisesResponse>(
+    `/${Endpoint.Exercises}`,
+    {
+      params: buildParams(params),
+    }
+  );
 
   return response.data;
 };
@@ -37,7 +40,7 @@ export const getExerciseById = async (
   exerciseId: string
 ): Promise<ExerciseDetails> => {
   const response = await yourEnergyApi.get<ExerciseDetails>(
-    `${Endpoint.Exercises}/${exerciseId}`
+    `/${Endpoint.Exercises}/${exerciseId}`
   );
 
   return response.data;
@@ -48,7 +51,7 @@ export const addExerciseRating = async (
   payload: ExerciseRatingPayload
 ): Promise<ExerciseRatingResponse> => {
   const response = await yourEnergyApi.patch<ExerciseRatingResponse>(
-    `${Endpoint.Exercises}/${exerciseId}/${Endpoint.Rating}`,
+    `/${Endpoint.Exercises}/${exerciseId}/${Endpoint.Rating}`,
     payload
   );
 
@@ -56,7 +59,7 @@ export const addExerciseRating = async (
 };
 
 export const getQuoteOfTheDay = async (): Promise<QuoteOfTheDay> => {
-  const response = await yourEnergyApi.get<QuoteOfTheDay>(Endpoint.Quote);
+  const response = await yourEnergyApi.get<QuoteOfTheDay>(`/${Endpoint.Quote}`);
 
   return response.data;
 };
@@ -65,7 +68,7 @@ export const subscribeToNewsletter = async (
   payload: SubscriptionPayload
 ): Promise<SubscriptionResponse> => {
   const response = await yourEnergyApi.post<SubscriptionResponse>(
-    Endpoint.Subscription,
+    `/${Endpoint.Subscription}`,
     payload
   );
 

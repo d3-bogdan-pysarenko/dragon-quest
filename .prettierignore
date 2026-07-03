@@ -1,0 +1,5 @@
+dist
+package-lock.json
+swagger.json
+src/img
+assets

@@ -31,7 +31,10 @@ export const openRatingModal = (options: OpenRatingModalOptions): void => {
 
       if (state.status === 'idle') {
         modal.close();
-        showToast('Your rating has been submitted. Thank you!', ToastType.Success);
+        showToast(
+          'Your rating has been submitted. Thank you!',
+          ToastType.Success
+        );
       } else if (state.status === 'error') {
         showToast('Something went wrong. Please try again.', ToastType.Error);
       }
@@ -66,7 +69,10 @@ export const initRatingModal = (): void => {
 
       if (state.status === 'idle') {
         modal.close();
-        showToast('Your rating has been submitted. Thank you!', ToastType.Success);
+        showToast(
+          'Your rating has been submitted. Thank you!',
+          ToastType.Success
+        );
       } else if (state.status === 'error') {
         showToast('Something went wrong. Please try again.', ToastType.Error);
       }
@@ -74,7 +80,9 @@ export const initRatingModal = (): void => {
   });
 
   document.addEventListener('click', event => {
-    const trigger = (event.target as HTMLElement).closest<HTMLElement>('[data-rating-open]');
+    const trigger = (event.target as HTMLElement).closest<HTMLElement>(
+      '[data-rating-open]'
+    );
 
     if (!trigger) {
       return;

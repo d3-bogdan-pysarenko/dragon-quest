@@ -146,7 +146,9 @@ export class ExampleModel {
     return getExercises(this.exercisesParams);
   }
 
-  private async loadExerciseDetails(exerciseId: string): Promise<ExerciseDetails> {
+  private async loadExerciseDetails(
+    exerciseId: string
+  ): Promise<ExerciseDetails> {
     return getExerciseById(exerciseId);
   }
 

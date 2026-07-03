@@ -1,116 +1,115 @@
 .workout-card {
-    position: relative;
-    max-width: 405px;
-    width: 100%;
-    padding: 24px;
-    background-color: var(--color-surface);
-    border-radius: var(--radius-card);
-    border: 1px solid var(--border-dark-soft);
-    box-sizing: border-box;
-   
+  position: relative;
+  max-width: 405px;
+  width: 100%;
+  padding: 24px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-dark-soft);
+  box-sizing: border-box;
 }
 
 .workout-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 .workout-badge-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .workout-badge {
-    padding: 5px 12px;
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: var(--color-ink);
-    border: 1px solid var(--border-dark-soft);
-    border-radius: var(--radius-pill);
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  border: 1px solid var(--border-dark-soft);
+  border-radius: var(--radius-pill);
 }
 
 .workout-btn-delete {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    padding: 4px;
-    cursor: pointer;
-    color: var(--color-ink);
-    transition: color var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--color-ink);
+  transition: color var(--transition-base);
 }
 
 .workout-btn-delete:hover {
-    color: #e74c3c;
+  color: #e74c3c;
 }
 
 .workout-title-container {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .workout-icon-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    background-color: var(--color-light);
-    border-radius: 50%;
-    font-size: 14px;
-    /* Для текстового эмодзи 🏃‍♂️ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-light);
+  border-radius: 50%;
+  font-size: 14px;
+  /* Для текстового эмодзи 🏃‍♂️ */
 }
 
 .workout-title {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1.2;
-    color: var(--color-ink);
-    margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-ink);
+  margin: 0;
 }
 
 .workout-info-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 16px;
-    width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  width: 100%;
 }
 
 .workout-info-item {
-    font-size: 12px;
-    line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .info-label {
-    color: var(--color-ink-muted);
-    margin-right: 4px;
+  color: var(--color-ink-muted);
+  margin-right: 4px;
 }
 
 .info-value {
-    color: var(--color-ink);
-    font-weight: 500;
+  color: var(--color-ink);
+  font-weight: 500;
 }
 
 .workout-btn-start {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: none;
-    border: none;
-    padding: 0;
-    font-family: var(--font-primary);
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--color-ink);
-    cursor: pointer;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-ink);
+  cursor: pointer;
 }
