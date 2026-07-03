@@ -6,6 +6,7 @@ export class ExerciseModalView {
   private readonly nameElement: HTMLElement;
   private readonly ratingValueElement: HTMLElement;
   private readonly starsElement: HTMLElement;
+  private readonly starSvgTemplate: SVGSVGElement | null | undefined;
   private readonly targetElement: HTMLElement;
   private readonly bodyPartElement: HTMLElement;
   private readonly equipmentElement: HTMLElement;
@@ -55,6 +56,9 @@ export class ExerciseModalView {
     this.loadingElement = this.getElement('[data-role="exercise-loading"]');
     this.contentElement = this.getElement('[data-role="exercise-content"]');
     this.errorElement = this.getElement('[data-role="exercise-error"]');
+    this.starSvgTemplate = document
+      .querySelector<HTMLTemplateElement>('[data-exercise-modal-star-template]')
+      ?.content.querySelector('svg');
   }
 
   render(state: ExerciseModalState): void {
@@ -131,7 +135,8 @@ export class ExerciseModalView {
     const rating = Number.isFinite(exercise.rating) ? exercise.rating : 0;
 
     this.ratingValueElement.textContent = rating.toFixed(1);
-    this.starsElement.innerHTML = this.buildStars(rating);
+    this.starsElement.innerHTML = '';
+    this.starsElement.appendChild(this.buildStars(rating));
 
     this.targetElement.textContent = exercise.target;
     this.bodyPartElement.textContent = exercise.bodyPart;
@@ -145,13 +150,19 @@ export class ExerciseModalView {
     this.updateFavoriteButton(isFavorite);
   }
 
-  private buildStars(rating: number): string {
+  private buildStars(rating: number): DocumentFragment {
     const filledCount = Math.round(Math.min(Math.max(rating, 0), 5));
+    const fragment = document.createDocumentFragment();
 
-    return Array.from({ length: 5 }, (_, i) => {
+    Array.from({ length: 5 }, (_, i) => {
       const filled = i < filledCount;
-      return `<svg class="exercise-modal-star${filled ? ' exercise-modal-star--filled' : ''}" width="18" height="18" aria-hidden="true"><use href="img/sprite.svg#icon-star"></use></svg>`;
-    }).join('');
+      const svgElement = this.starSvgTemplate?.cloneNode(true) as SVGSVGElement;
+      if (svgElement && filled) {
+        svgElement.classList.add('exercise-modal-star-filled');
+      }
+      fragment.appendChild(svgElement);
+    });
+    return fragment;
   }
 
   private getElement<T extends HTMLElement | SVGUseElement>(

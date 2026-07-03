@@ -206,7 +206,7 @@ export class ExercisesView {
     this.selectedCategoryText.classList.add('hidden');
     this.selectedCategoryText.textContent = '';
     this.searchInput.value = '';
-    this.listContainer.classList.remove('exercises-list--workouts');
+    this.listContainer.classList.remove('exercises-list-workouts');
   }
 
   private showExercisesMode(state: ExercisesState): void {
@@ -217,7 +217,7 @@ export class ExercisesView {
       ? this.formatDisplayName(state.selectedCategory)
       : '';
     this.searchInput.value = state.keyword;
-    this.listContainer.classList.add('exercises-list--workouts');
+    this.listContainer.classList.add('exercises-list-workouts');
   }
 
   private renderMessage(message: string): void {
