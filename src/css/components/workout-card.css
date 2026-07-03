@@ -48,6 +48,12 @@
   color: #e74c3c;
 }
 
+.delete-icon {
+  stroke: currentColor;
+  fill: none;
+  transition: opacity var(--transition-base);
+}
+
 .workout-title-container {
   display: flex;
   align-items: center;
