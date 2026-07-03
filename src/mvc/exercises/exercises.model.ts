@@ -11,7 +11,8 @@ import {
 } from '../../api';
 
 const CATEGORIES_PER_PAGE = 12;
-const EXERCISES_PER_PAGE = 10;
+export const EXERCISES_PER_PAGE = 10;
+export const EXERCISES_PER_PAGE_MOBILE = 8;
 
 export interface ExercisesState {
   selectedFilter: ExerciseFilter;
@@ -24,6 +25,8 @@ export interface ExercisesState {
 }
 
 export class ExercisesModel {
+  private exercisesPerPage = EXERCISES_PER_PAGE;
+
   private state: ExercisesState = {
     selectedFilter: ExerciseFilter.MUSCLES,
     selectedCategory: null,
@@ -36,6 +39,10 @@ export class ExercisesModel {
 
   getState(): ExercisesState {
     return this.state;
+  }
+
+  setExercisesPerPage(limit: number): void {
+    this.exercisesPerPage = limit;
   }
 
   async loadCategories(filter: ExerciseFilter): Promise<ExercisesState> {
@@ -116,7 +123,7 @@ export class ExercisesModel {
     const params: ExercisesListParams = {
       keyword: this.state.keyword,
       page: this.state.page,
-      limit: EXERCISES_PER_PAGE,
+      limit: this.exercisesPerPage,
     };
 
     switch (this.state.selectedFilter) {
