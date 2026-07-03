@@ -90,7 +90,8 @@ export class ExerciseModalView {
       ? 'Remove from favorites'
       : 'Add to favorites';
     const iconName = isFavorite ? 'icon-trash' : 'icon-heart';
-    this.favoriteBtnSVGUse.href.baseVal = `img/sprite.svg#${iconName}`;
+    const basePath = this.favoriteBtnSVGUse.href.baseVal.split('#')[0];
+    this.favoriteBtnSVGUse.href.baseVal = `${basePath}#${iconName}`;
   }
 
   private showLoading(): void {
