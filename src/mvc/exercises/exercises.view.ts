@@ -14,6 +14,7 @@ export class ExercisesView {
   private readonly listContainer: HTMLElement;
   private readonly listItemTemplate: HTMLTemplateElement;
   private readonly categoriesContainer: HTMLUListElement;
+  private readonly paginationContainer: HTMLElement;
 
   constructor(private readonly root: HTMLElement) {
     this.searchContainer = this.getElement('[data-exercises-search]');
@@ -28,6 +29,7 @@ export class ExercisesView {
       '[data-exercises-workout-item-template]'
     );
     this.categoriesContainer = this.getElement('[data-exercises-categories]');
+    this.paginationContainer = this.getElement('[data-exercises-pagination]');
   }
 
   renderExerciseCategories(): void {
@@ -111,6 +113,25 @@ export class ExercisesView {
     });
   }
 
+  onPageClick(callback: (page: number) => void): void {
+    this.paginationContainer.addEventListener('click', event => {
+      const button = this.getClosestElement<HTMLButtonElement>(
+        event.target,
+        '[data-page]'
+      );
+
+      if (!button || button.disabled) {
+        return;
+      }
+
+      const page = Number(button.dataset.page);
+
+      if (Number.isFinite(page)) {
+        callback(page);
+      }
+    });
+  }
+
   renderCategoryCards(filters: FilterItem[]): void {
     this.showCategoriesMode();
     this.listContainer.innerHTML = '';
@@ -141,6 +162,62 @@ export class ExercisesView {
     this.listContainer.appendChild(fragment);
   }
 
+  renderPagination(state: ExercisesState): void {
+    const { page, totalPages } = state;
+
+    if (totalPages <= 1) {
+      this.paginationContainer.classList.add('hidden');
+      this.paginationContainer.innerHTML = '';
+      return;
+    }
+
+    this.paginationContainer.classList.remove('hidden');
+
+    const windowSize = 3;
+    const start = Math.max(1, Math.min(page - 1, totalPages - windowSize + 1));
+    const end = Math.min(totalPages, start + windowSize - 1);
+
+    const numbers: string[] = [];
+    for (let p = start; p <= end; p += 1) {
+      const isActive = p === page;
+      numbers.push(`
+        <button
+          class="pagination-btn${isActive ? ' active' : ''}"
+          type="button"
+          data-page="${p}"
+          ${isActive ? 'aria-current="page"' : ''}
+        >${p}</button>
+      `);
+    }
+
+    const arrow = (
+      symbol: string,
+      target: number,
+      disabled: boolean,
+      label: string
+    ): string => `
+      <button
+        class="pagination-btn pagination-arrow"
+        type="button"
+        data-page="${target}"
+        aria-label="${label}"
+        ${disabled ? 'disabled data-static-disabled' : ''}
+      >${symbol}</button>
+    `;
+
+    this.paginationContainer.innerHTML = `
+      <div class="pagination-group">
+        ${arrow('&laquo;', 1, page === 1, 'First page')}
+        ${arrow('&lsaquo;', page - 1, page === 1, 'Previous page')}
+      </div>
+      <div class="pagination-group">${numbers.join('')}</div>
+      <div class="pagination-group">
+        ${arrow('&rsaquo;', page + 1, page === totalPages, 'Next page')}
+        ${arrow('&raquo;', totalPages, page === totalPages, 'Last page')}
+      </div>
+    `;
+  }
+
   setActiveFilter(filter: ExerciseFilter): void {
     this.categoriesContainer
       .querySelectorAll<HTMLButtonElement>('[data-filter]')
@@ -155,11 +232,17 @@ export class ExercisesView {
   setLoading(isLoading: boolean): void {
     this.root.setAttribute('aria-busy', String(isLoading));
 
-    this.root.querySelectorAll<HTMLButtonElement>('button').forEach(button => {
-      button.disabled = isLoading;
-    });
+    this.root
+      .querySelectorAll<HTMLButtonElement>('button:not([data-static-disabled])')
+      .forEach(button => {
+        button.disabled = isLoading;
+      });
 
     this.searchInput.disabled = isLoading;
+  }
+
+  scrollToSectionTop(): void {
+    this.root.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   renderError(error: unknown): void {

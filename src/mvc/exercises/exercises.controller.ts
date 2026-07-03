@@ -32,6 +32,10 @@ export class ExercisesController {
     this.view.onSearchClear(() => {
       void this.searchExercises('');
     });
+
+    this.view.onPageClick(page => {
+      void this.setPage(page);
+    });
   }
 
   private async loadCategories(filter: ExerciseFilter): Promise<void> {
@@ -44,6 +48,11 @@ export class ExercisesController {
 
   private async searchExercises(keyword: string): Promise<void> {
     await this.runRequest(() => this.model.searchExercises(keyword));
+  }
+
+  private async setPage(page: number): Promise<void> {
+    await this.runRequest(() => this.model.setPage(page));
+    this.view.scrollToSectionTop();
   }
 
   private async runRequest(request: () => Promise<unknown>): Promise<void> {
@@ -66,9 +75,10 @@ export class ExercisesController {
 
     if (state.selectedCategory) {
       this.view.renderExercises(state);
-      return;
+    } else {
+      this.view.renderCategoryCards(state.categories);
     }
 
-    this.view.renderCategoryCards(state.categories);
+    this.view.renderPagination(state);
   }
 }
