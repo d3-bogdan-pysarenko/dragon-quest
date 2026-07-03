@@ -101,9 +101,11 @@ body {
   }
 }
 .favor-quote-wrap h3 {
-  color: var(--color-light);
-  font-weight: 500;
   margin-bottom: 6px;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--color-light);
 }
 @media screen and (min-width: 768px) {
   .favor-quote-wrap h3 {
@@ -112,6 +114,8 @@ body {
   }
 }
 .favor-quote-wrap p {
+  font-size: 14px;
+  line-height: 1.286;
   color: rgba(244, 244, 244, 0.6);
 }
 @media screen and (min-width: 768px) {
@@ -153,42 +157,119 @@ body {
   }
 }
 .favor-dailynorm {
+  display: flex;
+  gap: 18px;
   position: relative;
   border-radius: 20px;
   background-color: #fff;
   padding: 20px;
   margin-bottom: 20px;
 }
+
+.favor-info.main .favor-dailynorm {
+  .favor-dailynorm-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--color-ink);
+    svg {
+      fill: var(--color-light);
+    }
+  }
+}
+
 @media screen and (min-width: 768px) {
   .favor-dailynorm {
     width: 344px;
-    height: 141px;
+    padding: 40px;
     margin-bottom: 0;
     border-radius: 15px;
   }
 }
+
 @media screen and (min-width: 1440px) {
   .favor-dailynorm {
     width: 239px;
   }
 }
+
 .favor-dailynorm svg {
   fill: var(--color-ink);
-  margin-bottom: 15px;
 }
-.favor-dailynorm h3 {
+
+.dailynorm-value {
+  font-size: 20px;
+  line-height: 1;
   font-weight: 500;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
+
 @media screen and (min-width: 768px) {
-  .favor-dailynorm h3 {
+  .dailynorm-value {
     font-size: 24px;
     line-height: 1.33;
   }
 }
-.favor-dailynorm p {
+
+.dailynorm-caption {
+  font-size: 14px;
+  line-height: 1.286;
   color: rgba(36, 36, 36, 0.6);
 }
+
+.dailynorm-text {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.286;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .dailynorm-text {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .dailynorm-text {
+    max-height: 105px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    text-overflow: ellipsis;
+  }
+}
+
+.favor-info.favorites {
+  .favor-dailynorm {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .favor-dailynorm {
+      padding: 25px;
+    }
+  }
+
+  .dailynorm-value {
+    margin-bottom: 6px;
+  }
+
+  .dailynorm-text {
+    display: none;
+  }
+}
+
 /**                          img */
 .favor-img-wrap {
   border-radius: 20px;
@@ -197,7 +278,8 @@ body {
 @media screen and (min-width: 768px) {
   .favor-img-wrap {
     width: 344px;
-    height: 141px;
+    /* height: 141px; */
+    min-height: stretch;
   }
 }
 @media screen and (min-width: 1440px) {

@@ -1,36 +1,40 @@
 <section>
-    <div class="container favor-container">
-      <h2 class="favor-title">Favorites</h2>
-      <div class="favor-quote">
-        <div>
-          <div class="favor-quote-container">
-            <div class="favor-quote-icon">
-              <svg width="18" height="20">
-                <use href="./img/sprite.svg#icon-running-stick"></use>
-              </svg>
-            </div>
-            <load src="/partials/components/quote.html" />
+  <div class="container favor-container">
+    <h2 class="favor-title">Favorites</h2>
+    <div class="favor-quote">
+      <div>
+        <div class="favor-quote-container">
+          <div class="favor-quote-icon">
+            <svg width="18" height="20">
+              <use href="./img/sprite.svg#icon-running-stick"></use>
+            </svg>
           </div>
-          <load src="/partials/components/favor-info.html" />
+          <load src="/partials/components/quote.html" />
         </div>
-        <div class="favor-exercises-wrap" data-favorites>
-          <div class="favor-exercises">
-            <ul class="favor-exercises-list"></ul>
-          </div>
-
-          <nav
-            class="pagination hidden"
-            data-favorites-pagination
-            aria-label="Favorites pagination"
-          ></nav>
-
-          <load
-            src="/partials/components/exercises-workout-item-template.html"
-            template-attr="data-favorites-card-template"
-            item-class="favor-exercises-item"
-            badge-action="/partials/components/workout-btn-delete.html"
-          />
+        <load
+          src="/partials/components/favor-info.html"
+          extra-class="favorites"
+          img-prefix="favorites"
+        />
+      </div>
+      <div class="favor-exercises-wrap" data-favorites>
+        <div class="favor-exercises">
+          <ul class="favor-exercises-list"></ul>
         </div>
+
+        <nav
+          class="pagination hidden"
+          data-favorites-pagination
+          aria-label="Favorites pagination"
+        ></nav>
+
+        <load
+          src="/partials/components/exercises-workout-item-template.html"
+          template-attr="data-favorites-card-template"
+          item-class="favor-exercises-item"
+          badge-action="/partials/components/workout-btn-delete.html"
+        />
       </div>
     </div>
-  </section>
+  </div>
+</section>
