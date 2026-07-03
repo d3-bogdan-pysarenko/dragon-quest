@@ -94,7 +94,9 @@ export class FavoritesView {
     startButton?.setAttribute('aria-label', `Start ${name}`);
     startButton?.setAttribute('data-exercise-id', favorite._id);
 
-    listItem.querySelector('.workout-title')!.textContent = name;
+    const workoutTitle = listItem.querySelector('.workout-title')!;
+    workoutTitle.textContent = name;
+    workoutTitle.setAttribute('title', name);
 
     listItem.querySelector('[data-exercise-burned-calories]')!.textContent =
       `${favorite.burnedCalories} / 3 min`;
