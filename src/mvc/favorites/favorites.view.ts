@@ -53,11 +53,9 @@ export class FavoritesView {
       const currentTarget = event.target as HTMLElement;
 
       let button: HTMLElement | null =
-        currentTarget.dataset.dataAction === 'delete' ? currentTarget : null;
-
-      if (!button) {
-        button = currentTarget.closest('[data-action="delete"]');
-      }
+        currentTarget.dataset.dataAction === 'delete'
+          ? currentTarget
+          : currentTarget.closest('[data-action="delete"]');
 
       if (!button) {
         return;
