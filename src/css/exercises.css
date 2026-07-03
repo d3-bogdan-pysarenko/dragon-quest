@@ -45,6 +45,7 @@
       }
       & .exercises-categories {
         display: flex;
+        flex-shrink: 0;
         gap: 20px;
         align-items: center;
         & .exercises-category {
@@ -56,6 +57,7 @@
             font-weight: 400;
             color: rgba(36, 36, 36, 0.6);
             background-color: transparent;
+            white-space: nowrap;
 
             &.active {
               position: relative;
@@ -218,6 +220,7 @@
         justify-content: flex-end;
 
         & .exercises-search-form {
+          flex: 0 0 273px;
           max-width: 273px;
         }
       }
@@ -262,9 +265,7 @@
       justify-content: space-between;
 
       & .exercises-filters {
-        & .exercises-search-form {
-          gap: 30px;
-        }
+        gap: 30px;
       }
     }
   }
