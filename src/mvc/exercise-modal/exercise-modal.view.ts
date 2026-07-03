@@ -6,6 +6,7 @@ export class ExerciseModalView {
   private readonly nameElement: HTMLElement;
   private readonly ratingValueElement: HTMLElement;
   private readonly starsElement: HTMLElement;
+  private readonly starSvgTemplate: SVGSVGElement | null | undefined;
   private readonly targetElement: HTMLElement;
   private readonly bodyPartElement: HTMLElement;
   private readonly equipmentElement: HTMLElement;
@@ -55,6 +56,9 @@ export class ExerciseModalView {
     this.loadingElement = this.getElement('[data-role="exercise-loading"]');
     this.contentElement = this.getElement('[data-role="exercise-content"]');
     this.errorElement = this.getElement('[data-role="exercise-error"]');
+    this.starSvgTemplate = document
+      .querySelector<HTMLTemplateElement>('[data-exercise-modal-star-template]')
+      ?.content.querySelector('svg');
   }
 
   render(state: ExerciseModalState): void {
@@ -149,18 +153,14 @@ export class ExerciseModalView {
   private buildStars(rating: number): DocumentFragment {
     const filledCount = Math.round(Math.min(Math.max(rating, 0), 5));
     const fragment = document.createDocumentFragment();
+
     Array.from({ length: 5 }, (_, i) => {
       const filled = i < filledCount;
-      const clone = document
-        .querySelector<HTMLTemplateElement>(
-          '[data-exercise-modal-star-template]'
-        )
-        ?.content.cloneNode(true) as DocumentFragment | null;
-      const svgElement = clone?.querySelector<SVGSVGElement>('svg');
+      const svgElement = this.starSvgTemplate?.cloneNode(true) as SVGSVGElement;
       if (svgElement && filled) {
-        svgElement.classList.add('exercise-modal-star--filled');
+        svgElement.classList.add('exercise-modal-star-filled');
       }
-      fragment.appendChild(clone ?? document.createDocumentFragment());
+      fragment.appendChild(svgElement);
     });
     return fragment;
   }
