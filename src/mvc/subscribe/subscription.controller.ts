@@ -1,5 +1,4 @@
 import { SubscriptionModel, SubscriptionView } from './';
-import { showLoader, hideLoader } from '../../components/loader';
 import { showToast, ToastType } from '../../components/toast';
 import { validateEmail, getErrorMessage } from '../../utils';
 import { SubscriptionRequest, SubscriptionResponse } from '../../api';
@@ -42,7 +41,6 @@ export class SubscriptionController {
     request: () => Promise<SubscriptionResponse>
   ): Promise<void> {
     this.view.setLoading(true);
-    showLoader();
 
     try {
       const result = await request();
@@ -53,7 +51,6 @@ export class SubscriptionController {
       showToast(errorMessage, ToastType.Error);
     } finally {
       this.view.setLoading(false);
-      hideLoader();
     }
   }
 }
