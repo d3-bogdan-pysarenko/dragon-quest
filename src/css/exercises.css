@@ -172,11 +172,6 @@
   line-height: 1.2;
 }
 
-.exercises-workout-item .workout-btn-start {
-  top: 14px;
-  right: 14px;
-}
-
 .exercises-message {
   grid-column: 1 / -1;
   max-width: 684px;
