@@ -1,5 +1,4 @@
 import { initScrollUp } from './components/scroll-up';
-import { showLoader, hideLoader } from './components/loader';
 import { initBurgerMenu } from './components/burger-menu';
 import { initRatingModal } from './mvc/rating/rating.controller';
 import { initExerciseModal } from './mvc/exercise-modal/exercise-modal.controller';
@@ -65,8 +64,5 @@ if (subscriptionForm) {
   );
   subscriptionController.init();
 }
-
-showLoader();
-hideLoader();
 
 export {};
