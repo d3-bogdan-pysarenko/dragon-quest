@@ -1,19 +1,16 @@
 .workout-card {
   position: relative;
-  max-width: 405px;
-  width: 100%;
-  padding: 24px;
+  min-height: 141px;
+  padding: 16px;
   background-color: var(--color-surface);
-  border-radius: var(--radius-card);
-  border: 1px solid var(--border-dark-soft);
-  box-sizing: border-box;
+  border-radius: 15px;
 }
 
 .workout-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 25px;
 }
 
 .workout-badge-wrap {
@@ -65,9 +62,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  background-color: var(--color-light);
   border-radius: 50%;
   font-size: 14px;
   /* Для текстового эмодзи 🏃‍♂️ */
@@ -104,11 +98,9 @@
 }
 
 .workout-btn-start {
-  position: absolute;
-  top: 24px;
-  right: 24px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background: none;
   border: none;
@@ -116,6 +108,7 @@
   font-family: var(--font-primary);
   font-size: 16px;
   font-weight: 500;
+  line-height: 1.5;
   color: var(--color-ink);
   cursor: pointer;
 }

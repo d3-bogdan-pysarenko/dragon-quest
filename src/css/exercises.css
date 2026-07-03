@@ -149,10 +149,46 @@
 }
 
 .exercises-workout-item .workout-card {
-  max-width: none;
-  min-height: 141px;
-  padding: 14px;
-  border-radius: 15px;
+  width: 100%;
+  min-width: 0;
+}
+
+.exercises-workout-item .workout-title-container {
+  min-width: 0;
+}
+
+.exercises-workout-item .workout-icon-wrap {
+  flex: 0 0 auto;
+}
+
+.exercises-workout-item .workout-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.exercises-workout-item .workout-info-list {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.exercises-workout-item .workout-info-item {
+  display: flex;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.exercises-workout-item .info-label {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.exercises-workout-item .info-value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .exercises-workout-item .workout-rating {
@@ -169,9 +205,6 @@
   stroke: none;
 }
 
-.exercises-workout-item .workout-header {
-  margin-bottom: 12px;
-}
 
 .exercises-workout-item .workout-title-container {
   margin-bottom: 6px;
@@ -180,11 +213,6 @@
 .exercises-workout-item .workout-title {
   font-size: 20px;
   line-height: 1.2;
-}
-
-.exercises-workout-item .workout-btn-start {
-  top: 14px;
-  right: 14px;
 }
 
 .exercises-message {

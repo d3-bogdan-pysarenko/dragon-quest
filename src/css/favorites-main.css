@@ -254,16 +254,6 @@ body {
     width: calc((100% - 16px) / 2);
   }
 }
-.favor-exercises-item .workout-card {
-  max-width: none;
-  width: 100%;
-  padding: 14px;
-  border-radius: 15px;
-}
-.favor-exercises-item .workout-btn-start {
-  top: 14px;
-  right: 14px;
-}
 .favor-exercises-noitems {
   padding: 40px 8px 0 9px;
 }

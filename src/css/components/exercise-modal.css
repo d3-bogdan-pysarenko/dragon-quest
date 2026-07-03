@@ -207,56 +207,21 @@
   .exercise-modal-actions {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: end;
     gap: 7px;
   }
 }
 
-.exercise-modal-btn-favorite.btn {
-  box-sizing: border-box;
-  width: 100%;
-  height: 48px;
-  padding: 12px 24px;
-  letter-spacing: -0.5px;
-  font-size: 16px;
-  background-color: var(--color-light);
-  border-color: var(--color-light);
-  color: var(--color-ink);
-}
-
-@media screen and (min-width: 768px) {
-  .exercise-modal-btn-favorite.btn {
-    width: 194px;
-  }
-}
-
-.exercise-modal-btn-favorite.btn:hover,
-.exercise-modal-btn-favorite.btn:focus-visible {
-  background-color: transparent;
-  color: var(--color-light);
-}
-
+.exercise-modal-btn-favorite.btn,
 .exercise-modal-btn-rating.btn {
-  box-sizing: border-box;
   width: 100%;
-  height: 48px;
-  padding: 12px 24px;
-  letter-spacing: -0.5px;
-  font-size: 16px;
-  background-color: var(--color-ink);
-  border-color: var(--color-light);
-  color: var(--color-light);
 }
 
 @media screen and (min-width: 768px) {
+  .exercise-modal-btn-favorite.btn,
   .exercise-modal-btn-rating.btn {
-    width: 137px;
+    width: auto;
   }
 }
 
-.exercise-modal-btn-rating.btn:hover,
-.exercise-modal-btn-rating.btn:focus-visible {
-  background-color: var(--color-light);
-  color: var(--color-ink);
-}
 /* #endregion Exercise Modal */
