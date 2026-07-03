@@ -21,6 +21,8 @@ export const initExerciseModal = (): void => {
     view.updateFavoriteButton(state.isFavorite);
   });
 
+  view.onRatingClick(() => modal.close());
+
   document.addEventListener('click', event => {
     const trigger = (event.target as HTMLElement).closest<HTMLElement>(
       '[data-exercise-open]'
