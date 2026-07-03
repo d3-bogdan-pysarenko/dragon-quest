@@ -63,7 +63,7 @@
               position: relative;
               color: var(--color-ink);
               &::after {
-                content: "";
+                content: '';
                 position: absolute;
                 bottom: -3px;
                 left: 0;
@@ -257,7 +257,6 @@
 }
 
 @media screen and (min-width: 1440px) {
-
   .exercises {
     & .exercises-header {
       flex-direction: row;

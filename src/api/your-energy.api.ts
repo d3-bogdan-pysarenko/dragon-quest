@@ -26,9 +26,12 @@ export const getFilters = async (
 export const getExercises = async (
   params: ExercisesListParams = {}
 ): Promise<ExercisesResponse> => {
-  const response = await yourEnergyApi.get<ExercisesResponse>(Endpoint.Exercises, {
-    params: buildParams(params),
-  });
+  const response = await yourEnergyApi.get<ExercisesResponse>(
+    Endpoint.Exercises,
+    {
+      params: buildParams(params),
+    }
+  );
 
   return response.data;
 };

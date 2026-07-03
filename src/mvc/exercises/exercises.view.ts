@@ -321,9 +321,8 @@ export class ExercisesView {
     listItem.querySelector('[data-exercise-body-part]')!.textContent =
       this.escapeHtml(this.formatDisplayName(exercise.bodyPart));
 
-    listItem.querySelector(
-      '[data-exercise-target]'
-    )!.textContent = this.escapeHtml(this.formatDisplayName(exercise.target));
+    listItem.querySelector('[data-exercise-target]')!.textContent =
+      this.escapeHtml(this.formatDisplayName(exercise.target));
 
     return listItem;
   }

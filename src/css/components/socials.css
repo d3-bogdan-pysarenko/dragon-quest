@@ -48,8 +48,7 @@
 
 .social-icon {
   fill: currentColor;
-  transition:
-    opacity var(--transition-base);
+  transition: opacity var(--transition-base);
 }
 
 .light .social-icon {
