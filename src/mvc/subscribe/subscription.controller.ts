@@ -1,14 +1,14 @@
-import { SubscriptionModel, SubscriptionView } from "./";
+import { SubscriptionModel, SubscriptionView } from './';
 import { showLoader, hideLoader } from '../../components/loader';
 import { showToast, ToastType } from '../../components/toast';
 import { validateEmail, getErrorMessage } from '../../utils';
-import { SubscriptionRequest, SubscriptionResponse } from "../../api";
+import { SubscriptionRequest, SubscriptionResponse } from '../../api';
 
 export class SubscriptionController {
   constructor(
     private model: SubscriptionModel,
     private view: SubscriptionView
-  ) { }
+  ) {}
 
   init(): void {
     this.bindEvents();
@@ -16,7 +16,7 @@ export class SubscriptionController {
   }
 
   private bindEvents(): void {
-    this.view.onSubscribe((email) => {
+    this.view.onSubscribe(email => {
       this.handleSubscription(email);
     });
   }
@@ -38,7 +38,9 @@ export class SubscriptionController {
     await this.runRequest(() => this.model.subscribe(payload));
   }
 
-  private async runRequest(request: () => Promise<SubscriptionResponse>): Promise<void> {
+  private async runRequest(
+    request: () => Promise<SubscriptionResponse>
+  ): Promise<void> {
     this.view.setLoading(true);
     showLoader();
 

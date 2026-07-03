@@ -15,7 +15,9 @@ export class RatingView {
 
     this.form.addEventListener('change', event => {
       if ((event.target as HTMLElement).matches('[name="rate"]')) {
-        const checked = this.form.querySelector<HTMLInputElement>('[name="rate"]:checked');
+        const checked = this.form.querySelector<HTMLInputElement>(
+          '[name="rate"]:checked'
+        );
         this.ratingValueElement.textContent = checked
           ? Number(checked.value).toFixed(1)
           : '0.0';

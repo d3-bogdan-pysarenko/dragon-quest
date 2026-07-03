@@ -14,11 +14,11 @@ TS-логіка маленьких інтерактивних компонент
 
 ```ts
 export const initBurgerMenu = (): void => {
-  const button = document.querySelector<HTMLButtonElement>('[data-burger-open]');
+  const button =
+    document.querySelector<HTMLButtonElement>('[data-burger-open]');
 
   if (!button) {
     return;
   }
 };
 ```
-

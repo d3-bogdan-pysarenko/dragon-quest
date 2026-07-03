@@ -1,13 +1,13 @@
-
 export class SubscriptionView {
   private readonly emailInputElement: HTMLInputElement;
   private readonly subscribeButtonElement: HTMLButtonElement;
 
-  constructor(
-    private readonly root: HTMLFormElement
-  ) {
-    this.emailInputElement = this.getElement<HTMLInputElement>('#subscribe-email');
-    this.subscribeButtonElement = this.getElement<HTMLButtonElement>('#subscribe-form button[type="submit"]');
+  constructor(private readonly root: HTMLFormElement) {
+    this.emailInputElement =
+      this.getElement<HTMLInputElement>('#subscribe-email');
+    this.subscribeButtonElement = this.getElement<HTMLButtonElement>(
+      '#subscribe-form button[type="submit"]'
+    );
   }
 
   private getElement<T extends HTMLElement>(selector: string): T {
@@ -21,7 +21,7 @@ export class SubscriptionView {
   }
 
   onSubscribe(handler: (email: string) => void): void {
-    this.root.addEventListener('submit', (event) => {
+    this.root.addEventListener('submit', event => {
       event.preventDefault();
       handler(this.getEmailInputValue());
     });

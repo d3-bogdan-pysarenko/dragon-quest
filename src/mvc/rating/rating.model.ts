@@ -16,7 +16,10 @@ export class RatingModel {
     return this.state;
   }
 
-  async submit(exerciseId: string, payload: ExerciseRatingPayload): Promise<RatingState> {
+  async submit(
+    exerciseId: string,
+    payload: ExerciseRatingPayload
+  ): Promise<RatingState> {
     this.state = { status: 'submitting', errorMessage: null };
 
     try {
