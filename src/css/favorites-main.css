@@ -249,6 +249,41 @@ body {
   display: flex;
   width: 100%;
 }
+.favor-exercises-item .workout-card {
+  width: 100%;
+  min-width: 0;
+}
+.favor-exercises-item .workout-title-container {
+  min-width: 0;
+}
+.favor-exercises-item .workout-icon-wrap {
+  flex: 0 0 auto;
+}
+.favor-exercises-item .workout-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.favor-exercises-item .workout-info-list {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.favor-exercises-item .workout-info-item {
+  display: flex;
+  min-width: 0;
+  white-space: nowrap;
+}
+.favor-exercises-item .info-label {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.favor-exercises-item .info-value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 @media screen and (min-width: 768px) {
   .favor-exercises-item {
     width: calc((100% - 16px) / 2);
