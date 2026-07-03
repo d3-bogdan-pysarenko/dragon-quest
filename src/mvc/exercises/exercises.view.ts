@@ -254,9 +254,10 @@ export class ExercisesView {
       .querySelector('.workout-btn-start')
       ?.setAttribute('data-exercise-id', this.escapeHtml(exercise._id));
 
-    listItem.querySelector('.workout-title')!.textContent = this.escapeHtml(
-      this.formatDisplayName(exercise.name)
-    );
+    const exerciseName = this.formatDisplayName(exercise.name);
+    const workoutTitle = listItem.querySelector('.workout-title')!;
+    workoutTitle.textContent = this.escapeHtml(exerciseName);
+    workoutTitle.setAttribute('title', exerciseName);
 
     listItem.querySelector('[data-exercise-burned-calories]')!.textContent =
       `${exercise.burnedCalories} / 3 min`;
