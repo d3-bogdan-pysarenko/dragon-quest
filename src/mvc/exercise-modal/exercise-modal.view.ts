@@ -14,6 +14,7 @@ export class ExerciseModalView {
   private readonly descriptionElement: HTMLElement;
   private readonly favoriteButton: HTMLButtonElement;
   private readonly favoriteBtnText: HTMLElement;
+  private readonly favoriteBtnSVGUse: SVGUseElement;
   private readonly ratingButton: HTMLButtonElement;
   private readonly loadingElement: HTMLElement;
   private readonly contentElement: HTMLElement;
@@ -44,6 +45,9 @@ export class ExerciseModalView {
     );
     this.favoriteBtnText = this.getElement(
       '[data-role="exercise-favorite-text"]'
+    );
+    this.favoriteBtnSVGUse = this.getElement(
+      '[data-role="exercise-favorite-btn"] .btn-icon use'
     );
     this.ratingButton = this.getElement<HTMLButtonElement>(
       '[data-role="exercise-rating-btn"]'
@@ -85,6 +89,8 @@ export class ExerciseModalView {
     this.favoriteBtnText.textContent = isFavorite
       ? 'Remove from favorites'
       : 'Add to favorites';
+    const iconName = isFavorite ? 'icon-trash' : 'icon-heart';
+    this.favoriteBtnSVGUse.href.baseVal = `img/sprite.svg#${iconName}`;
   }
 
   private showLoading(): void {
@@ -147,8 +153,10 @@ export class ExerciseModalView {
     }).join('');
   }
 
-  private getElement<T extends HTMLElement>(selector: string): T {
-    const element = this.root.querySelector<T>(selector);
+  private getElement<T extends HTMLElement | SVGUseElement>(
+    selector: string
+  ): T | never {
+    const element: T | null = this.root.querySelector<T>(selector);
 
     if (!element) {
       throw new Error(`ExerciseModalView: element not found: ${selector}`);
