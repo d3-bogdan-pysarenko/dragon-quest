@@ -148,6 +148,26 @@
   min-width: 0;
 }
 
+.exercises-workout-item .workout-card {
+  width: 100%;
+  min-width: 0;
+}
+
+.exercises-workout-item .workout-title-container {
+  min-width: 0;
+}
+
+.exercises-workout-item .workout-icon-wrap {
+  flex: 0 0 auto;
+}
+
+.exercises-workout-item .workout-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .exercises-workout-item .workout-rating {
   display: inline-flex;
   align-items: center;
