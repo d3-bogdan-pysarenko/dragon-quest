@@ -33,7 +33,13 @@ export class ExercisesView {
   }
 
   renderExerciseCategories(): void {
-    this.categoriesContainer.innerHTML = Object.values(ExerciseFilter)
+    const filterOrder = [
+      ExerciseFilter.MUSCLES,
+      ExerciseFilter.BODY_PARTS,
+      ExerciseFilter.EQUIPMENT,
+    ];
+
+    this.categoriesContainer.innerHTML = filterOrder
       .map(
         categoryName => `
         <li class="exercises-category">
@@ -286,39 +292,39 @@ export class ExercisesView {
       true
     ) as HTMLElement;
     const listItem: HTMLLIElement = clone.querySelector('li') as HTMLLIElement;
-    
+
     listItem
       .querySelector('.workout-card')
       ?.setAttribute('data-workout-id', this.escapeHtml(exercise._id));
-    
+
     listItem
       .querySelector('.workout-rating')
       ?.setAttribute('aria-label', `Rating ${rating}`);
-    
+
     listItem.querySelector('.workout-rating span')!.textContent = rating;
-    
+
     listItem
       .querySelector('.workout-btn-start')
       ?.setAttribute('aria-label', `Start ${this.escapeHtml(exercise.name)}`);
-    
+
     listItem
       .querySelector('.workout-btn-start')
       ?.setAttribute('data-exercise-id', this.escapeHtml(exercise._id));
-    
+
     listItem.querySelector('.workout-title')!.textContent = this.escapeHtml(
       this.formatDisplayName(exercise.name)
     );
-    
+
     listItem.querySelector('[data-exercise-burned-calories]')!.textContent =
       `${exercise.burnedCalories} / 3 min`;
-    
+
     listItem.querySelector('[data-exercise-body-part]')!.textContent =
       this.escapeHtml(this.formatDisplayName(exercise.bodyPart));
-    
+
     listItem.querySelector(
       '[data-exercise-target]'
     )!.textContent = this.escapeHtml(this.formatDisplayName(exercise.target));
-    
+
     return listItem;
   }
 
