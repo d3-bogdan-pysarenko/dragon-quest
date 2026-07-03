@@ -1,15 +1,10 @@
-<template data-exercises-workout-item-template>
-  <li class="exercises-workout-item">
+<template {=$template-attr}>
+  <li class="{=$item-class}">
     <div class="workout-card" data-workout-id>
       <div class="workout-header">
         <div class="workout-badge-wrap">
           <div class="workout-badge">Workout</div>
-          <div class="workout-rating" aria-label="Rating ">
-            <span></span>
-            <svg class="workout-rating-icon" width="18" height="18">
-              <use href="img/sprite.svg#icon-star"></use>
-            </svg>
-          </div>
+          <load src="{=$badge-action}" />
         </div>
 
         <button
