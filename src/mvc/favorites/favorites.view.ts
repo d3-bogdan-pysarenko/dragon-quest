@@ -52,7 +52,7 @@ export class FavoritesView {
     this.list.addEventListener('click', event => {
       const currentTarget = event.target as HTMLElement;
 
-      let button: HTMLElement | null =
+      const button: HTMLElement | null =
         currentTarget.dataset.dataAction === 'delete'
           ? currentTarget
           : currentTarget.closest('[data-action="delete"]');
