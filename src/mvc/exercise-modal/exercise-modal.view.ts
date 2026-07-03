@@ -131,7 +131,8 @@ export class ExerciseModalView {
     const rating = Number.isFinite(exercise.rating) ? exercise.rating : 0;
 
     this.ratingValueElement.textContent = rating.toFixed(1);
-    this.starsElement.innerHTML = this.buildStars(rating);
+    this.starsElement.innerHTML = '';
+    this.starsElement.appendChild(this.buildStars(rating));
 
     this.targetElement.textContent = exercise.target;
     this.bodyPartElement.textContent = exercise.bodyPart;
@@ -145,13 +146,23 @@ export class ExerciseModalView {
     this.updateFavoriteButton(isFavorite);
   }
 
-  private buildStars(rating: number): string {
+  private buildStars(rating: number): DocumentFragment {
     const filledCount = Math.round(Math.min(Math.max(rating, 0), 5));
-
-    return Array.from({ length: 5 }, (_, i) => {
+    const fragment = document.createDocumentFragment();
+    Array.from({ length: 5 }, (_, i) => {
       const filled = i < filledCount;
-      return `<svg class="exercise-modal-star${filled ? ' exercise-modal-star--filled' : ''}" width="18" height="18" aria-hidden="true"><use href="img/sprite.svg#icon-star"></use></svg>`;
-    }).join('');
+      const clone = document
+        .querySelector<HTMLTemplateElement>(
+          '[data-exercise-modal-star-template]'
+        )
+        ?.content.cloneNode(true) as DocumentFragment | null;
+      const svgElement = clone?.querySelector<SVGSVGElement>('svg');
+      if (svgElement && filled) {
+        svgElement.classList.add('exercise-modal-star--filled');
+      }
+      fragment.appendChild(clone ?? document.createDocumentFragment());
+    });
+    return fragment;
   }
 
   private getElement<T extends HTMLElement | SVGUseElement>(
