@@ -8,7 +8,7 @@ export const enum Endpoint {
   Filters = 'filters',
 }
 
-export const EMAIL_REGEX = /^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export const FAVORITES_CHANGED_EVENT = 'favorites:changed';
 
