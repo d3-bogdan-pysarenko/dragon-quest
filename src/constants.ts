@@ -11,3 +11,5 @@ export const enum Endpoint {
 export const EMAIL_REGEX = /^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
 export const FAVORITES_CHANGED_EVENT = 'favorites:changed';
+
+export const TABLET_MEDIA_QUERY = '(min-width: 768px)';

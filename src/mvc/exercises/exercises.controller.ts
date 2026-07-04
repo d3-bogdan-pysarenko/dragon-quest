@@ -1,4 +1,5 @@
 import { ExerciseFilter } from '../../api';
+import { TABLET_MEDIA_QUERY } from '../../constants';
 import {
   EXERCISES_PER_PAGE,
   EXERCISES_PER_PAGE_MOBILE,
@@ -6,10 +7,8 @@ import {
 } from './exercises.model';
 import { ExercisesView } from './exercises.view';
 
-const DESKTOP_QUERY = '(min-width: 768px)';
-
 export class ExercisesController {
-  private readonly desktopQuery = window.matchMedia(DESKTOP_QUERY);
+  private readonly desktopQuery = window.matchMedia(TABLET_MEDIA_QUERY);
 
   constructor(
     private readonly model: ExercisesModel,
