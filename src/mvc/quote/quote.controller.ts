@@ -1,5 +1,5 @@
-import { QuoteModel } from './quote.model';
-import { QuoteView } from './quote.view';
+import type { QuoteModel } from './quote.model';
+import type { QuoteView } from './quote.view';
 
 export class QuoteController {
   constructor(

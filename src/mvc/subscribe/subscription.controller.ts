@@ -1,4 +1,4 @@
-import { SubscriptionModel, SubscriptionView } from './';
+import type { SubscriptionModel, SubscriptionView } from './';
 import { showToast, ToastType } from '../../components/toast';
 import { validateEmail, getErrorMessage } from '../../utils';
 import type { SubscriptionRequest, SubscriptionResponse } from '../../api';
