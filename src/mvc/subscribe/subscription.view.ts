@@ -1,22 +1,18 @@
+import { getRequiredElement } from '../../utils';
+
 export class SubscriptionView {
   private readonly emailInputElement: HTMLInputElement;
   private readonly subscribeButtonElement: HTMLButtonElement;
 
   constructor(private readonly root: HTMLFormElement) {
-    this.emailInputElement =
-      this.getElement<HTMLInputElement>('#subscribe-email');
-    this.subscribeButtonElement =
-      this.getElement<HTMLButtonElement>('button[type="submit"]');
-  }
-
-  private getElement<T extends HTMLElement>(selector: string): T {
-    const element = this.root.querySelector<T>(selector);
-
-    if (!element) {
-      throw new Error(`Element not found: ${selector}`);
-    }
-
-    return element;
+    this.emailInputElement = getRequiredElement(
+      this.root,
+      '#subscribe-email'
+    );
+    this.subscribeButtonElement = getRequiredElement(
+      this.root,
+      'button[type="submit"]'
+    );
   }
 
   onSubscribe(handler: (email: string) => void): void {
