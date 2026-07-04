@@ -2,6 +2,11 @@ import {
   getPageFromEvent,
   renderPagination,
 } from '../../components/pagination';
+import {
+  formatDisplayName,
+  getClosestElement,
+  getRequiredElement,
+} from '../../utils';
 import type { FavoriteExercise } from './favorites.model';
 
 const EMPTY_TEXT =
@@ -16,10 +21,16 @@ export class FavoritesView {
   private readonly paginationContainer: HTMLElement;
 
   constructor(private readonly root: HTMLElement) {
-    this.exercisesBox = this.getElement('.favor-exercises');
-    this.list = this.getElement('.favor-exercises-list');
-    this.cardTemplate = this.getElement('[data-favorites-card-template]');
-    this.paginationContainer = this.getElement('[data-favorites-pagination]');
+    this.exercisesBox = getRequiredElement(this.root, '.favor-exercises');
+    this.list = getRequiredElement(this.root, '.favor-exercises-list');
+    this.cardTemplate = getRequiredElement(
+      this.root,
+      '[data-favorites-card-template]'
+    );
+    this.paginationContainer = getRequiredElement(
+      this.root,
+      '[data-favorites-pagination]'
+    );
   }
 
   renderFavorites(favorites: FavoriteExercise[]): void {
@@ -50,12 +61,10 @@ export class FavoritesView {
 
   onDeleteClick(callback: (id: string) => void): void {
     this.list.addEventListener('click', event => {
-      const currentTarget = event.target as HTMLElement;
-
-      const button: HTMLElement | null =
-        currentTarget.dataset.dataAction === 'delete'
-          ? currentTarget
-          : currentTarget.closest('[data-action="delete"]');
+      const button = getClosestElement<HTMLElement>(
+        event.target,
+        '[data-action="delete"]'
+      );
 
       if (!button) {
         return;
@@ -88,42 +97,47 @@ export class FavoritesView {
 
   private createCard(favorite: FavoriteExercise): HTMLElement {
     const clone = this.cardTemplate.content.cloneNode(true) as HTMLElement;
-    const listItem = clone.querySelector('li') as HTMLLIElement;
-    const name = this.formatDisplayName(favorite.name);
+    const listItem = getRequiredElement<HTMLLIElement>(clone, 'li');
+    const workoutCard = getRequiredElement<HTMLElement>(
+      listItem,
+      '.workout-card'
+    );
+    const startButton = getRequiredElement<HTMLButtonElement>(
+      listItem,
+      '.workout-btn-start'
+    );
+    const workoutTitle = getRequiredElement<HTMLElement>(
+      listItem,
+      '.workout-title'
+    );
+    const caloriesElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-burned-calories]'
+    );
+    const bodyPartElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-body-part]'
+    );
+    const targetElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-target]'
+    );
+    const name = formatDisplayName(favorite.name);
 
-    listItem
-      .querySelector('.workout-card')
-      ?.setAttribute('data-workout-id', favorite._id);
+    workoutCard.setAttribute('data-workout-id', favorite._id);
 
-    const startButton = listItem.querySelector('.workout-btn-start');
-    startButton?.setAttribute('aria-label', `Start ${name}`);
-    startButton?.setAttribute('data-exercise-id', favorite._id);
+    startButton.setAttribute('aria-label', `Start ${name}`);
+    startButton.setAttribute('data-exercise-id', favorite._id);
 
-    const workoutTitle = listItem.querySelector('.workout-title')!;
     workoutTitle.textContent = name;
     workoutTitle.setAttribute('title', name);
 
-    listItem.querySelector('[data-exercise-burned-calories]')!.textContent =
-      `${favorite.burnedCalories} / 3 min`;
+    caloriesElement.textContent = `${favorite.burnedCalories} / 3 min`;
 
-    listItem.querySelector('[data-exercise-body-part]')!.textContent =
-      this.formatDisplayName(favorite.bodyPart);
+    bodyPartElement.textContent = formatDisplayName(favorite.bodyPart);
 
-    listItem.querySelector('[data-exercise-target]')!.textContent =
-      this.formatDisplayName(favorite.target);
+    targetElement.textContent = formatDisplayName(favorite.target);
 
     return listItem;
-  }
-
-  private getElement<T extends HTMLElement>(selector: string): T {
-    const element = this.root.querySelector<T>(selector);
-    if (!element) {
-      throw new Error(`Element not found: ${selector}`);
-    }
-    return element;
-  }
-
-  private formatDisplayName(value: string): string {
-    return value.charAt(0).toUpperCase() + value.slice(1);
   }
 }

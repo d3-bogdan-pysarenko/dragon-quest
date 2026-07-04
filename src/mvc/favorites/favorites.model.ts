@@ -1,12 +1,10 @@
-export interface FavoriteExercise {
-  _id: string;
-  name: string;
-  burnedCalories: number;
-  bodyPart: string;
-  target: string;
-}
+import {
+  readFavorites,
+  removeFavorite as removeStoredFavorite,
+  type FavoriteExercise,
+} from '../../services/favorites-storage';
 
-const STORAGE_KEY = 'favorite-exercises-list';
+export type { FavoriteExercise } from '../../services/favorites-storage';
 
 export const FAVORITES_PER_PAGE = 10;
 export const FAVORITES_PER_PAGE_MOBILE = 8;
@@ -23,26 +21,11 @@ export class FavoritesModel {
   private pageSize = FAVORITES_PER_PAGE;
 
   getFavorites(): FavoriteExercise[] | null {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw === null) {
-      return null;
-    }
-
-    try {
-      const parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? (parsed as FavoriteExercise[]) : null;
-    } catch {
-      return null;
-    }
+    return readFavorites();
   }
 
   removeFavorite(id: string): FavoriteExercise[] {
-    const favorites = this.getFavorites() ?? [];
-    const updated = favorites.filter(favorite => favorite._id !== id);
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-
-    return updated;
+    return removeStoredFavorite(id);
   }
 
   setPageSize(pageSize: number): void {

@@ -1,5 +1,6 @@
 import { initScrollUp } from './components/scroll-up';
 import { initBurgerMenu } from './components/burger-menu';
+import { hideLoader, showLoader } from './components/loader';
 import { initRatingModal } from './mvc/rating/rating.controller';
 import { initExerciseModal } from './mvc/exercise-modal/exercise-modal.controller';
 import { QuoteModel } from './mvc/quote/quote.model';
@@ -17,52 +18,84 @@ import {
   SubscriptionModel,
   SubscriptionView,
 } from './mvc/subscribe';
+import { setApiLoadingListener } from './api';
 
-initRatingModal();
-initExerciseModal();
-initScrollUp();
-initBurgerMenu();
-initSunIcon();
+const initApiLoader = (): void => {
+  setApiLoadingListener(isLoading => {
+    if (isLoading) {
+      showLoader();
+    } else {
+      hideLoader();
+    }
+  });
+};
 
-const favoritesRoot = document.querySelector<HTMLElement>('[data-favorites]');
-if (favoritesRoot) {
-  const favoritesController = new FavoritesController(
-    new FavoritesModel(),
-    new FavoritesView(favoritesRoot)
+const initGlobalComponents = (): void => {
+  initRatingModal();
+  initExerciseModal();
+  initScrollUp();
+  initBurgerMenu();
+  initSunIcon();
+};
+
+const initFavorites = (): void => {
+  const favoritesRoot = document.querySelector<HTMLElement>('[data-favorites]');
+
+  if (favoritesRoot) {
+    const favoritesController = new FavoritesController(
+      new FavoritesModel(),
+      new FavoritesView(favoritesRoot)
+    );
+    favoritesController.init();
+  }
+};
+
+const initQuote = (): void => {
+  const quoteRoot = document.querySelector<HTMLElement>('[data-quote]');
+
+  if (quoteRoot) {
+    const quoteController = new QuoteController(
+      new QuoteModel(),
+      new QuoteView(quoteRoot)
+    );
+    quoteController.init();
+  }
+};
+
+const initExercises = (): void => {
+  const exercisesSection = document.querySelector<HTMLElement>(
+    '[data-exercises-section]'
   );
-  favoritesController.init();
-}
 
-const quoteRoot = document.querySelector<HTMLElement>('[data-quote]');
-if (quoteRoot) {
-  const quoteController = new QuoteController(
-    new QuoteModel(),
-    new QuoteView(quoteRoot)
-  );
-  quoteController.init();
-}
+  if (exercisesSection) {
+    const exercisesController = new ExercisesController(
+      new ExercisesModel(),
+      new ExercisesView(exercisesSection)
+    );
 
-const exercisesSection = document.querySelector<HTMLElement>(
-  '[data-exercises-section]'
-);
-if (exercisesSection) {
-  const exercisesController = new ExercisesController(
-    new ExercisesModel(),
-    new ExercisesView(exercisesSection)
+    void exercisesController.init();
+  }
+};
+
+const initSubscription = (): void => {
+  const subscriptionForm = document.querySelector<HTMLFormElement>(
+    '[data-subscribe-form]'
   );
 
-  void exercisesController.init();
-}
+  if (subscriptionForm) {
+    const subscriptionController = new SubscriptionController(
+      new SubscriptionModel(),
+      new SubscriptionView(subscriptionForm)
+    );
+    subscriptionController.init();
+  }
+};
 
-const subscriptionForm = document.querySelector<HTMLFormElement>(
-  '[data-subscribe-form]'
-);
-if (subscriptionForm) {
-  const subscriptionController = new SubscriptionController(
-    new SubscriptionModel(),
-    new SubscriptionView(subscriptionForm)
-  );
-  subscriptionController.init();
-}
+initApiLoader();
+initGlobalComponents();
+initFavorites();
+initQuote();
+initExercises();
+initSubscription();
 
 export {};

@@ -4,6 +4,11 @@ import {
   type FilterItem,
 } from '../../api';
 import { getPageFromEvent, renderPagination } from '../../components/pagination';
+import {
+  formatDisplayName,
+  getErrorMessage,
+  getRequiredElement,
+} from '../../utils';
 import type { ExercisesState } from './exercises.model';
 
 export class ExercisesView {
@@ -18,19 +23,39 @@ export class ExercisesView {
   private readonly paginationContainer: HTMLElement;
 
   constructor(private readonly root: HTMLElement) {
-    this.searchContainer = this.getElement('[data-exercises-search]');
-    this.searchForm = this.getElement('[data-exercises-search] .search-form');
-    this.searchInput = this.getElement('[data-exercises-search] .search-input');
-    this.exercisesSlash = this.getElement('[data-exercises-slash]');
-    this.selectedCategoryText = this.getElement(
+    this.searchContainer = getRequiredElement(
+      this.root,
+      '[data-exercises-search]'
+    );
+    this.searchForm = getRequiredElement(
+      this.root,
+      '[data-exercises-search] .search-form'
+    );
+    this.searchInput = getRequiredElement(
+      this.root,
+      '[data-exercises-search] .search-input'
+    );
+    this.exercisesSlash = getRequiredElement(
+      this.root,
+      '[data-exercises-slash]'
+    );
+    this.selectedCategoryText = getRequiredElement(
+      this.root,
       '[data-exercises-selected-category]'
     );
-    this.listContainer = this.getElement('[data-exercises-list]');
-    this.listItemTemplate = this.getElement(
+    this.listContainer = getRequiredElement(this.root, '[data-exercises-list]');
+    this.listItemTemplate = getRequiredElement(
+      this.root,
       '[data-exercises-workout-item-template]'
     );
-    this.categoriesContainer = this.getElement('[data-exercises-categories]');
-    this.paginationContainer = this.getElement('[data-exercises-pagination]');
+    this.categoriesContainer = getRequiredElement(
+      this.root,
+      '[data-exercises-categories]'
+    );
+    this.paginationContainer = getRequiredElement(
+      this.root,
+      '[data-exercises-pagination]'
+    );
   }
 
   renderExerciseCategories(): void {
@@ -195,7 +220,7 @@ export class ExercisesView {
   }
 
   renderError(error: unknown): void {
-    const message = error instanceof Error ? error.message : 'Unknown error';
+    const message = getErrorMessage(error);
 
     this.renderMessage(`Sorry, something went wrong. ${message}`);
   }
@@ -214,7 +239,7 @@ export class ExercisesView {
     this.exercisesSlash.classList.remove('hidden');
     this.selectedCategoryText.classList.remove('hidden');
     this.selectedCategoryText.textContent = state.selectedCategory
-      ? this.formatDisplayName(state.selectedCategory)
+      ? formatDisplayName(state.selectedCategory)
       : '';
     this.searchInput.value = state.keyword;
     this.listContainer.classList.add('exercises-list-workouts');
@@ -234,45 +259,68 @@ export class ExercisesView {
     const clone: HTMLElement = this.listItemTemplate.content.cloneNode(
       true
     ) as HTMLElement;
-    const listItem: HTMLLIElement = clone.querySelector('li') as HTMLLIElement;
+    const listItem = getRequiredElement<HTMLLIElement>(clone, 'li');
+    const workoutCard = getRequiredElement<HTMLElement>(
+      listItem,
+      '.workout-card'
+    );
+    const ratingElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '.workout-rating'
+    );
+    const ratingText = getRequiredElement<HTMLElement>(
+      ratingElement,
+      'span'
+    );
+    const startButton = getRequiredElement<HTMLButtonElement>(
+      listItem,
+      '.workout-btn-start'
+    );
+    const workoutTitle = getRequiredElement<HTMLElement>(
+      listItem,
+      '.workout-title'
+    );
+    const caloriesElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-burned-calories]'
+    );
+    const bodyPartElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-body-part]'
+    );
+    const targetElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-target]'
+    );
 
-    listItem
-      .querySelector('.workout-card')
-      ?.setAttribute('data-workout-id', this.escapeHtml(exercise._id));
+    workoutCard.setAttribute('data-workout-id', this.escapeHtml(exercise._id));
 
-    listItem
-      .querySelector('.workout-rating')
-      ?.setAttribute('aria-label', `Rating ${rating}`);
+    ratingElement.setAttribute('aria-label', `Rating ${rating}`);
 
-    listItem.querySelector('.workout-rating span')!.textContent = rating;
+    ratingText.textContent = rating;
 
-    listItem
-      .querySelector('.workout-btn-start')
-      ?.setAttribute('aria-label', `Start ${this.escapeHtml(exercise.name)}`);
+    startButton.setAttribute(
+      'aria-label',
+      `Start ${this.escapeHtml(exercise.name)}`
+    );
 
-    listItem
-      .querySelector('.workout-btn-start')
-      ?.setAttribute('data-exercise-id', this.escapeHtml(exercise._id));
+    startButton.setAttribute('data-exercise-id', this.escapeHtml(exercise._id));
 
-    const exerciseName = this.formatDisplayName(exercise.name);
-    const workoutTitle = listItem.querySelector('.workout-title')!;
-    workoutTitle.textContent = this.escapeHtml(exerciseName);
+    const exerciseName = formatDisplayName(exercise.name);
+    workoutTitle.textContent = exerciseName;
     workoutTitle.setAttribute('title', exerciseName);
 
-    listItem.querySelector('[data-exercise-burned-calories]')!.textContent =
-      `${exercise.burnedCalories} / 3 min`;
+    caloriesElement.textContent = `${exercise.burnedCalories} / 3 min`;
 
-    listItem.querySelector('[data-exercise-body-part]')!.textContent =
-      this.escapeHtml(this.formatDisplayName(exercise.bodyPart));
+    bodyPartElement.textContent = formatDisplayName(exercise.bodyPart);
 
-    listItem.querySelector('[data-exercise-target]')!.textContent =
-      this.escapeHtml(this.formatDisplayName(exercise.target));
+    targetElement.textContent = formatDisplayName(exercise.target);
 
     return listItem;
   }
 
   private createCategoryCard(filter: FilterItem): string {
-    const categoryName = this.formatDisplayName(filter.name);
+    const categoryName = formatDisplayName(filter.name);
     const imageUrl = filter.imgUrl ?? filter.imgURL ?? '';
 
     return `
@@ -314,18 +362,6 @@ export class ExercisesView {
     }
 
     return target.closest<T>(selector);
-  }
-
-  private getElement<T extends HTMLElement>(selector: string): T {
-    const element = this.root.querySelector<T>(selector);
-    if (!element) {
-      throw new Error(`Element not found: ${selector}`);
-    }
-    return element;
-  }
-
-  private formatDisplayName(value: string): string {
-    return value.charAt(0).toUpperCase() + value.slice(1);
   }
 
   private escapeHtml(value: string | number | null | undefined): string {

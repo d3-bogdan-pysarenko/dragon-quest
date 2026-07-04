@@ -1,5 +1,6 @@
 import { createModal } from '../../components/modal';
 import { FAVORITES_CHANGED_EVENT } from '../../constants';
+import { getClosestElement } from '../../utils';
 import { ExerciseModalModel } from './exercise-modal.model';
 import { ExerciseModalView } from './exercise-modal.view';
 
@@ -26,7 +27,8 @@ export const initExerciseModal = (): void => {
   view.onRatingClick(() => modal.close());
 
   document.addEventListener('click', event => {
-    const trigger = (event.target as HTMLElement).closest<HTMLElement>(
+    const trigger = getClosestElement<HTMLElement>(
+      event.target,
       '[data-exercise-open]'
     );
 

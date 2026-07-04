@@ -1,7 +1,7 @@
 import {
-  SubscriptionPayload,
-  SubscriptionResponse,
   subscribeToNewsletter,
+  type SubscriptionPayload,
+  type SubscriptionResponse,
 } from '../../api';
 
 export class SubscriptionModel {

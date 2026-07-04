@@ -1,3 +1,4 @@
+import { getRequiredElement } from '../../utils';
 import type { ExerciseModalState } from './exercise-modal.model';
 
 export class ExerciseModalView {
@@ -22,40 +23,78 @@ export class ExerciseModalView {
   private readonly errorElement: HTMLElement;
 
   constructor(private readonly root: HTMLElement) {
-    this.gifElement = this.getElement<HTMLImageElement>(
+    this.gifElement = getRequiredElement(
+      this.root,
       '[data-role="exercise-gif"]'
     );
-    this.mediaElement = this.getElement('[data-role="exercise-media"]');
-    this.nameElement = this.getElement('[data-role="exercise-name"]');
-    this.ratingValueElement = this.getElement(
+    this.mediaElement = getRequiredElement(
+      this.root,
+      '[data-role="exercise-media"]'
+    );
+    this.nameElement = getRequiredElement(
+      this.root,
+      '[data-role="exercise-name"]'
+    );
+    this.ratingValueElement = getRequiredElement(
+      this.root,
       '[data-role="exercise-rating-value"]'
     );
-    this.starsElement = this.getElement('[data-role="exercise-stars"]');
-    this.targetElement = this.getElement('[data-role="exercise-target"]');
-    this.bodyPartElement = this.getElement('[data-role="exercise-body-part"]');
-    this.equipmentElement = this.getElement('[data-role="exercise-equipment"]');
-    this.popularityElement = this.getElement(
+    this.starsElement = getRequiredElement(
+      this.root,
+      '[data-role="exercise-stars"]'
+    );
+    this.targetElement = getRequiredElement(
+      this.root,
+      '[data-role="exercise-target"]'
+    );
+    this.bodyPartElement = getRequiredElement(
+      this.root,
+      '[data-role="exercise-body-part"]'
+    );
+    this.equipmentElement = getRequiredElement(
+      this.root,
+      '[data-role="exercise-equipment"]'
+    );
+    this.popularityElement = getRequiredElement(
+      this.root,
       '[data-role="exercise-popularity"]'
     );
-    this.caloriesElement = this.getElement('[data-role="exercise-calories"]');
-    this.descriptionElement = this.getElement(
+    this.caloriesElement = getRequiredElement(
+      this.root,
+      '[data-role="exercise-calories"]'
+    );
+    this.descriptionElement = getRequiredElement(
+      this.root,
       '[data-role="exercise-description"]'
     );
-    this.favoriteButton = this.getElement<HTMLButtonElement>(
+    this.favoriteButton = getRequiredElement(
+      this.root,
       '[data-role="exercise-favorite-btn"]'
     );
-    this.favoriteBtnText = this.getElement(
+    this.favoriteBtnText = getRequiredElement(
+      this.root,
       '[data-role="exercise-favorite-text"]'
     );
-    this.favoriteBtnSVGUse = this.getElement(
+    this.favoriteBtnSVGUse = getRequiredElement(
+      this.root,
       '[data-role="exercise-favorite-btn"] .btn-icon use'
     );
-    this.ratingButton = this.getElement<HTMLButtonElement>(
+    this.ratingButton = getRequiredElement(
+      this.root,
       '[data-role="exercise-rating-btn"]'
     );
-    this.loadingElement = this.getElement('[data-role="exercise-loading"]');
-    this.contentElement = this.getElement('[data-role="exercise-content"]');
-    this.errorElement = this.getElement('[data-role="exercise-error"]');
+    this.loadingElement = getRequiredElement(
+      this.root,
+      '[data-role="exercise-loading"]'
+    );
+    this.contentElement = getRequiredElement(
+      this.root,
+      '[data-role="exercise-content"]'
+    );
+    this.errorElement = getRequiredElement(
+      this.root,
+      '[data-role="exercise-error"]'
+    );
     this.starSvgTemplate = document
       .querySelector<HTMLTemplateElement>('[data-exercise-modal-star-template]')
       ?.content.querySelector('svg');
@@ -157,7 +196,11 @@ export class ExerciseModalView {
     Array.from({ length: 5 }, (_, i) => {
       const filled = i < filledCount;
       const svgElement = this.starSvgTemplate?.cloneNode(true) as SVGSVGElement;
-      if (svgElement && filled) {
+      if (!svgElement) {
+        return;
+      }
+
+      if (filled) {
         svgElement.classList.add('exercise-modal-star-filled');
       }
       fragment.appendChild(svgElement);
@@ -165,15 +208,4 @@ export class ExerciseModalView {
     return fragment;
   }
 
-  private getElement<T extends HTMLElement | SVGUseElement>(
-    selector: string
-  ): T | never {
-    const element: T | null = this.root.querySelector<T>(selector);
-
-    if (!element) {
-      throw new Error(`ExerciseModalView: element not found: ${selector}`);
-    }
-
-    return element;
-  }
 }

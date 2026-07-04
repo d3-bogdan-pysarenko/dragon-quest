@@ -1,4 +1,4 @@
-import { FAVORITES_CHANGED_EVENT } from '../../constants';
+import { FAVORITES_CHANGED_EVENT, TABLET_MEDIA_QUERY } from '../../constants';
 import {
   FAVORITES_PER_PAGE,
   FAVORITES_PER_PAGE_MOBILE,
@@ -6,10 +6,8 @@ import {
 } from './favorites.model';
 import { FavoritesView } from './favorites.view';
 
-const DESKTOP_QUERY = '(min-width: 768px)';
-
 export class FavoritesController {
-  private readonly desktopQuery = window.matchMedia(DESKTOP_QUERY);
+  private readonly desktopQuery = window.matchMedia(TABLET_MEDIA_QUERY);
 
   constructor(
     private model: FavoritesModel,

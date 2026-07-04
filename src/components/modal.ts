@@ -2,17 +2,34 @@ export interface ModalInstance {
   element: HTMLElement;
   open(): void;
   close(): void;
+  destroy(): void;
 }
 
 export interface CreateModalOptions {
   onClose?: () => void;
 }
 
+let openModalCount = 0;
+
+const lockBodyScroll = (): void => {
+  openModalCount += 1;
+  document.body.classList.add('modal-open');
+};
+
+const unlockBodyScroll = (): void => {
+  openModalCount = Math.max(openModalCount - 1, 0);
+
+  if (openModalCount === 0) {
+    document.body.classList.remove('modal-open');
+  }
+};
+
 export const createModal = (
   root: HTMLElement,
   options: CreateModalOptions = {}
 ): ModalInstance => {
   const closeButton = root.querySelector<HTMLElement>('[data-modal-close]');
+  const lifecycleController = new AbortController();
 
   let isOpen = false;
   let lastFocused: HTMLElement | null = null;
@@ -38,7 +55,7 @@ export const createModal = (
     lastFocused = document.activeElement as HTMLElement | null;
 
     root.classList.add('is-open');
-    document.body.classList.add('modal-open');
+    lockBodyScroll();
     document.addEventListener('keydown', handleKeydown);
     root.addEventListener('click', handleOverlayClick);
 
@@ -53,7 +70,7 @@ export const createModal = (
     isOpen = false;
 
     root.classList.remove('is-open');
-    document.body.classList.remove('modal-open');
+    unlockBodyScroll();
     document.removeEventListener('keydown', handleKeydown);
     root.removeEventListener('click', handleOverlayClick);
 
@@ -61,7 +78,14 @@ export const createModal = (
     options.onClose?.();
   };
 
-  closeButton?.addEventListener('click', close);
+  const destroy = (): void => {
+    close();
+    lifecycleController.abort();
+  };
 
-  return { element: root, open, close };
+  closeButton?.addEventListener('click', close, {
+    signal: lifecycleController.signal,
+  });
+
+  return { element: root, open, close, destroy };
 };

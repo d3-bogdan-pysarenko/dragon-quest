@@ -1,5 +1,6 @@
-import { createModal } from '../../components/modal';
+import { createModal, type ModalInstance } from '../../components/modal';
 import { showToast, ToastType } from '../../components/toast';
+import { getClosestElement } from '../../utils';
 import { RatingModel } from './rating.model';
 import { RatingView } from './rating.view';
 
@@ -10,23 +11,26 @@ export interface OpenRatingModalOptions {
   onClose?: () => void;
 }
 
-export const openRatingModal = (options: OpenRatingModalOptions): void => {
-  const root = document.querySelector<HTMLElement>('[data-rating-modal]');
+interface RatingModalContext {
+  modal: ModalInstance;
+  model: RatingModel;
+  view: RatingView;
+  setExerciseId(exerciseId: string): void;
+  setCloseHandler(handler: (() => void) | undefined): void;
+}
 
-  if (!root) {
-    return;
-  }
+let ratingModalContext: RatingModalContext | null = null;
 
-  const modal = createModal(root, { onClose: options.onClose });
-  const model = new RatingModel();
-  const view = new RatingView(root);
-
-  view.render(model.getState());
-
+const bindRatingSubmit = (
+  view: RatingView,
+  model: RatingModel,
+  modal: ModalInstance,
+  getExerciseId: () => string
+): void => {
   view.onSubmit(payload => {
     void (async () => {
       view.render({ status: 'submitting', errorMessage: null });
-      const state = await model.submit(options.exerciseId, payload);
+      const state = await model.submit(getExerciseId(), payload);
       view.render(state);
 
       if (state.status === 'idle') {
@@ -40,47 +44,73 @@ export const openRatingModal = (options: OpenRatingModalOptions): void => {
       }
     })();
   });
-
-  modal.open();
 };
 
-export const initRatingModal = (): void => {
+const getRatingModalContext = (): RatingModalContext | null => {
   const root = document.querySelector<HTMLElement>('[data-rating-modal]');
 
   if (!root) {
-    return;
+    return null;
+  }
+
+  if (ratingModalContext) {
+    return ratingModalContext;
   }
 
   let exerciseId = '';
+  let closeHandler: (() => void) | undefined;
 
-  const modal = createModal(root, {
-    onClose: () => view.reset(),
-  });
   const model = new RatingModel();
   const view = new RatingView(root);
-
-  view.render(model.getState());
-
-  view.onSubmit(payload => {
-    void (async () => {
-      view.render({ status: 'submitting', errorMessage: null });
-      const state = await model.submit(exerciseId, payload);
-      view.render(state);
-
-      if (state.status === 'idle') {
-        modal.close();
-        showToast(
-          'Your rating has been submitted. Thank you!',
-          ToastType.Success
-        );
-      } else if (state.status === 'error') {
-        showToast('Something went wrong. Please try again.', ToastType.Error);
-      }
-    })();
+  const modal = createModal(root, {
+    onClose: () => {
+      view.reset();
+      closeHandler?.();
+      closeHandler = undefined;
+    },
   });
 
+  view.render(model.getState());
+  bindRatingSubmit(view, model, modal, () => exerciseId);
+
+  ratingModalContext = {
+    modal,
+    model,
+    view,
+    setExerciseId(nextExerciseId: string): void {
+      exerciseId = nextExerciseId;
+    },
+    setCloseHandler(handler: (() => void) | undefined): void {
+      closeHandler = handler;
+    },
+  };
+
+  return ratingModalContext;
+};
+
+export const openRatingModal = (options: OpenRatingModalOptions): void => {
+  const context = getRatingModalContext();
+
+  if (!context) {
+    return;
+  }
+
+  context.setExerciseId(options.exerciseId);
+  context.setCloseHandler(options.onClose);
+  context.view.reset();
+  context.modal.open();
+};
+
+export const initRatingModal = (): void => {
+  const context = getRatingModalContext();
+
+  if (!context) {
+    return;
+  }
+
   document.addEventListener('click', event => {
-    const trigger = (event.target as HTMLElement).closest<HTMLElement>(
+    const trigger = getClosestElement<HTMLElement>(
+      event.target,
       '[data-rating-open]'
     );
 
@@ -88,8 +118,9 @@ export const initRatingModal = (): void => {
       return;
     }
 
-    exerciseId = trigger.dataset.exerciseId ?? '';
-    view.reset();
-    modal.open();
+    context.setExerciseId(trigger.dataset.exerciseId ?? '');
+    context.setCloseHandler(undefined);
+    context.view.reset();
+    context.modal.open();
   });
 };

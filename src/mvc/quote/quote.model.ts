@@ -1,6 +1,6 @@
 import {
   getQuoteOfTheDay as getQuoteOfTheDayApi,
-  QuoteOfTheDay,
+  type QuoteOfTheDay,
 } from '../../api';
 
 export class QuoteModel {

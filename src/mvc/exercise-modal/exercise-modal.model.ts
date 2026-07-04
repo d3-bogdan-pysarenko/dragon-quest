@@ -1,16 +1,11 @@
 import { getExerciseById } from '../../api';
 import type { ExerciseResponse } from '../../api';
+import {
+  isFavorite,
+  toggleFavorite,
+  type FavoriteExercise,
+} from '../../services/favorites-storage';
 import { getErrorMessage } from '../../utils';
-
-const FAVORITES_KEY = 'favorite-exercises-list';
-
-interface FavoriteExercise {
-  _id: string;
-  name: string;
-  burnedCalories: number;
-  bodyPart: string;
-  target: string;
-}
 
 export interface ExerciseModalState {
   status: 'idle' | 'loading' | 'success' | 'error';
@@ -44,7 +39,7 @@ export class ExerciseModalModel {
       this.state = {
         status: 'success',
         exercise,
-        isFavorite: this.checkIsFavorite(exercise._id),
+        isFavorite: isFavorite(exercise._id),
         errorMessage: null,
       };
     } catch (error) {
@@ -66,23 +61,8 @@ export class ExerciseModalModel {
       return this.state;
     }
 
-    const favorites = this.getFavorites();
-    const existingIndex = favorites.findIndex(f => f._id === exercise._id);
-
-    if (existingIndex >= 0) {
-      favorites.splice(existingIndex, 1);
-    } else {
-      favorites.push({
-        _id: exercise._id,
-        name: exercise.name,
-        burnedCalories: exercise.burnedCalories,
-        bodyPart: exercise.bodyPart,
-        target: exercise.target,
-      });
-    }
-
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
-    this.state = { ...this.state, isFavorite: existingIndex < 0 };
+    const result = toggleFavorite(this.toFavoriteExercise(exercise));
+    this.state = { ...this.state, isFavorite: result.isFavorite };
 
     return this.state;
   }
@@ -96,23 +76,13 @@ export class ExerciseModalModel {
     };
   }
 
-  private checkIsFavorite(id: string): boolean {
-    return this.getFavorites().some(f => f._id === id);
-  }
-
-  private getFavorites(): FavoriteExercise[] {
-    try {
-      const raw = localStorage.getItem(FAVORITES_KEY);
-
-      if (!raw) {
-        return [];
-      }
-
-      const parsed = JSON.parse(raw) as unknown;
-
-      return Array.isArray(parsed) ? (parsed as FavoriteExercise[]) : [];
-    } catch {
-      return [];
-    }
+  private toFavoriteExercise(exercise: ExerciseResponse): FavoriteExercise {
+    return {
+      _id: exercise._id,
+      name: exercise.name,
+      burnedCalories: exercise.burnedCalories,
+      bodyPart: exercise.bodyPart,
+      target: exercise.target,
+    };
   }
 }
