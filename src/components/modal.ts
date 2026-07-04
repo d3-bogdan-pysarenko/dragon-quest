@@ -8,6 +8,21 @@ export interface CreateModalOptions {
   onClose?: () => void;
 }
 
+let openModalCount = 0;
+
+const lockBodyScroll = (): void => {
+  openModalCount += 1;
+  document.body.classList.add('modal-open');
+};
+
+const unlockBodyScroll = (): void => {
+  openModalCount = Math.max(openModalCount - 1, 0);
+
+  if (openModalCount === 0) {
+    document.body.classList.remove('modal-open');
+  }
+};
+
 export const createModal = (
   root: HTMLElement,
   options: CreateModalOptions = {}
@@ -38,7 +53,7 @@ export const createModal = (
     lastFocused = document.activeElement as HTMLElement | null;
 
     root.classList.add('is-open');
-    document.body.classList.add('modal-open');
+    lockBodyScroll();
     document.addEventListener('keydown', handleKeydown);
     root.addEventListener('click', handleOverlayClick);
 
@@ -53,7 +68,7 @@ export const createModal = (
     isOpen = false;
 
     root.classList.remove('is-open');
-    document.body.classList.remove('modal-open');
+    unlockBodyScroll();
     document.removeEventListener('keydown', handleKeydown);
     root.removeEventListener('click', handleOverlayClick);
 

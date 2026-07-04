@@ -157,7 +157,11 @@ export class ExerciseModalView {
     Array.from({ length: 5 }, (_, i) => {
       const filled = i < filledCount;
       const svgElement = this.starSvgTemplate?.cloneNode(true) as SVGSVGElement;
-      if (svgElement && filled) {
+      if (!svgElement) {
+        return;
+      }
+
+      if (filled) {
         svgElement.classList.add('exercise-modal-star-filled');
       }
       fragment.appendChild(svgElement);
