@@ -14,6 +14,13 @@ const CATEGORIES_PER_PAGE = 12;
 export const EXERCISES_PER_PAGE = 10;
 export const EXERCISES_PER_PAGE_MOBILE = 8;
 
+const isEnumValue = <T extends Record<string, string>>(
+  enumObject: T,
+  value: string
+): value is T[keyof T] => {
+  return Object.values(enumObject).includes(value);
+};
+
 export interface ExercisesState {
   selectedFilter: ExerciseFilter;
   selectedCategory: string | null;
@@ -126,19 +133,39 @@ export class ExercisesModel {
       limit: this.exercisesPerPage,
     };
 
-    switch (this.state.selectedFilter) {
-      case ExerciseFilter.BODY_PARTS:
-        params.bodypart = this.state.selectedCategory as BodyPart;
-        break;
-      case ExerciseFilter.EQUIPMENT:
-        params.equipment = this.state.selectedCategory as Equipment;
-        break;
-      case ExerciseFilter.MUSCLES:
-      default:
-        params.muscles = this.state.selectedCategory as MuscleGroup;
-        break;
+    const category = this.getSelectedCategory();
+
+    if (category) {
+      Object.assign(params, category);
     }
 
     return params;
+  }
+
+  private getSelectedCategory(): Pick<
+    ExercisesListParams,
+    'bodypart' | 'equipment' | 'muscles'
+  > | null {
+    const { selectedCategory, selectedFilter } = this.state;
+
+    if (!selectedCategory) {
+      return null;
+    }
+
+    switch (selectedFilter) {
+      case ExerciseFilter.BODY_PARTS:
+        return isEnumValue(BodyPart, selectedCategory)
+          ? { bodypart: selectedCategory }
+          : null;
+      case ExerciseFilter.EQUIPMENT:
+        return isEnumValue(Equipment, selectedCategory)
+          ? { equipment: selectedCategory }
+          : null;
+      case ExerciseFilter.MUSCLES:
+      default:
+        return isEnumValue(MuscleGroup, selectedCategory)
+          ? { muscles: selectedCategory }
+          : null;
+    }
   }
 }
