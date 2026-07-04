@@ -1,4 +1,7 @@
+import { getRequiredElement } from '../../utils';
 import type { ExerciseModalState } from './exercise-modal.model';
+
+const MISSING_ELEMENT_MESSAGE = 'ExerciseModalView: element not found';
 
 export class ExerciseModalView {
   private readonly gifElement: HTMLImageElement;
@@ -22,7 +25,7 @@ export class ExerciseModalView {
   private readonly errorElement: HTMLElement;
 
   constructor(private readonly root: HTMLElement) {
-    this.gifElement = this.getElement<HTMLImageElement>(
+    this.gifElement = this.getElement(
       '[data-role="exercise-gif"]'
     );
     this.mediaElement = this.getElement('[data-role="exercise-media"]');
@@ -41,7 +44,7 @@ export class ExerciseModalView {
     this.descriptionElement = this.getElement(
       '[data-role="exercise-description"]'
     );
-    this.favoriteButton = this.getElement<HTMLButtonElement>(
+    this.favoriteButton = this.getElement(
       '[data-role="exercise-favorite-btn"]'
     );
     this.favoriteBtnText = this.getElement(
@@ -50,7 +53,7 @@ export class ExerciseModalView {
     this.favoriteBtnSVGUse = this.getElement(
       '[data-role="exercise-favorite-btn"] .btn-icon use'
     );
-    this.ratingButton = this.getElement<HTMLButtonElement>(
+    this.ratingButton = this.getElement(
       '[data-role="exercise-rating-btn"]'
     );
     this.loadingElement = this.getElement('[data-role="exercise-loading"]');
@@ -171,13 +174,7 @@ export class ExerciseModalView {
 
   private getElement<T extends HTMLElement | SVGUseElement>(
     selector: string
-  ): T | never {
-    const element: T | null = this.root.querySelector<T>(selector);
-
-    if (!element) {
-      throw new Error(`ExerciseModalView: element not found: ${selector}`);
-    }
-
-    return element;
+  ): T {
+    return getRequiredElement(this.root, selector, MISSING_ELEMENT_MESSAGE);
   }
 }
