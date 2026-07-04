@@ -10,7 +10,8 @@ import {
   type FilterItem,
 } from '../../api';
 
-const CATEGORIES_PER_PAGE = 12;
+export const CATEGORIES_PER_PAGE = 12;
+export const CATEGORIES_PER_PAGE_MOBILE = 9;
 export const EXERCISES_PER_PAGE = 10;
 export const EXERCISES_PER_PAGE_MOBILE = 8;
 
@@ -32,6 +33,8 @@ export interface ExercisesState {
 }
 
 export class ExercisesModel {
+  private categoriesPerPage = CATEGORIES_PER_PAGE;
+
   private exercisesPerPage = EXERCISES_PER_PAGE;
 
   private state: ExercisesState = {
@@ -52,6 +55,10 @@ export class ExercisesModel {
     this.exercisesPerPage = limit;
   }
 
+  setCategoriesPerPage(limit: number): void {
+    this.categoriesPerPage = limit;
+  }
+
   async loadCategories(filter: ExerciseFilter): Promise<ExercisesState> {
     const isSameFilterPaging =
       filter === this.state.selectedFilter &&
@@ -61,7 +68,7 @@ export class ExercisesModel {
     const response = await getFiltersApi({
       filter,
       page,
-      limit: CATEGORIES_PER_PAGE,
+      limit: this.categoriesPerPage,
     });
 
     this.state = {

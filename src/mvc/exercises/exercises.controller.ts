@@ -1,6 +1,8 @@
 import { ExerciseFilter } from '../../api';
 import { TABLET_MEDIA_QUERY } from '../../constants';
 import {
+  CATEGORIES_PER_PAGE,
+  CATEGORIES_PER_PAGE_MOBILE,
   EXERCISES_PER_PAGE,
   EXERCISES_PER_PAGE_MOBILE,
   ExercisesModel,
@@ -16,6 +18,7 @@ export class ExercisesController {
   ) {}
 
   async init(): Promise<void> {
+    this.applyCategoriesPerPage();
     this.applyExercisesPerPage();
     this.view.renderExerciseCategories();
     this.bindEvents();
@@ -27,6 +30,14 @@ export class ExercisesController {
   private applyExercisesPerPage(): void {
     this.model.setExercisesPerPage(
       this.desktopQuery.matches ? EXERCISES_PER_PAGE : EXERCISES_PER_PAGE_MOBILE
+    );
+  }
+
+  private applyCategoriesPerPage(): void {
+    this.model.setCategoriesPerPage(
+      this.desktopQuery.matches
+        ? CATEGORIES_PER_PAGE
+        : CATEGORIES_PER_PAGE_MOBILE
     );
   }
 
@@ -52,10 +63,13 @@ export class ExercisesController {
     });
 
     this.desktopQuery.addEventListener('change', () => {
+      this.applyCategoriesPerPage();
       this.applyExercisesPerPage();
 
       if (this.model.getState().selectedCategory) {
         void this.setPage(1);
+      } else {
+        void this.loadCategories(this.model.getState().selectedFilter);
       }
     });
   }
