@@ -1,41 +1,43 @@
-# MVC and API Guide
+# MVC і керівництво по API
 
-This project uses a small MVC-style structure for features that combine state,
-API calls, loading/error handling, and DOM rendering.
+У цьому проєкті використовується невелика структура у стилі MVC для фіч,
+що об'єднують управління станом, виклики API, обробку завантаження/помилок і
+рендеринг у DOM.
 
-## Active Structure
+## Активна структура
 
-- `src/api` contains the API client, request functions, and shared API types.
-- `src/mvc/exercises` contains category/exercise list state and rendering.
-- `src/mvc/favorites` contains favorites pagination and localStorage-backed state.
-- `src/mvc/exercise-modal` contains exercise details and favorite toggling.
-- `src/mvc/rating` contains rating modal state and submission.
-- `src/mvc/quote` contains quote loading and rendering.
-- `src/mvc/subscribe` contains newsletter subscription state and form handling.
+- `src/api` — клієнт API, функції запитів і спільні типи API.
+- `src/mvc/exercises` — стан і рендеринг списків категорій/вправ.
+- `src/mvc/favorites` — пагінація улюблених і стан, що зберігається в localStorage.
+- `src/mvc/exercise-modal` — деталі вправи і перемикання улюбленого.
+- `src/mvc/rating` — стан модалки рейтингу та відправка рейтингу.
+- `src/mvc/quote` — завантаження та рендеринг цитат.
+- `src/mvc/subscribe` — стан підписки на розсилку та обробка форми.
 
-The old standalone MVC demo page and `src/mvc/example.*` files have been
-removed. Use the active feature folders above as references.
+Стара окрема демонстраційна сторінка MVC та файли `src/mvc/example.*` були
+видалені. Використовуйте вищенаведені активні папки фіч як довідку.
 
-## Responsibility Rules
+## Правила відповідальності
 
-- Model owns state, persistence, and API calls.
-- View owns DOM queries, rendering, and DOM event binding.
-- Controller wires model and view together and coordinates user actions.
-- Shared DOM helpers belong in `src/utils`.
-- Shared browser storage logic belongs in `src/services`.
-- API functions and API types belong in `src/api`.
+- `Model` відповідає за стан, збереження і виклики API.
+- `View` відповідає за пошук елементів у DOM, рендеринг і прив'язку подій DOM.
+- `Controller` з'єднує `Model` і `View` та координує дії користувача.
+- Спільні допоміжні функції для роботи з DOM розміщуйте в `src/utils`.
+- Логіку спільного збереження в браузері тримайте в `src/services`.
+- Функції API і типи API розміщуйте в `src/api`.
 
-## Adding an API Request
+## Додавання запиту до API
 
-1. Add or update request/response types in `src/api/your-energy.types.ts`.
-2. Add the request function in `src/api/your-energy.api.ts`.
-3. Use the request from the relevant feature model.
-4. Keep request params typed; avoid casting arbitrary strings to API enums.
-5. Render loading, success, empty, and error states from the feature view.
+1. Додайте або оновіть типи запиту/відповіді в `src/api/your-energy.types.ts`.
+2. Додайте функцію запиту в `src/api/your-energy.api.ts`.
+3. Використовуйте цей запит у відповідній моделі фічі.
+4. Тримайте параметри запитів типізованими; уникайте приведення довільних строк
+   до enum-значень API.
+5. У view фічі відображайте стани завантаження, успіху, порожнього результату і помилки.
 
-## Adding a Feature
+## Додавання фічі
 
-Use this structure when a feature has meaningful state or API interaction:
+Використовуйте цю структуру, коли фіча має значний стан або взаємодіє з API:
 
 ```text
 src/mvc/feature-name/
@@ -44,18 +46,20 @@ src/mvc/feature-name/
   feature-name.controller.ts
 ```
 
-For simple UI-only interactions, use `src/components` instead.
+Для простих взаємодій тільки з інтерфейсом користувача використовуйте
+`src/components`.
 
-## Entrypoints
+## Точки входу
 
-- `src/main.ts` is the shared app entrypoint for `index.html` and
+- `src/main.ts` — спільна точка входу додатка для `index.html` та
   `favorites.html`.
-- Each initializer must first check that its root DOM node exists.
-- Do not add test/demo HTML files to production entrypoints.
+- Кожен ініціалізатор повинен спочатку перевіряти існування свого кореневого
+  DOM-вузла.
+- Не додавайте тестові/демонстраційні HTML-файли до продакшн-точок входу.
 
-## Checks
+## Перевірки
 
-Run these before handing off changes:
+Виконайте ці команди перед передачею змін:
 
 ```bash
 npm run typecheck
