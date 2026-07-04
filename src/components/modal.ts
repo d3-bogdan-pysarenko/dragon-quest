@@ -2,6 +2,7 @@ export interface ModalInstance {
   element: HTMLElement;
   open(): void;
   close(): void;
+  destroy(): void;
 }
 
 export interface CreateModalOptions {
@@ -28,6 +29,7 @@ export const createModal = (
   options: CreateModalOptions = {}
 ): ModalInstance => {
   const closeButton = root.querySelector<HTMLElement>('[data-modal-close]');
+  const lifecycleController = new AbortController();
 
   let isOpen = false;
   let lastFocused: HTMLElement | null = null;
@@ -76,7 +78,14 @@ export const createModal = (
     options.onClose?.();
   };
 
-  closeButton?.addEventListener('click', close);
+  const destroy = (): void => {
+    close();
+    lifecycleController.abort();
+  };
 
-  return { element: root, open, close };
+  closeButton?.addEventListener('click', close, {
+    signal: lifecycleController.signal,
+  });
+
+  return { element: root, open, close, destroy };
 };
