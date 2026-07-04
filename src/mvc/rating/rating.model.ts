@@ -1,4 +1,4 @@
-import { addExerciseRating, ExerciseRatingPayload } from '../../api';
+import { addExerciseRating, type ExerciseRatingPayload } from '../../api';
 import { getErrorMessage } from '../../utils';
 
 export interface RatingState {

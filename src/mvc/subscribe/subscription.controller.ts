@@ -1,7 +1,7 @@
 import { SubscriptionModel, SubscriptionView } from './';
 import { showToast, ToastType } from '../../components/toast';
 import { validateEmail, getErrorMessage } from '../../utils';
-import { SubscriptionRequest, SubscriptionResponse } from '../../api';
+import type { SubscriptionRequest, SubscriptionResponse } from '../../api';
 
 export class SubscriptionController {
   constructor(

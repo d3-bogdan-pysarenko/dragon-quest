@@ -4,6 +4,7 @@ import {
   type FilterItem,
 } from '../../api';
 import { getPageFromEvent, renderPagination } from '../../components/pagination';
+import { getErrorMessage } from '../../utils';
 import type { ExercisesState } from './exercises.model';
 
 export class ExercisesView {
@@ -195,7 +196,7 @@ export class ExercisesView {
   }
 
   renderError(error: unknown): void {
-    const message = error instanceof Error ? error.message : 'Unknown error';
+    const message = getErrorMessage(error);
 
     this.renderMessage(`Sorry, something went wrong. ${message}`);
   }
