@@ -7,9 +7,3 @@ export const enum Endpoint {
   Subscription = 'subscription',
   Filters = 'filters',
 }
-
-export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-export const FAVORITES_CHANGED_EVENT = 'favorites:changed';
-
-export const TABLET_MEDIA_QUERY = '(min-width: 768px)';
