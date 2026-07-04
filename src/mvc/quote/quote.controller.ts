@@ -11,8 +11,7 @@ export class QuoteController {
     try {
       const { quote, author } = await this.model.getQuote();
       this.view.renderQuote(quote, author);
-    } catch (error) {
-      console.error('Error loading quote of the day:', error);
+    } catch {
       this.view.renderError();
     }
   }

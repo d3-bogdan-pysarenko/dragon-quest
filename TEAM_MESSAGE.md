@@ -22,12 +22,10 @@ http://localhost:5173
 
 - `src/index.html` - основна сторінка.
 - `src/main.ts` - основний entrypoint для `index.html` і `favorites.html`.
-- `src/test-components.html` - сторінка для перевірки компонентів.
-- `src/mvc-example.ts` - окремий entrypoint для MVC/API прикладу.
 - `src/components` - TS-логіка маленьких інтерактивних компонентів без API.
 - `src/pages` - TS-логіка окремих сторінок без API.
 - `src/api` - API client, типи й готові запити.
-- `src/mvc` - приклад Model/View/Controller.
+- `src/mvc` - production features у стилі Model/View/Controller.
 - `MVC_API_GUIDE.md` - детальна інструкція для роботи.
 
 ## Короткі правила
@@ -86,4 +84,4 @@ npm run typecheck
 npm run build
 ```
 
-Якщо потрібен приклад реалізації, дивіться `src/mvc-example.ts` і `src/mvc`.
+Якщо потрібен приклад реалізації, дивіться активні feature-папки в `src/mvc`.

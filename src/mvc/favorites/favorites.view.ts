@@ -2,7 +2,11 @@ import {
   getPageFromEvent,
   renderPagination,
 } from '../../components/pagination';
-import { formatDisplayName, getRequiredElement } from '../../utils';
+import {
+  formatDisplayName,
+  getClosestElement,
+  getRequiredElement,
+} from '../../utils';
 import type { FavoriteExercise } from './favorites.model';
 
 const EMPTY_TEXT =
@@ -57,10 +61,10 @@ export class FavoritesView {
 
   onDeleteClick(callback: (id: string) => void): void {
     this.list.addEventListener('click', event => {
-      const currentTarget = event.target as HTMLElement;
-
-      const button =
-        currentTarget.closest<HTMLElement>('[data-action="delete"]');
+      const button = getClosestElement<HTMLElement>(
+        event.target,
+        '[data-action="delete"]'
+      );
 
       if (!button) {
         return;

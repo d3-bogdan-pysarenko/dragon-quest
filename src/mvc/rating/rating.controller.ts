@@ -1,5 +1,6 @@
 import { createModal, type ModalInstance } from '../../components/modal';
 import { showToast, ToastType } from '../../components/toast';
+import { getClosestElement } from '../../utils';
 import { RatingModel } from './rating.model';
 import { RatingView } from './rating.view';
 
@@ -108,7 +109,8 @@ export const initRatingModal = (): void => {
   }
 
   document.addEventListener('click', event => {
-    const trigger = (event.target as HTMLElement).closest<HTMLElement>(
+    const trigger = getClosestElement<HTMLElement>(
+      event.target,
       '[data-rating-open]'
     );
 

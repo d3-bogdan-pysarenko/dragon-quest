@@ -1,5 +1,5 @@
 import type { ExerciseRatingPayload } from '../../api';
-import { getRequiredElement } from '../../utils';
+import { getClosestElement, getRequiredElement } from '../../utils';
 import type { RatingState } from './rating.model';
 
 export class RatingView {
@@ -24,7 +24,7 @@ export class RatingView {
     );
 
     this.form.addEventListener('change', event => {
-      if ((event.target as HTMLElement).matches('[name="rate"]')) {
+      if (getClosestElement<HTMLInputElement>(event.target, '[name="rate"]')) {
         const checked = this.form.querySelector<HTMLInputElement>(
           '[name="rate"]:checked'
         );
