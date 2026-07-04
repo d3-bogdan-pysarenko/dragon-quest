@@ -10,6 +10,16 @@ export interface OpenRatingModalOptions {
   onClose?: () => void;
 }
 
+interface RatingModalContext {
+  modal: ModalInstance;
+  model: RatingModel;
+  view: RatingView;
+  setExerciseId(exerciseId: string): void;
+  setCloseHandler(handler: (() => void) | undefined): void;
+}
+
+let ratingModalContext: RatingModalContext | null = null;
+
 const bindRatingSubmit = (
   view: RatingView,
   model: RatingModel,
@@ -35,40 +45,67 @@ const bindRatingSubmit = (
   });
 };
 
-export const openRatingModal = (options: OpenRatingModalOptions): void => {
+const getRatingModalContext = (): RatingModalContext | null => {
   const root = document.querySelector<HTMLElement>('[data-rating-modal]');
 
   if (!root) {
-    return;
+    return null;
   }
 
-  const modal = createModal(root, { onClose: options.onClose });
-  const model = new RatingModel();
-  const view = new RatingView(root);
-
-  view.render(model.getState());
-  bindRatingSubmit(view, model, modal, () => options.exerciseId);
-
-  modal.open();
-};
-
-export const initRatingModal = (): void => {
-  const root = document.querySelector<HTMLElement>('[data-rating-modal]');
-
-  if (!root) {
-    return;
+  if (ratingModalContext) {
+    return ratingModalContext;
   }
 
   let exerciseId = '';
+  let closeHandler: (() => void) | undefined;
 
-  const modal = createModal(root, {
-    onClose: () => view.reset(),
-  });
   const model = new RatingModel();
   const view = new RatingView(root);
+  const modal = createModal(root, {
+    onClose: () => {
+      view.reset();
+      closeHandler?.();
+      closeHandler = undefined;
+    },
+  });
 
   view.render(model.getState());
   bindRatingSubmit(view, model, modal, () => exerciseId);
+
+  ratingModalContext = {
+    modal,
+    model,
+    view,
+    setExerciseId(nextExerciseId: string): void {
+      exerciseId = nextExerciseId;
+    },
+    setCloseHandler(handler: (() => void) | undefined): void {
+      closeHandler = handler;
+    },
+  };
+
+  return ratingModalContext;
+};
+
+export const openRatingModal = (options: OpenRatingModalOptions): void => {
+  const context = getRatingModalContext();
+
+  if (!context) {
+    return;
+  }
+
+  context.setExerciseId(options.exerciseId);
+  context.setCloseHandler(options.onClose);
+  context.view.reset();
+  context.modal.open();
+};
+
+export const initRatingModal = (): void => {
+  const context = getRatingModalContext();
+
+  if (!context) {
+    return;
+  }
 
   document.addEventListener('click', event => {
     const trigger = (event.target as HTMLElement).closest<HTMLElement>(
@@ -79,8 +116,9 @@ export const initRatingModal = (): void => {
       return;
     }
 
-    exerciseId = trigger.dataset.exerciseId ?? '';
-    view.reset();
-    modal.open();
+    context.setExerciseId(trigger.dataset.exerciseId ?? '');
+    context.setCloseHandler(undefined);
+    context.view.reset();
+    context.modal.open();
   });
 };
