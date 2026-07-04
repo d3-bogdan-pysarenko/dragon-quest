@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { hideLoader, showLoader } from '../components/loader';
 import { API_BASE_URL } from '../constants';
 
 export const yourEnergyApi = axios.create({
@@ -10,17 +9,25 @@ export const yourEnergyApi = axios.create({
 });
 
 let activeRequests = 0;
+let loadingListener: ((isLoading: boolean) => void) | null = null;
+
+export const setApiLoadingListener = (
+  listener: ((isLoading: boolean) => void) | null
+): void => {
+  loadingListener = listener;
+  loadingListener?.(activeRequests > 0);
+};
 
 const startRequest = (): void => {
   activeRequests += 1;
-  showLoader();
+  loadingListener?.(true);
 };
 
 const finishRequest = (): void => {
   activeRequests = Math.max(activeRequests - 1, 0);
 
   if (activeRequests === 0) {
-    hideLoader();
+    loadingListener?.(false);
   }
 };
 

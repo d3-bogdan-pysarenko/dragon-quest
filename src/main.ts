@@ -1,5 +1,6 @@
 import { initScrollUp } from './components/scroll-up';
 import { initBurgerMenu } from './components/burger-menu';
+import { hideLoader, showLoader } from './components/loader';
 import { initRatingModal } from './mvc/rating/rating.controller';
 import { initExerciseModal } from './mvc/exercise-modal/exercise-modal.controller';
 import { QuoteModel } from './mvc/quote/quote.model';
@@ -17,7 +18,15 @@ import {
   SubscriptionModel,
   SubscriptionView,
 } from './mvc/subscribe';
+import { setApiLoadingListener } from './api';
 
+setApiLoadingListener(isLoading => {
+  if (isLoading) {
+    showLoader();
+  } else {
+    hideLoader();
+  }
+});
 initRatingModal();
 initExerciseModal();
 initScrollUp();
