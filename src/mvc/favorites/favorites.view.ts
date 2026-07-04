@@ -93,29 +93,46 @@ export class FavoritesView {
 
   private createCard(favorite: FavoriteExercise): HTMLElement {
     const clone = this.cardTemplate.content.cloneNode(true) as HTMLElement;
-    const listItem = clone.querySelector('li') as HTMLLIElement;
+    const listItem = getRequiredElement<HTMLLIElement>(clone, 'li');
+    const workoutCard = getRequiredElement<HTMLElement>(
+      listItem,
+      '.workout-card'
+    );
+    const startButton = getRequiredElement<HTMLButtonElement>(
+      listItem,
+      '.workout-btn-start'
+    );
+    const workoutTitle = getRequiredElement<HTMLElement>(
+      listItem,
+      '.workout-title'
+    );
+    const caloriesElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-burned-calories]'
+    );
+    const bodyPartElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-body-part]'
+    );
+    const targetElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-target]'
+    );
     const name = formatDisplayName(favorite.name);
 
-    listItem
-      .querySelector('.workout-card')
-      ?.setAttribute('data-workout-id', favorite._id);
+    workoutCard.setAttribute('data-workout-id', favorite._id);
 
-    const startButton = listItem.querySelector('.workout-btn-start');
-    startButton?.setAttribute('aria-label', `Start ${name}`);
-    startButton?.setAttribute('data-exercise-id', favorite._id);
+    startButton.setAttribute('aria-label', `Start ${name}`);
+    startButton.setAttribute('data-exercise-id', favorite._id);
 
-    const workoutTitle = listItem.querySelector('.workout-title')!;
     workoutTitle.textContent = name;
     workoutTitle.setAttribute('title', name);
 
-    listItem.querySelector('[data-exercise-burned-calories]')!.textContent =
-      `${favorite.burnedCalories} / 3 min`;
+    caloriesElement.textContent = `${favorite.burnedCalories} / 3 min`;
 
-    listItem.querySelector('[data-exercise-body-part]')!.textContent =
-      formatDisplayName(favorite.bodyPart);
+    bodyPartElement.textContent = formatDisplayName(favorite.bodyPart);
 
-    listItem.querySelector('[data-exercise-target]')!.textContent =
-      formatDisplayName(favorite.target);
+    targetElement.textContent = formatDisplayName(favorite.target);
 
     return listItem;
   }

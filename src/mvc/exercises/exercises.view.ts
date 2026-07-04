@@ -259,39 +259,62 @@ export class ExercisesView {
     const clone: HTMLElement = this.listItemTemplate.content.cloneNode(
       true
     ) as HTMLElement;
-    const listItem: HTMLLIElement = clone.querySelector('li') as HTMLLIElement;
+    const listItem = getRequiredElement<HTMLLIElement>(clone, 'li');
+    const workoutCard = getRequiredElement<HTMLElement>(
+      listItem,
+      '.workout-card'
+    );
+    const ratingElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '.workout-rating'
+    );
+    const ratingText = getRequiredElement<HTMLElement>(
+      ratingElement,
+      'span'
+    );
+    const startButton = getRequiredElement<HTMLButtonElement>(
+      listItem,
+      '.workout-btn-start'
+    );
+    const workoutTitle = getRequiredElement<HTMLElement>(
+      listItem,
+      '.workout-title'
+    );
+    const caloriesElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-burned-calories]'
+    );
+    const bodyPartElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-body-part]'
+    );
+    const targetElement = getRequiredElement<HTMLElement>(
+      listItem,
+      '[data-exercise-target]'
+    );
 
-    listItem
-      .querySelector('.workout-card')
-      ?.setAttribute('data-workout-id', this.escapeHtml(exercise._id));
+    workoutCard.setAttribute('data-workout-id', this.escapeHtml(exercise._id));
 
-    listItem
-      .querySelector('.workout-rating')
-      ?.setAttribute('aria-label', `Rating ${rating}`);
+    ratingElement.setAttribute('aria-label', `Rating ${rating}`);
 
-    listItem.querySelector('.workout-rating span')!.textContent = rating;
+    ratingText.textContent = rating;
 
-    listItem
-      .querySelector('.workout-btn-start')
-      ?.setAttribute('aria-label', `Start ${this.escapeHtml(exercise.name)}`);
+    startButton.setAttribute(
+      'aria-label',
+      `Start ${this.escapeHtml(exercise.name)}`
+    );
 
-    listItem
-      .querySelector('.workout-btn-start')
-      ?.setAttribute('data-exercise-id', this.escapeHtml(exercise._id));
+    startButton.setAttribute('data-exercise-id', this.escapeHtml(exercise._id));
 
     const exerciseName = formatDisplayName(exercise.name);
-    const workoutTitle = listItem.querySelector('.workout-title')!;
-    workoutTitle.textContent = this.escapeHtml(exerciseName);
+    workoutTitle.textContent = exerciseName;
     workoutTitle.setAttribute('title', exerciseName);
 
-    listItem.querySelector('[data-exercise-burned-calories]')!.textContent =
-      `${exercise.burnedCalories} / 3 min`;
+    caloriesElement.textContent = `${exercise.burnedCalories} / 3 min`;
 
-    listItem.querySelector('[data-exercise-body-part]')!.textContent =
-      this.escapeHtml(formatDisplayName(exercise.bodyPart));
+    bodyPartElement.textContent = formatDisplayName(exercise.bodyPart);
 
-    listItem.querySelector('[data-exercise-target]')!.textContent =
-      this.escapeHtml(formatDisplayName(exercise.target));
+    targetElement.textContent = formatDisplayName(exercise.target);
 
     return listItem;
   }
