@@ -4,7 +4,11 @@ import {
   type FilterItem,
 } from '../../api';
 import { getPageFromEvent, renderPagination } from '../../components/pagination';
-import { formatDisplayName, getErrorMessage } from '../../utils';
+import {
+  formatDisplayName,
+  getErrorMessage,
+  getRequiredElement,
+} from '../../utils';
 import type { ExercisesState } from './exercises.model';
 
 export class ExercisesView {
@@ -19,19 +23,39 @@ export class ExercisesView {
   private readonly paginationContainer: HTMLElement;
 
   constructor(private readonly root: HTMLElement) {
-    this.searchContainer = this.getElement('[data-exercises-search]');
-    this.searchForm = this.getElement('[data-exercises-search] .search-form');
-    this.searchInput = this.getElement('[data-exercises-search] .search-input');
-    this.exercisesSlash = this.getElement('[data-exercises-slash]');
-    this.selectedCategoryText = this.getElement(
+    this.searchContainer = getRequiredElement(
+      this.root,
+      '[data-exercises-search]'
+    );
+    this.searchForm = getRequiredElement(
+      this.root,
+      '[data-exercises-search] .search-form'
+    );
+    this.searchInput = getRequiredElement(
+      this.root,
+      '[data-exercises-search] .search-input'
+    );
+    this.exercisesSlash = getRequiredElement(
+      this.root,
+      '[data-exercises-slash]'
+    );
+    this.selectedCategoryText = getRequiredElement(
+      this.root,
       '[data-exercises-selected-category]'
     );
-    this.listContainer = this.getElement('[data-exercises-list]');
-    this.listItemTemplate = this.getElement(
+    this.listContainer = getRequiredElement(this.root, '[data-exercises-list]');
+    this.listItemTemplate = getRequiredElement(
+      this.root,
       '[data-exercises-workout-item-template]'
     );
-    this.categoriesContainer = this.getElement('[data-exercises-categories]');
-    this.paginationContainer = this.getElement('[data-exercises-pagination]');
+    this.categoriesContainer = getRequiredElement(
+      this.root,
+      '[data-exercises-categories]'
+    );
+    this.paginationContainer = getRequiredElement(
+      this.root,
+      '[data-exercises-pagination]'
+    );
   }
 
   renderExerciseCategories(): void {
@@ -315,14 +339,6 @@ export class ExercisesView {
     }
 
     return target.closest<T>(selector);
-  }
-
-  private getElement<T extends HTMLElement>(selector: string): T {
-    const element = this.root.querySelector<T>(selector);
-    if (!element) {
-      throw new Error(`Element not found: ${selector}`);
-    }
-    return element;
   }
 
   private escapeHtml(value: string | number | null | undefined): string {

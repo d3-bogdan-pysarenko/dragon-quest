@@ -2,7 +2,7 @@ import {
   getPageFromEvent,
   renderPagination,
 } from '../../components/pagination';
-import { formatDisplayName } from '../../utils';
+import { formatDisplayName, getRequiredElement } from '../../utils';
 import type { FavoriteExercise } from './favorites.model';
 
 const EMPTY_TEXT =
@@ -17,10 +17,16 @@ export class FavoritesView {
   private readonly paginationContainer: HTMLElement;
 
   constructor(private readonly root: HTMLElement) {
-    this.exercisesBox = this.getElement('.favor-exercises');
-    this.list = this.getElement('.favor-exercises-list');
-    this.cardTemplate = this.getElement('[data-favorites-card-template]');
-    this.paginationContainer = this.getElement('[data-favorites-pagination]');
+    this.exercisesBox = getRequiredElement(this.root, '.favor-exercises');
+    this.list = getRequiredElement(this.root, '.favor-exercises-list');
+    this.cardTemplate = getRequiredElement(
+      this.root,
+      '[data-favorites-card-template]'
+    );
+    this.paginationContainer = getRequiredElement(
+      this.root,
+      '[data-favorites-pagination]'
+    );
   }
 
   renderFavorites(favorites: FavoriteExercise[]): void {
@@ -53,10 +59,8 @@ export class FavoritesView {
     this.list.addEventListener('click', event => {
       const currentTarget = event.target as HTMLElement;
 
-      const button: HTMLElement | null =
-        currentTarget.dataset.dataAction === 'delete'
-          ? currentTarget
-          : currentTarget.closest('[data-action="delete"]');
+      const button =
+        currentTarget.closest<HTMLElement>('[data-action="delete"]');
 
       if (!button) {
         return;
@@ -115,13 +119,4 @@ export class FavoritesView {
 
     return listItem;
   }
-
-  private getElement<T extends HTMLElement>(selector: string): T {
-    const element = this.root.querySelector<T>(selector);
-    if (!element) {
-      throw new Error(`Element not found: ${selector}`);
-    }
-    return element;
-  }
-
 }

@@ -1,4 +1,5 @@
 import type { ExerciseRatingPayload } from '../../api';
+import { getRequiredElement } from '../../utils';
 import type { RatingState } from './rating.model';
 
 export class RatingView {
@@ -8,10 +9,19 @@ export class RatingView {
   private readonly errorElement: HTMLElement;
 
   constructor(private readonly root: HTMLElement) {
-    this.form = this.getElement('[data-role="rating-form"]');
-    this.ratingValueElement = this.getElement('[data-role="rating-value"]');
-    this.submitButton = this.getElement('[data-role="rating-submit"]');
-    this.errorElement = this.getElement('[data-role="rating-error"]');
+    this.form = getRequiredElement(this.root, '[data-role="rating-form"]');
+    this.ratingValueElement = getRequiredElement(
+      this.root,
+      '[data-role="rating-value"]'
+    );
+    this.submitButton = getRequiredElement(
+      this.root,
+      '[data-role="rating-submit"]'
+    );
+    this.errorElement = getRequiredElement(
+      this.root,
+      '[data-role="rating-error"]'
+    );
 
     this.form.addEventListener('change', event => {
       if ((event.target as HTMLElement).matches('[name="rate"]')) {
@@ -64,15 +74,5 @@ export class RatingView {
     this.ratingValueElement.textContent = '0.0';
     this.errorElement.textContent = '';
     this.errorElement.hidden = true;
-  }
-
-  private getElement<T extends HTMLElement>(selector: string): T {
-    const element = this.root.querySelector<T>(selector);
-
-    if (!element) {
-      throw new Error(`Element not found: ${selector}`);
-    }
-
-    return element;
   }
 }
