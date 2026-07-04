@@ -2,6 +2,7 @@ import {
   getPageFromEvent,
   renderPagination,
 } from '../../components/pagination';
+import { formatDisplayName } from '../../utils';
 import type { FavoriteExercise } from './favorites.model';
 
 const EMPTY_TEXT =
@@ -89,7 +90,7 @@ export class FavoritesView {
   private createCard(favorite: FavoriteExercise): HTMLElement {
     const clone = this.cardTemplate.content.cloneNode(true) as HTMLElement;
     const listItem = clone.querySelector('li') as HTMLLIElement;
-    const name = this.formatDisplayName(favorite.name);
+    const name = formatDisplayName(favorite.name);
 
     listItem
       .querySelector('.workout-card')
@@ -107,10 +108,10 @@ export class FavoritesView {
       `${favorite.burnedCalories} / 3 min`;
 
     listItem.querySelector('[data-exercise-body-part]')!.textContent =
-      this.formatDisplayName(favorite.bodyPart);
+      formatDisplayName(favorite.bodyPart);
 
     listItem.querySelector('[data-exercise-target]')!.textContent =
-      this.formatDisplayName(favorite.target);
+      formatDisplayName(favorite.target);
 
     return listItem;
   }
@@ -123,7 +124,4 @@ export class FavoritesView {
     return element;
   }
 
-  private formatDisplayName(value: string): string {
-    return value.charAt(0).toUpperCase() + value.slice(1);
-  }
 }

@@ -4,7 +4,7 @@ import {
   type FilterItem,
 } from '../../api';
 import { getPageFromEvent, renderPagination } from '../../components/pagination';
-import { getErrorMessage } from '../../utils';
+import { formatDisplayName, getErrorMessage } from '../../utils';
 import type { ExercisesState } from './exercises.model';
 
 export class ExercisesView {
@@ -215,7 +215,7 @@ export class ExercisesView {
     this.exercisesSlash.classList.remove('hidden');
     this.selectedCategoryText.classList.remove('hidden');
     this.selectedCategoryText.textContent = state.selectedCategory
-      ? this.formatDisplayName(state.selectedCategory)
+      ? formatDisplayName(state.selectedCategory)
       : '';
     this.searchInput.value = state.keyword;
     this.listContainer.classList.add('exercises-list-workouts');
@@ -255,7 +255,7 @@ export class ExercisesView {
       .querySelector('.workout-btn-start')
       ?.setAttribute('data-exercise-id', this.escapeHtml(exercise._id));
 
-    const exerciseName = this.formatDisplayName(exercise.name);
+    const exerciseName = formatDisplayName(exercise.name);
     const workoutTitle = listItem.querySelector('.workout-title')!;
     workoutTitle.textContent = this.escapeHtml(exerciseName);
     workoutTitle.setAttribute('title', exerciseName);
@@ -264,16 +264,16 @@ export class ExercisesView {
       `${exercise.burnedCalories} / 3 min`;
 
     listItem.querySelector('[data-exercise-body-part]')!.textContent =
-      this.escapeHtml(this.formatDisplayName(exercise.bodyPart));
+      this.escapeHtml(formatDisplayName(exercise.bodyPart));
 
     listItem.querySelector('[data-exercise-target]')!.textContent =
-      this.escapeHtml(this.formatDisplayName(exercise.target));
+      this.escapeHtml(formatDisplayName(exercise.target));
 
     return listItem;
   }
 
   private createCategoryCard(filter: FilterItem): string {
-    const categoryName = this.formatDisplayName(filter.name);
+    const categoryName = formatDisplayName(filter.name);
     const imageUrl = filter.imgUrl ?? filter.imgURL ?? '';
 
     return `
@@ -323,10 +323,6 @@ export class ExercisesView {
       throw new Error(`Element not found: ${selector}`);
     }
     return element;
-  }
-
-  private formatDisplayName(value: string): string {
-    return value.charAt(0).toUpperCase() + value.slice(1);
   }
 
   private escapeHtml(value: string | number | null | undefined): string {
