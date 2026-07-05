@@ -66,7 +66,7 @@ body {
 @media screen and (min-width: 1440px) {
   .favor-quote-container {
     gap: 16px;
-    width: 494px;
+    width: 100%;
     min-height: 230px;
   }
 }
@@ -158,7 +158,7 @@ body {
 }
 .favor-dailynorm {
   display: flex;
-  gap: 18px;
+  gap: 16px;
   position: relative;
   border-radius: 20px;
   background-color: #fff;
@@ -222,30 +222,45 @@ body {
 }
 
 .dailynorm-text {
-  margin-top: 16px;
+  font-weight: 400;
   font-size: 14px;
-  line-height: 1.286;
-
+  line-height: 1.28571;
+  overflow: hidden;
+  height: 90px;
+  margin-bottom: 15px;
+  position: relative;
   &.hidden {
     display: none;
   }
+}
+
+.dailynorm-text::after {
+  content: '...';
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 @media screen and (min-width: 768px) {
   .dailynorm-text {
     margin-top: 20px;
   }
+
+  .dailynorm-text::after {
+    padding-right: 4px;
+    background-color: #fff;
+  }
 }
 
-@media screen and (max-width: 1439px) {
+@media screen and (min-width: 1440px) {
   .dailynorm-text {
-    max-height: 105px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    line-clamp: 5;
-    text-overflow: ellipsis;
+    height: auto;
+    margin-bottom: 0;
+  }
+  .dailynorm-text::after {
+    content: '';
+    padding: 0;
+    background-color:transparent;
   }
 }
 

@@ -52,16 +52,11 @@
   margin-bottom: 22px;
   width: 100%;
   height: 460px;
-  border-radius: var(--radius-media);
+  border-radius: 30px;
   overflow: hidden;
   background-color: var(--color-light);
 }
 
-.hero-image {
-  object-position: -187px -14px;
-  width: 100%;
-  height: 509px;
-}
 
 .pill-list {
   display: flex;
@@ -108,13 +103,9 @@
   }
 
   .hero-image-wrapper {
+    border-radius: 60px;
     margin-bottom: 16px;
     height: 550px;
-  }
-
-  .hero-image {
-    object-position: -205px -38px;
-    height: 773px;
   }
 
   .pill-list {
@@ -149,11 +140,6 @@
   .hero-image-wrapper {
     margin-bottom: 16px;
     height: 350px;
-  }
-
-  .hero-image {
-    object-position: -9px -153px;
-    height: 929px;
   }
 
   .pill-list {
