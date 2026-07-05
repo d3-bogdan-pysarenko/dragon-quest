@@ -3,7 +3,10 @@ import {
   type ExerciseResponse,
   type FilterItem,
 } from '../../api';
-import { getPageFromEvent, renderPagination } from '../../components/pagination';
+import {
+  getPageFromEvent,
+  renderPagination,
+} from '../../components/pagination';
 import {
   formatDisplayName,
   getErrorMessage,
@@ -268,10 +271,7 @@ export class ExercisesView {
       listItem,
       '.workout-rating'
     );
-    const ratingText = getRequiredElement<HTMLElement>(
-      ratingElement,
-      'span'
-    );
+    const ratingText = getRequiredElement<HTMLElement>(ratingElement, 'span');
     const startButton = getRequiredElement<HTMLButtonElement>(
       listItem,
       '.workout-btn-start'
@@ -335,6 +335,8 @@ export class ExercisesView {
           class="item-image"
           src="${this.escapeHtml(imageUrl)}"
           alt="${this.escapeHtml(filter.name)}"
+          loading="lazy"
+          decoding="async"
         />
         <div class="item-content">
           <h3 class="content-title">${this.escapeHtml(categoryName)}</h3>

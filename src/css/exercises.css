@@ -305,7 +305,7 @@
   }
 
   .exercises-sidebar {
-    grid-template-columns: 494px;
+    grid-template-columns: 444px;
     order: 1;
   }
 
@@ -317,7 +317,7 @@
   .exercises-sidebar .favor-img-wrap,
   .exercises-sidebar .favor-dailynorm {
     grid-column: 1;
-    width: 494px;
+    width: 100%;
   }
 
   .exercises-sidebar .favor-quote-container {

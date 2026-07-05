@@ -10,7 +10,7 @@
           aria-hidden="true"
           focusable="false"
         >
-          <use href="./img/sprite.svg#icon-sun" /></svg
+          <use href="./img/sprite.svg#icon-sun"></use></svg
         >Get <i>Body</i> in shape, Stay healthy
       </h1>
       <p class="hero-subtitle">
@@ -19,14 +19,59 @@
       </p>
     </div>
     <picture class="hero-image-wrapper">
+      <!-- Mobile -->
       <source
-        srcset="./img/hero.avif 1x, ./img/hero@2x.avif 2x"
+        media="(max-width: 767px)"
+        srcset="./img/hero-mobile.avif 1x, ./img/hero-mobile@2x.avif 2x"
         type="image/avif"
+        width="335"
+        height="460"
       />
+      <source
+        media="(max-width: 767px)"
+        srcset="./img/hero-mobile.webp 1x, ./img/hero-mobile@2x.webp 2x"
+        type="image/webp"
+        width="335"
+        height="460"
+      />
+
+      <!-- Tablet -->
+      <source
+        media="(min-width: 768px) and (max-width: 1439px)"
+        srcset="./img/hero-tablet.avif 1x, ./img/hero-tablet@2x.avif 2x"
+        type="image/avif"
+        width="704"
+        height="550"
+      />
+      <source
+        media="(min-width: 768px) and (max-width: 1439px)"
+        srcset="./img/hero-tablet.webp 1x, ./img/hero-tablet@2x.webp 2x"
+        type="image/webp"
+        width="704"
+        height="550"
+      />
+
+      <!-- Desktop -->
+      <source
+        media="(min-width: 1440px)"
+        srcset="./img/hero-desktop.avif 1x, ./img/hero-desktop@2x.avif 2x"
+        type="image/avif"
+        width="1376"
+        height="350"
+      />
+      <source
+        media="(min-width: 1440px)"
+        srcset="./img/hero-desktop.webp 1x, ./img/hero-desktop@2x.webp 2x"
+        type="image/webp"
+        width="1376"
+        height="350"
+      />
+
       <img
-        src="./img/hero.jpg"
-        srcset="./img/hero.jpg 1x, ./img/hero@2x.jpg 2x"
+        src="./img/hero-desktop.webp"
         alt="Two girls are exercising in the fresh air"
+        width="1376"
+        height="350"
         loading="eager"
         fetchpriority="high"
         class="hero-image"

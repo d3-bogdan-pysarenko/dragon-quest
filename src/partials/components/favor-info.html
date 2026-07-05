@@ -21,6 +21,17 @@
   </div>
   <div class="favor-img-wrap">
     <picture>
+      <!-- Desktop -->
+      <source
+        media="(min-width: 1440px)"
+        srcset="
+          ./img/favorites/{=$img-prefix}-info-widget-desktop.avif    1x,
+          ./img/favorites/{=$img-prefix}-info-widget-desktop@2x.avif 2x
+        "
+        type="image/avif"
+        loading="lazy"
+        decoding="async"
+      />
       <source
         media="(min-width: 1440px)"
         srcset="
@@ -28,6 +39,19 @@
           ./img/favorites/{=$img-prefix}-info-widget-desktop@2x.webp 2x
         "
         type="image/webp"
+        loading="lazy"
+        decoding="async"
+      />
+      <!-- Tablet -->
+      <source
+        media="(min-width: 768px)"
+        srcset="
+          ./img/favorites/{=$img-prefix}-info-widget-tablet.avif    1x,
+          ./img/favorites/{=$img-prefix}-info-widget-tablet@2x.avif 2x
+        "
+        type="image/avif"
+        loading="lazy"
+        decoding="async"
       />
       <source
         media="(min-width: 768px)"
@@ -36,6 +60,18 @@
           ./img/favorites/{=$img-prefix}-info-widget-tablet@2x.webp 2x
         "
         type="image/webp"
+        loading="lazy"
+        decoding="async"
+      />
+      <!-- Mobile -->
+      <source
+        srcset="
+          ./img/favorites/{=$img-prefix}-info-widget-mobile.avif    1x,
+          ./img/favorites/{=$img-prefix}-info-widget-mobile@2x.avif 2x
+        "
+        type="image/avif"
+        loading="lazy"
+        decoding="async"
       />
       <source
         srcset="
@@ -43,12 +79,16 @@
           ./img/favorites/{=$img-prefix}-info-widget-mobile@2x.webp 2x
         "
         type="image/webp"
+        loading="lazy"
+        decoding="async"
       />
       <img
         src="./img/favorites/{=$img-prefix}-info-widget-mobile.webp"
         alt="Women sportswear working-out outdoor"
         width="344"
         height="141"
+        loading="lazy"
+        decoding="async"
       />
     </picture>
   </div>
